@@ -1,0 +1,106 @@
+# 新增模块及功能说明
+
+## 1. home模块 (已整合到users模块)
+
+# ### 1.1 EnterpriseRecommendationController
+# 文件路径: d:/bianchenglianxi/java/project/enterprise_plus/home/src/main/java/com/example/home/controller/EnterpriseRecommendationController.java
+# 控制器类: EnterpriseRecommendationController
+# 方法列表:
+# - @GetMapping("/list"): list(@RequestParam(required = false) String studentId, @RequestParam(required = false) String major, @RequestParam(required = false) String industry, @RequestParam(required = false) String sortBy) - 获取个性化企业推荐列表
+# - @PostMapping("/favorite"): favorite(@RequestBody EnterpriseFavoriteDTO favoriteDTO) - 收藏企业
+# - @DeleteMapping("/favorite/{id}"): unfavorite(@PathVariable("id") Long favoriteId) - 取消收藏企业
+# - @GetMapping("/favorites"): getFavorites(@RequestParam String studentId) - 获取收藏的企业列表
+# - @GetMapping("/detail/{enterpriseId}"): getEnterpriseDetail(@PathVariable("enterpriseId") Long enterpriseId) - 获取企业详细信息
+
+# ### 1.2 CampusRecruitmentEventController
+# 文件路径: d:/bianchenglianxi/java/project/enterprise_plus/home/src/main/java/com/example/home/controller/CampusRecruitmentEventController.java
+# 控制器类: CampusRecruitmentEventController
+# 方法列表:
+# - @GetMapping("/list"): list(@RequestParam(required = false) String location, @RequestParam(required = false) String startTime, @RequestParam(required = false) String endTime, @RequestParam(required = false) Integer pageNum, @RequestParam(required = false) Integer pageSize) - 获取校园招聘活动列表
+# - @PostMapping("/register"): register(@RequestBody EventRegistrationDTO registrationDTO) - 报名校园招聘活动
+# - @DeleteMapping("/register/{id}"): cancelRegistration(@PathVariable("id") Long registrationId) - 取消活动报名
+# - @GetMapping("/register/list"): getRegistrations(@RequestParam String studentId) - 获取学生报名的活动列表
+# - @GetMapping("/detail/{eventId}"): getEventDetail(@PathVariable("eventId") Long eventId) - 获取活动详细信息
+
+# ### 1.3 SearchController
+# 文件路径: d:/bianchenglianxi/java/project/enterprise_plus/home/src/main/java/com/example/home/controller/SearchController.java
+# 控制器类: SearchController
+# 方法列表:
+# - @GetMapping("/enterprise"): searchEnterprise(@RequestParam String keyword, @RequestParam(required = false) String industry, @RequestParam(required = false) String location, @RequestParam(required = false) String enterpriseScale, @RequestParam(required = false) String sortBy) - 搜索企业
+# - @GetMapping("/event"): searchEvent(@RequestParam String keyword, @RequestParam(required = false) String location, @RequestParam(required = false) String startTime, @RequestParam(required = false) String endTime) - 搜索校园招聘活动
+
+## 2. admin模块
+
+### 2.1 AdminEnterpriseController
+文件路径: d:/bianchenglianxi/java/project/enterprise_plus/admin/src/main/java/com/example/admin/controller/AdminEnterpriseController.java
+控制器类: AdminEnterpriseController
+方法列表:
+- @GetMapping("/list"): list(EnterpriseQueryDTO queryDTO) - 查询企业列表（分页）
+- @PostMapping("/audit"): audit(@RequestBody EnterpriseAuditDTO auditDTO) - 审核企业信息
+- @PutMapping("/update"): update(@RequestBody Enterprise enterprise) - 修改企业信息
+- @DeleteMapping("/{enterpriseIds}"): delete(@PathVariable Long[] enterpriseIds) - 删除企业
+- @GetMapping("/detail/{enterpriseId}"): getDetail(@PathVariable("enterpriseId") Long enterpriseId) - 获取企业详细信息
+- @PostMapping("/certify"): certify(@RequestBody EnterpriseCertifyDTO certifyDTO) - 企业资质认证
+
+### 2.2 AdminUserController
+文件路径: d:/bianchenglianxi/java/project/enterprise_plus/admin/src/main/java/com/example/admin/controller/AdminUserController.java
+控制器类: AdminUserController
+方法列表:
+- @GetMapping("/list"): list(UserQueryDTO queryDTO) - 查询用户列表（分页）
+- @PutMapping("/updateStatus"): updateStatus(@RequestBody UserStatusDTO statusDTO) - 更新用户状态
+- @DeleteMapping("/{userIds}"): delete(@PathVariable Long[] userIds) - 删除用户
+- @GetMapping("/detail/{userId}"): getDetail(@PathVariable("userId") Long userId) - 获取用户详细信息
+- @PutMapping("/update"): update(@RequestBody User user) - 修改用户信息
+
+### 2.3 AdminEventController
+文件路径: d:/bianchenglianxi/java/project/enterprise_plus/admin/src/main/java/com/example/admin/controller/AdminEventController.java
+控制器类: AdminEventController
+方法列表:
+- @GetMapping("/list"): list(EventQueryDTO queryDTO) - 查询校园招聘活动列表（分页）
+- @PostMapping: add(@RequestBody CampusRecruitmentEvent event) - 新增校园招聘活动
+- @PutMapping: update(@RequestBody CampusRecruitmentEvent event) - 修改校园招聘活动
+- @DeleteMapping("/{eventIds}"): delete(@PathVariable Long[] eventIds) - 删除校园招聘活动
+- @GetMapping("/detail/{eventId}"): getDetail(@PathVariable("eventId") Long eventId) - 获取活动详细信息
+- @GetMapping("/registration/list"): getRegistrationList(@RequestParam Long eventId, @RequestParam(required = false) Integer pageNum, @RequestParam(required = false) Integer pageSize) - 获取活动报名列表
+
+### 2.4 AdminContentController
+文件路径: d:/bianchenglianxi/java/project/enterprise_plus/admin/src/main/java/com/example/admin/controller/AdminContentController.java
+控制器类: AdminContentController
+方法列表:
+- @GetMapping("/announcement/list"): listAnnouncement(AnnouncementQueryDTO queryDTO) - 查询公告列表（分页）
+- @PostMapping("/announcement"): addAnnouncement(@RequestBody Announcement announcement) - 新增公告
+- @PutMapping("/announcement"): updateAnnouncement(@RequestBody Announcement announcement) - 修改公告
+- @DeleteMapping("/announcement/{announcementIds}"): deleteAnnouncement(@PathVariable Long[] announcementIds) - 删除公告
+- @GetMapping("/banner/list"): listBanner() - 查询轮播图列表
+- @PostMapping("/banner"): addBanner(@RequestBody Banner banner) - 新增轮播图
+- @PutMapping("/banner"): updateBanner(@RequestBody Banner banner) - 修改轮播图
+- @DeleteMapping("/banner/{bannerIds}"): deleteBanner(@PathVariable Long[] bannerIds) - 删除轮播图
+
+### 2.5 AdminStatisticsController
+文件路径: d:/bianchenglianxi/java/project/enterprise_plus/admin/src/main/java/com/example/admin/controller/AdminStatisticsController.java
+控制器类: AdminStatisticsController
+方法列表:
+- @GetMapping("/user/activity"): getUserActivityStatistics(@RequestParam(required = false) String startTime, @RequestParam(required = false) String endTime) - 获取用户活跃度统计
+- @GetMapping("/enterprise/recommendation"): getEnterpriseRecommendationStatistics(@RequestParam(required = false) String startTime, @RequestParam(required = false) String endTime) - 获取企业推荐效果统计
+- @GetMapping("/event/participation"): getEventParticipationStatistics(@RequestParam(required = false) String startTime, @RequestParam(required = false) String endTime) - 获取校招活动参与度统计
+- @GetMapping("/platform/operation"): getPlatformOperationStatistics(@RequestParam(required = false) String startTime, @RequestParam(required = false) String endTime) - 获取平台运营数据统计
+
+## 3. tag模块
+
+### 3.1 TagController
+文件路径: d:/bianchenglianxi/java/project/enterprise_plus/tag/src/main/java/com/example/tag/controller/TagController.java
+控制器类: TagController
+方法列表:
+- @GetMapping("/list"): list(Tag tag) - 获取标签列表
+- @GetMapping("/{tagId}"): getTagInfo(@PathVariable("tagId") Long tagId) - 获取标签详细信息
+- @PostMapping: add(@RequestBody Tag tag) - 新增标签
+- @PutMapping: update(@RequestBody Tag tag) - 修改标签
+- @DeleteMapping("/{tagIds}"): delete(@PathVariable Long[] tagIds) - 批量删除标签
+
+### 3.2 EntityTagController
+文件路径: d:/bianchenglianxi/java/project/enterprise_plus/tag/src/main/java/com/example/tag/controller/EntityTagController.java
+控制器类: EntityTagController
+方法列表:
+- @GetMapping("/byEntity/{entityType}/{entityId}"): getByEntity(@PathVariable String entityType, @PathVariable Long entityId) - 根据实体类型和ID获取标签列表
+- @PostMapping("/batch"): batchAdd(@RequestBody List<EntityTag> entityTags) - 批量添加实体标签
+- @DeleteMapping("/byEntity/{entityType}/{entityId}"): deleteByEntity(@PathVariable String entityType, @PathVariable Long entityId) - 删除实体的所有标签

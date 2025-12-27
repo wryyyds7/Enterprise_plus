@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.learning.mapper.LearningResourceMapper">
+    
+    <resultMap id="LearningResourceResult" type="com.example.learning.domain.entity.LearningResource">
+        <id property="resourceId" column="resource_id"/>
+        <result property="resourceName" column="resource_name"/>
+        <result property="resourceType" column="resource_type"/>
+        <result property="pathId" column="path_id"/>
+        <result property="contentUrl" column="content_url"/>
+        <result property="description" column="description"/>
+        <result property="duration" column="duration"/>
+        <result property="sortOrder" column="sort_order"/>
+        <result property="createdBy" column="created_by"/>
+        <result property="createdTime" column="created_time"/>
+        <result property="updatedBy" column="updated_by"/>
+        <result property="updatedTime" column="updated_time"/>
+        <result property="status" column="status"/>
+    </resultMap>
+    
+    <select id="selectLearningResourceList" parameterType="com.example.learning.domain.entity.LearningResource" resultMap="LearningResourceResult">
+        select * from learning_resource
+        <where>
+            <if test="resourceName != null and resourceName != ''">
+                and resource_name like concat('%', #{resourceName}, '%')
+            </if>
+            <if test="resourceType != null">
+                and resource_type = #{resourceType}
+            </if>
+            <if test="pathId != null">
+                and path_id = #{pathId}
+            </if>
+            <if test="status != null">
+                and status = #{status}
+            </if>
+        </where>
+        order by sort_order
+    </select>
+    
+    <select id="selectLearningResourceById" parameterType="java.lang.Long" resultMap="LearningResourceResult">
+        select * from learning_resource where resource_id = #{resourceId}
+    </select>
+    
+    <select id="selectLearningResourceByPathId" parameterType="java.lang.Long" resultMap="LearningResourceResult">
+        select * from learning_resource where path_id = #{pathId}
+        order by sort_order
+    </select>
+    
+    <insert id="insertLearningResource" parameterType="com.example.learning.domain.entity.LearningResource" useGeneratedKeys="true" keyProperty="resourceId">
+        insert into learning_resource
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="resourceName != null and resourceName != ''">resource_name,</if>
+            <if test="resourceType != null">resource_type,</if>
+            <if test="pathId != null">path_id,</if>
+            <if test="contentUrl != null and contentUrl != ''">content_url,</if>
+            <if test="description != null and description != ''">description,</if>
+            <if test="duration != null">duration,</if>
+            <if test="sortOrder != null">sort_order,</if>
+            <if test="createdBy != null and createdBy != ''">created_by,</if>
+            <if test="createdTime != null">created_time,</if>
+            <if test="updatedBy != null and updatedBy != ''">updated_by,</if>
+            <if test="updatedTime != null">updated_time,</if>
+            <if test="status != null">status,</if>
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="resourceName != null and resourceName != ''">#{resourceName},</if>
+            <if test="resourceType != null">#{resourceType},</if>
+            <if test="pathId != null">#{pathId},</if>
+            <if test="contentUrl != null and contentUrl != ''">#{contentUrl},</if>
+            <if test="description != null and description != ''">#{description},</if>
+            <if test="duration != null">#{duration},</if>
+            <if test="sortOrder != null">#{sortOrder},</if>
+            <if test="createdBy != null and createdBy != ''">#{createdBy},</if>
+            <if test="createdTime != null">#{createdTime},</if>
+            <if test="updatedBy != null and updatedBy != ''">#{updatedBy},</if>
+            <if test="updatedTime != null">#{updatedTime},</if>
+            <if test="status != null">#{status},</if>
+        </trim>
+    </insert>
+    
+    <update id="updateLearningResource" parameterType="com.example.learning.domain.entity.LearningResource">
+        update learning_resource
+        <set>
+            <if test="resourceName != null and resourceName != ''">resource_name = #{resourceName},</if>
+            <if test="resourceType != null">resource_type = #{resourceType},</if>
+            <if test="pathId != null">path_id = #{pathId},</if>
+            <if test="contentUrl != null and contentUrl != ''">content_url = #{contentUrl},</if>
+            <if test="description != null and description != ''">description = #{description},</if>
+            <if test="duration != null">duration = #{duration},</if>
+            <if test="sortOrder != null">sort_order = #{sortOrder},</if>
+            <if test="updatedBy != null and updatedBy != ''">updated_by = #{updatedBy},</if>
+            <if test="updatedTime != null">updated_time = #{updatedTime},</if>
+            <if test="status != null">status = #{status},</if>
+        </set>
+        where resource_id = #{resourceId}
+    </update>
+    
+    <delete id="deleteLearningResourceById" parameterType="java.lang.Long">
+        delete from learning_resource where resource_id = #{resourceId}
+    </delete>
+    
+    <delete id="deleteLearningResourceByIds" parameterType="java.lang.Long[]">
+        delete from learning_resource where resource_id in
+        <foreach item="resourceId" collection="array" open="(" separator="," close=")">
+            #{resourceId}
+        </foreach>
+    </delete>
+</mapper>

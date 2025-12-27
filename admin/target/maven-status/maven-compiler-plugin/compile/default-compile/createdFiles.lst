@@ -1,0 +1,5 @@
+com\example\admin\AdminApplication.class
+com\example\admin\service\impl\AdminServiceImpl.class
+com\example\admin\config\WebConfig.class
+com\example\admin\controller\AdminController.class
+com\example\admin\service\AdminService.class

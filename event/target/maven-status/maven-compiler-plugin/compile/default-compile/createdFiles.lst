@@ -1,0 +1,6 @@
+com\example\event\service\impl\EventServiceImpl.class
+com\example\event\EventApplication.class
+com\example\event\controller\EventController.class
+com\example\event\service\EventService.class
+com\example\event\mapper\EventMapper.class
+com\example\event\domain\entity\Event.class

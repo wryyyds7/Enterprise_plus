@@ -1,0 +1,4 @@
+com\example\search\PositionUtilsTest.class
+com\example\search\service\impl\EnterpriseNameExtractionTest.class
+com\example\search\service\impl\SearchEngineServiceImplTest.class
+com\example\search\SearchApplicationTests.class

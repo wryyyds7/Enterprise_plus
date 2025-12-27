@@ -1,0 +1,341 @@
+# 未完成功能API及模块
+
+## 1. 个人中心相关API
+
+### 用户信息管理
+- **路径**: /user/user/jobPreference
+- **方法**: GET
+- **模块**: user
+- **描述**: 获取用户求职偏好
+- **状态**: 未实现
+
+- **路径**: /user/user/jobPreference
+- **方法**: PUT
+- **模块**: user
+- **描述**: 更新用户求职偏好
+- **状态**: 未实现
+
+- **路径**: /users/user/jobPreference
+- **方法**: GET
+- **模块**: users
+- **描述**: 获取用户求职偏好
+- **状态**: 已实现
+
+- **路径**: /users/user/jobPreference
+- **方法**: PUT
+- **模块**: users
+- **描述**: 更新用户求职偏好
+- **状态**: 已实现
+
+### 用户收藏管理
+- **路径**: /user/favorites/enterprises
+- **方法**: GET
+- **模块**: user
+- **描述**: 获取用户收藏的企业列表
+- **状态**: 未实现
+
+- **路径**: /user/favorites/events
+- **方法**: GET
+- **模块**: user
+- **描述**: 获取用户收藏的活动列表
+- **状态**: 未实现
+
+- **路径**: /home/campusRecruitmentEvent/favorite
+- **方法**: POST
+- **模块**: users
+- **描述**: 收藏活动
+- **状态**: 已实现
+
+- **路径**: /home/campusRecruitmentEvent/favorite/{id}
+- **方法**: DELETE
+- **模块**: users
+- **描述**: 取消收藏活动
+- **状态**: 已实现
+
+# 已实现功能API
+
+## 1. 用户求职偏好API
+
+- **路径**: /users/user/jobPreference
+- **方法**: GET
+- **模块**: users
+- **描述**: 获取用户求职偏好
+- **状态**: 已实现
+
+- **路径**: /users/user/jobPreference
+- **方法**: PUT
+- **模块**: users
+- **描述**: 更新用户求职偏好
+- **状态**: 已实现
+
+## 2. 用户企业收藏API
+
+- **路径**: /users/user/enterpriseFavorites
+- **方法**: GET
+- **模块**: users
+- **描述**: 获取用户收藏的企业列表
+- **状态**: 已实现
+
+- **路径**: /users/user/enterpriseFavorite
+- **方法**: POST
+- **模块**: users
+- **描述**: 添加企业收藏
+- **状态**: 已实现
+
+- **路径**: /users/user/enterpriseFavorite
+- **方法**: DELETE
+- **模块**: users
+- **描述**: 删除企业收藏
+- **状态**: 已实现
+
+- **路径**: /users/user/isEnterpriseFavorited
+- **方法**: GET
+- **模块**: users
+- **描述**: 检查用户是否已收藏企业
+- **状态**: 已实现
+
+## 3. 用户活动收藏API
+
+- **路径**: /users/user/activityFavorites
+- **方法**: GET
+- **模块**: users
+- **描述**: 获取用户收藏的活动列表
+- **状态**: 已实现
+
+- **路径**: /users/user/activityFavorite
+- **方法**: POST
+- **模块**: users
+- **描述**: 添加活动收藏
+- **状态**: 已实现
+
+- **路径**: /users/user/activityFavorite
+- **方法**: DELETE
+- **模块**: users
+- **描述**: 删除活动收藏
+- **状态**: 已实现
+
+- **路径**: /users/user/isActivityFavorited
+- **方法**: GET
+- **模块**: users
+- **描述**: 检查用户是否已收藏活动
+- **状态**: 已实现
+
+## 4. 用户活动注册API
+
+- **路径**: /users/user/eventRegistrations
+- **方法**: GET
+- **模块**: users
+- **描述**: 获取用户的活动注册记录列表
+- **状态**: 已实现
+
+- **路径**: /users/user/eventRegistration
+- **方法**: POST
+- **模块**: users
+- **描述**: 添加活动注册
+- **状态**: 已实现
+
+- **路径**: /users/user/eventRegistration
+- **方法**: PUT
+- **模块**: users
+- **描述**: 更新活动注册信息
+- **状态**: 已实现
+
+- **路径**: /users/user/eventRegistration
+- **方法**: DELETE
+- **模块**: users
+- **描述**: 取消活动注册
+- **状态**: 已实现
+
+- **路径**: /users/user/isEventRegistered
+- **方法**: GET
+- **模块**: users
+- **描述**: 检查用户是否已注册活动
+- **状态**: 已实现
+
+- **路径**: /users/user/eventRegistration
+- **方法**: GET
+- **模块**: users
+- **描述**: 获取特定的活动注册记录
+- **状态**: 已实现
+
+## 5. 标签API
+
+### 5.1 企业标签API
+
+- **路径**: /enterprise/id/{enterpriseId}/tags
+- **方法**: GET
+- **模块**: enterprise
+- **描述**: 获取企业标签
+- **状态**: 已实现
+
+- **路径**: /enterprise/id/{enterpriseId}/tags
+- **方法**: POST
+- **模块**: enterprise
+- **描述**: 添加企业标签
+- **状态**: 已实现
+
+- **路径**: /enterprise/id/{enterpriseId}/tags
+- **方法**: DELETE
+- **模块**: enterprise
+- **描述**: 删除企业标签
+- **状态**: 已实现
+
+### 5.2 职位标签API
+
+- **路径**: /position/{positionId}/tags
+- **方法**: GET
+- **模块**: enterprise
+- **描述**: 获取职位标签
+- **状态**: 已实现
+
+- **路径**: /position/{positionId}/tags
+- **方法**: POST
+- **模块**: enterprise
+- **描述**: 添加职位标签
+- **状态**: 已实现
+
+- **路径**: /position/{positionId}/tags
+- **方法**: DELETE
+- **模块**: enterprise
+- **描述**: 删除职位标签
+- **状态**: 已实现
+
+### 5.3 用户标签API
+
+- **路径**: /users/user/tags/{userId}
+- **方法**: GET
+- **模块**: users
+- **描述**: 获取用户标签
+- **状态**: 已实现
+
+- **路径**: /users/user/tags/{userId}
+- **方法**: POST
+- **模块**: users
+- **描述**: 添加用户标签
+- **状态**: 已实现
+
+- **路径**: /users/user/tags/{userId}
+- **方法**: DELETE
+- **模块**: users
+- **描述**: 删除用户标签
+- **状态**: 已实现
+
+### 5.4 标签管理API
+
+- **路径**: /tag/list
+- **方法**: GET
+- **模块**: tag
+- **描述**: 查询标签列表
+- **状态**: 已实现
+
+- **路径**: /tag/{tagId}
+- **方法**: GET
+- **模块**: tag
+- **描述**: 获取标签详细信息
+- **状态**: 已实现
+
+- **路径**: /tag
+- **方法**: POST
+- **模块**: tag
+- **描述**: 新增标签
+- **状态**: 已实现
+
+- **路径**: /tag
+- **方法**: PUT
+- **模块**: tag
+- **描述**: 修改标签
+- **状态**: 已实现
+
+- **路径**: /tag/{tagIds}
+- **方法**: DELETE
+- **模块**: tag
+- **描述**: 删除标签
+- **状态**: 已实现
+
+## 2. 企业推荐模块
+
+- **路径**: /home/enterpriseRecommendation/list
+- **方法**: GET
+- **模块**: users
+- **描述**: 获取企业推荐列表
+- **状态**: 已实现
+
+- **路径**: /home/enterpriseRecommendation/favorite
+- **方法**: POST
+- **模块**: users
+- **描述**: 收藏企业
+- **状态**: 已实现
+
+- **路径**: /home/enterpriseRecommendation/favorite
+- **方法**: DELETE
+- **模块**: users
+- **描述**: 取消收藏企业
+- **状态**: 已实现
+
+## 3. 校园招聘活动模块
+
+- **路径**: /home/campusRecruitmentEvent/list
+- **方法**: GET
+- **模块**: users
+- **描述**: 获取校园招聘活动列表
+- **状态**: 已实现
+
+- **路径**: /home/campusRecruitmentEvent/register
+- **方法**: POST
+- **模块**: users
+- **描述**: 报名校园招聘活动
+- **状态**: 已实现
+
+## 4. 搜索模块
+
+- **路径**: /home/search/enterprise
+- **方法**: GET
+- **模块**: users
+- **描述**: 搜索企业
+- **状态**: 已实现
+
+- **路径**: /home/search/event
+- **方法**: GET
+- **模块**: users
+- **描述**: 搜索活动
+- **状态**: 已实现
+
+## 5. 管理员统计模块
+
+- **路径**: /admin/statistics/*
+- **方法**: 多种
+- **模块**: admin
+- **描述**: 管理员统计相关接口
+- **状态**: 已实现
+
+## 6. 前端TODO调用
+
+### Profile.vue中的TODO
+- getUserInfo(): 获取用户信息
+- saveUserInfo(): 保存用户信息
+- saveJobPreference(): 保存求职偏好
+- unfavoriteEnterprise(): 取消收藏企业
+- unfavoriteEvent(): 取消收藏活动
+
+## 7. 可拓展性建议
+
+1. **用户收藏模块**:
+   - 建议设计统一的收藏表结构，支持多种类型的收藏（企业、活动、职位等）
+   - 添加分页和筛选功能，支持大量收藏数据的管理
+
+2. **求职偏好模块**:
+   - 建议设计灵活的偏好配置，支持自定义行业、职位类型等
+   - 添加偏好推荐功能，根据用户偏好推荐相关企业和职位
+
+3. **搜索模块**:
+   - 建议使用全文检索引擎，提高搜索效率和准确性
+   - 添加搜索历史和热门搜索功能
+
+4. **统计模块**:
+   - 建议设计可配置的统计报表，支持自定义统计维度和时间范围
+   - 添加数据可视化接口，支持图表展示
+
+5. **API设计**:
+   - 建议统一API响应格式，包括状态码、错误信息、数据结构等
+   - 添加API版本控制，支持平滑升级
+   - 实现API文档自动生成，提高开发效率

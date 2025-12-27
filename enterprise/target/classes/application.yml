@@ -1,0 +1,47 @@
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  datasource:
+    url: jdbc:mysql://localhost:3306/login?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      maximum-pool-size: 5
+      minimum-idle: 2
+      connection-timeout: 30000
+      idle-timeout: 600000
+      max-lifetime: 1800000
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    show-sql: true
+  security:
+    enabled: false
+  application:
+    name: enterprise
+  cloud:
+    nacos:
+      username: nacos
+      password: nacos
+      server-addr: 127.0.0.1:8848
+    config:
+      import:
+       - nacos:enterprise.properties
+mybatis:
+  mapper-locations: classpath:mapper/**/*.xml
+  type-aliases-package: com.example.enterprise.domain.entity
+
+
+hm:
+  auth:
+    excludePaths:
+      - /in/**
+      - /users/**
+      - /search/**
+      - /system/**
+server:
+  port: 0
+
+logging:
+  level:
+    org.springframework.security: TRACE

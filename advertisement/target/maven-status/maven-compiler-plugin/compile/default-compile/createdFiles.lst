@@ -1,0 +1,6 @@
+com\example\advertisement\domain\entity\Advertisement.class
+com\example\advertisement\mapper\AdvertisementMapper.class
+com\example\advertisement\controller\AdvertisementController.class
+com\example\advertisement\AdvertisementApplication.class
+com\example\advertisement\service\impl\AdvertisementServiceImpl.class
+com\example\advertisement\service\AdvertisementService.class

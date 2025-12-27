@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+      </profile>
+      <profile name="Annotation profile for parent" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="E:/language/maven/repository/org/projectlombok/lombok/1.18.32/lombok-1.18.32.jar" />
+        </processorPath>
+        <module name="activity" />
+        <module name="enterprise" />
+        <module name="AI" />
+        <module name="admin" />
+        <module name="learning" />
+        <module name="login" />
+        <module name="users" />
+        <module name="forum" />
+        <module name="search" />
+        <module name="common" />
+        <module name="chat" />
+        <module name="advertisement" />
+        <module name="tag" />
+        <module name="event" />
+        <module name="gateway" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="search (1)" target="17" />
+      <module name="search (2)" target="17" />
+      <module name="user" target="17" />
+      <module name="user.main" target="17" />
+      <module name="user.test" target="17" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="AI" options="-parameters" />
+      <module name="activity" options="-parameters" />
+      <module name="admin" options="-parameters" />
+      <module name="advertisement" options="-parameters" />
+      <module name="chat" options="-parameters" />
+      <module name="common" options="-parameters" />
+      <module name="enterprise" options="-parameters" />
+      <module name="event" options="-parameters" />
+      <module name="forum" options="-parameters" />
+      <module name="gateway" options="-parameters" />
+      <module name="learning" options="-parameters" />
+      <module name="login" options="-parameters" />
+      <module name="parent" options="-parameters" />
+      <module name="search" options="-parameters" />
+      <module name="search (1)" options="-parameters" />
+      <module name="search (2)" options="-parameters" />
+      <module name="tag" options="-parameters" />
+      <module name="user" options="-parameters" />
+      <module name="users" options="-parameters" />
+    </option>
+  </component>
+</project>

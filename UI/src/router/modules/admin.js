@@ -1,0 +1,4 @@
+// 管理员模块路由
+export default [
+  {    path: '/admin/dashboard',    name: 'AdminDashboard',    component: () => import('@/views/admin/Dashboard.vue'),    meta: {      title: '管理仪表盘',      requiresAuth: true,      roles: ['ADMIN']    }  },  {    path: '/admin/enterprises',    name: 'EnterpriseManagement',    component: () => import('@/views/admin/EnterpriseManagement.vue'),    meta: {      title: '企业管理',      requiresAuth: true,      roles: ['ADMIN']    }  },  {    path: '/admin/users',    name: 'UserManagement',    component: () => import('@/views/admin/UserManagement.vue'),    meta: {      title: '用户管理',      requiresAuth: true,      roles: ['ADMIN']    }  },  {    path: '/admin/register',    name: 'AdminRegister',    component: () => import('@/views/admin/RegisterAdmin.vue'),    meta: {      title: '新增管理员',      requiresAuth: true,      roles: ['ADMIN']    }  }
+]

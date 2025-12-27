@@ -1,0 +1,11 @@
+com\example\chat\controller\JobChatSessionController.class
+com\example\chat\service\impl\JobChatSessionServiceImpl.class
+com\example\chat\domain\JobChatSession.class
+com\example\chat\mapper\JobChatMessageMapper.class
+com\example\chat\service\impl\JobChatMessageServiceImpl.class
+com\example\chat\domain\JobChatMessage.class
+com\example\chat\mapper\JobChatSessionMapper.class
+com\example\chat\ChatApplication.class
+com\example\chat\service\IJobChatMessageService.class
+com\example\chat\service\IJobChatSessionService.class
+com\example\chat\controller\JobChatMessageController.class

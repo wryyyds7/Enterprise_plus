@@ -1,0 +1,8 @@
+com\example\ai\controller\AIController$Choices.class
+com\example\ai\controller\AIController$RoleContent.class
+com\example\ai\AiApplication.class
+com\example\ai\controller\AIController$JsonParse.class
+com\example\ai\config\SecurityConfig.class
+com\example\ai\controller\AIController.class
+com\example\ai\controller\AIController$Message.class
+com\example\ai\controller\SparkController.class

@@ -1,0 +1,114 @@
+2025-12-17 17:51:30,963 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.149.83.185:5000
+2025-12-17 17:51:30,964 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-12-17 17:51:30,997 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-12-17 17:51:40,789 - werkzeug - WARNING -  * Debugger is active!
+2025-12-17 17:51:40,822 - werkzeug - INFO -  * Debugger PIN: 761-463-918
+2025-12-17 17:52:14,856 - werkzeug - INFO - 127.0.0.1 - - [17/Dec/2025 17:52:14] "GET /api/health HTTP/1.1" 200 -
+2025-12-17 18:14:05,835 - werkzeug - INFO -  * Detected change in 'E:\\language\\python3.10\\Lib\\site-packages\\numpy\\_typing\\__init__.py', reloading
+2025-12-17 18:14:05,842 - werkzeug - INFO -  * Detected change in 'E:\\language\\python3.10\\Lib\\site-packages\\numpy\\_utils\\__init__.py', reloading
+2025-12-17 18:14:05,845 - werkzeug - INFO -  * Detected change in 'E:\\language\\python3.10\\Lib\\site-packages\\numpy\\_typing\\_nested_sequence.py', reloading
+2025-12-17 18:14:05,846 - werkzeug - INFO -  * Detected change in 'E:\\language\\python3.10\\Lib\\site-packages\\numpy\\_typing\\_nbit.py', reloading
+2025-12-17 18:14:05,847 - werkzeug - INFO -  * Detected change in 'E:\\language\\python3.10\\Lib\\site-packages\\numpy\\_typing\\_char_codes.py', reloading
+2025-12-17 18:14:05,849 - werkzeug - INFO -  * Detected change in 'E:\\language\\python3.10\\Lib\\site-packages\\numpy\\_typing\\_scalars.py', reloading
+2025-12-17 18:14:05,850 - werkzeug - INFO -  * Detected change in 'E:\\language\\python3.10\\Lib\\site-packages\\numpy\\_typing\\_shape.py', reloading
+2025-12-17 18:14:05,851 - werkzeug - INFO -  * Detected change in 'E:\\language\\python3.10\\Lib\\site-packages\\numpy\\_typing\\_dtype_like.py', reloading
+2025-12-17 18:14:05,852 - werkzeug - INFO -  * Detected change in 'E:\\language\\python3.10\\Lib\\site-packages\\numpy\\_typing\\_array_like.py', reloading
+2025-12-17 18:14:05,853 - werkzeug - INFO -  * Detected change in 'E:\\language\\python3.10\\Lib\\site-packages\\numpy\\typing\\__init__.py', reloading
+2025-12-17 18:14:06,727 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-12-17 18:14:18,305 - werkzeug - WARNING -  * Debugger is active!
+2025-12-17 18:14:18,341 - werkzeug - INFO -  * Debugger PIN: 761-463-918
+2025-12-17 18:18:16,276 - werkzeug - INFO -  * Detected change in 'D:\\bianchenglianxi\\java\\project\\enterprise_plus\\python-knowledge\\enterprise-recommendation\\test_similarity.py', reloading
+2025-12-17 18:18:17,333 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-12-17 18:18:24,224 - werkzeug - WARNING -  * Debugger is active!
+2025-12-17 18:18:24,241 - werkzeug - INFO -  * Debugger PIN: 761-463-918
+2025-12-17 18:23:17,579 - werkzeug - INFO -  * Detected change in 'D:\\bianchenglianxi\\java\\project\\enterprise_plus\\python-knowledge\\enterprise-recommendation\\utils\\similarity.py', reloading
+2025-12-17 18:23:18,654 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-12-17 18:23:25,312 - werkzeug - WARNING -  * Debugger is active!
+2025-12-17 18:23:25,334 - werkzeug - INFO -  * Debugger PIN: 761-463-918
+2025-12-17 18:24:03,726 - __main__ - INFO - 为用户 123 推荐企业，标签: ['?????', 'Java', 'Spring Boot']，类型: hybrid
+2025-12-17 18:24:03,728 - werkzeug - INFO - 127.0.0.1 - - [17/Dec/2025 18:24:03] "POST /api/recommend/enterprise HTTP/1.1" 200 -
+2025-12-17 18:39:21,456 - werkzeug - INFO -  * Detected change in 'D:\\bianchenglianxi\\java\\project\\enterprise_plus\\python-knowledge\\enterprise-recommendation\\utils\\response.py', reloading
+2025-12-17 18:39:21,930 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-12-17 18:39:28,596 - werkzeug - WARNING -  * Debugger is active!
+2025-12-17 18:39:28,616 - werkzeug - INFO -  * Debugger PIN: 761-463-918
+2025-12-17 18:42:22,141 - werkzeug - INFO -  * Detected change in 'D:\\bianchenglianxi\\java\\project\\enterprise_plus\\python-knowledge\\enterprise-recommendation\\models\\data_loader.py', reloading
+2025-12-17 18:42:22,143 - werkzeug - INFO -  * Detected change in 'D:\\bianchenglianxi\\java\\project\\enterprise_plus\\python-knowledge\\enterprise-recommendation\\models\\graph_builder.py', reloading
+2025-12-17 18:42:22,895 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-12-17 18:42:30,028 - werkzeug - WARNING -  * Debugger is active!
+2025-12-17 18:42:30,053 - werkzeug - INFO -  * Debugger PIN: 761-463-918
+2025-12-17 18:43:22,429 - werkzeug - INFO -  * Detected change in 'D:\\bianchenglianxi\\java\\project\\enterprise_plus\\python-knowledge\\enterprise-recommendation\\services\\enterprise_service.py', reloading
+2025-12-17 18:43:23,038 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-12-17 18:43:30,064 - werkzeug - WARNING -  * Debugger is active!
+2025-12-17 18:43:30,089 - werkzeug - INFO -  * Debugger PIN: 761-463-918
+2025-12-17 18:45:22,894 - werkzeug - INFO -  * Detected change in 'D:\\bianchenglianxi\\java\\project\\enterprise_plus\\python-knowledge\\enterprise-recommendation\\test_tag_loading.py', reloading
+2025-12-17 18:45:23,641 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-12-17 18:45:30,482 - werkzeug - WARNING -  * Debugger is active!
+2025-12-17 18:45:30,500 - werkzeug - INFO -  * Debugger PIN: 761-463-918
+2025-12-17 18:46:23,158 - werkzeug - INFO -  * Detected change in 'D:\\bianchenglianxi\\java\\project\\enterprise_plus\\python-knowledge\\enterprise-recommendation\\app.py', reloading
+2025-12-17 18:46:24,411 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-12-17 18:46:31,383 - werkzeug - WARNING -  * Debugger is active!
+2025-12-17 18:46:31,408 - werkzeug - INFO -  * Debugger PIN: 761-463-918
+2025-12-17 18:48:11,023 - werkzeug - INFO -  * Detected change in 'D:\\bianchenglianxi\\java\\project\\enterprise_plus\\python-knowledge\\enterprise-recommendation\\app.py', reloading
+2025-12-17 18:48:11,023 - werkzeug - INFO -  * Detected change in 'D:\\bianchenglianxi\\java\\project\\enterprise_plus\\python-knowledge\\enterprise-recommendation\\app.py', reloading
+2025-12-17 18:48:11,024 - werkzeug - INFO -  * Detected change in 'D:\\bianchenglianxi\\java\\project\\enterprise_plus\\python-knowledge\\enterprise-recommendation\\app.py', reloading
+2025-12-17 18:48:11,751 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-12-17 18:48:18,649 - werkzeug - WARNING -  * Debugger is active!
+2025-12-17 18:48:18,670 - werkzeug - INFO -  * Debugger PIN: 761-463-918
+2025-12-17 18:48:43,943 - werkzeug - INFO -  * Detected change in 'D:\\bianchenglianxi\\java\\project\\enterprise_plus\\python-knowledge\\enterprise-recommendation\\models\\recommendation.py', reloading
+2025-12-17 18:48:43,944 - werkzeug - INFO -  * Detected change in 'D:\\bianchenglianxi\\java\\project\\enterprise_plus\\python-knowledge\\enterprise-recommendation\\models\\recommendation.py', reloading
+2025-12-17 18:48:45,251 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-12-17 18:48:52,284 - werkzeug - WARNING -  * Debugger is active!
+2025-12-17 18:48:52,305 - werkzeug - INFO -  * Debugger PIN: 761-463-918
+2025-12-17 18:49:23,995 - werkzeug - INFO -  * Detected change in 'D:\\bianchenglianxi\\java\\project\\enterprise_plus\\python-knowledge\\enterprise-recommendation\\services\\tag_service.py', reloading
+2025-12-17 18:49:25,039 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-12-17 18:49:31,938 - werkzeug - WARNING -  * Debugger is active!
+2025-12-17 18:49:31,953 - werkzeug - INFO -  * Debugger PIN: 761-463-918
+2025-12-17 18:50:24,267 - werkzeug - INFO -  * Detected change in 'D:\\bianchenglianxi\\java\\project\\enterprise_plus\\python-knowledge\\enterprise-recommendation\\utils\\cache.py', reloading
+2025-12-17 18:50:24,971 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-12-17 18:50:32,207 - werkzeug - WARNING -  * Debugger is active!
+2025-12-17 18:50:32,243 - werkzeug - INFO -  * Debugger PIN: 761-463-918
+2025-12-17 18:51:24,495 - werkzeug - INFO -  * Detected change in 'D:\\bianchenglianxi\\java\\project\\enterprise_plus\\python-knowledge\\enterprise-recommendation\\services\\position_service.py', reloading
+2025-12-17 18:51:25,180 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-12-17 18:51:31,846 - werkzeug - WARNING -  * Debugger is active!
+2025-12-17 18:51:31,865 - werkzeug - INFO -  * Debugger PIN: 761-463-918
+2025-12-23 11:32:44,843 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.149.83.185:5000
+2025-12-23 11:32:44,844 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-12-23 11:32:44,873 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-12-23 11:32:50,085 - werkzeug - WARNING -  * Debugger is active!
+2025-12-23 11:32:50,093 - werkzeug - INFO -  * Debugger PIN: 761-463-918
+2025-12-23 11:36:45,165 - werkzeug - INFO -  * Detected change in 'D:\\bianchenglianxi\\java\\project\\enterprise_plus\\python-knowledge\\enterprise-recommendation\\config.py', reloading
+2025-12-23 11:36:45,165 - werkzeug - INFO -  * Detected change in 'D:\\bianchenglianxi\\java\\project\\enterprise_plus\\python-knowledge\\enterprise-recommendation\\config.py', reloading
+2025-12-23 11:36:45,167 - werkzeug - INFO -  * Detected change in 'D:\\bianchenglianxi\\java\\project\\enterprise_plus\\python-knowledge\\enterprise-recommendation\\config.py', reloading
+2025-12-23 11:36:46,511 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-12-23 11:36:51,261 - werkzeug - WARNING -  * Debugger is active!
+2025-12-23 11:36:51,269 - werkzeug - INFO -  * Debugger PIN: 761-463-918
+2025-12-23 11:44:11,392 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.149.83.185:5000
+2025-12-23 11:44:11,393 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-12-23 11:44:11,403 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-12-23 11:44:16,196 - werkzeug - WARNING -  * Debugger is active!
+2025-12-23 11:44:16,214 - werkzeug - INFO -  * Debugger PIN: 761-463-918
+2025-12-23 11:46:31,492 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.149.83.185:5000
+2025-12-23 11:46:31,492 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-12-23 11:46:31,515 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-12-23 11:46:36,187 - werkzeug - WARNING -  * Debugger is active!
+2025-12-23 11:46:36,215 - werkzeug - INFO -  * Debugger PIN: 761-463-918
+2025-12-25 17:40:11,763 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.149.83.185:5000
+2025-12-25 17:40:11,764 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-12-25 17:40:11,765 - werkzeug - INFO -  * Restarting with stat
+2025-12-25 17:40:25,499 - werkzeug - WARNING -  * Debugger is active!
+2025-12-25 17:40:25,510 - werkzeug - INFO -  * Debugger PIN: 656-954-131

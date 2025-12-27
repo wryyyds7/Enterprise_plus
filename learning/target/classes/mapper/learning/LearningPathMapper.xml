@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.learning.mapper.LearningPathMapper">
+    
+    <resultMap id="LearningPathResult" type="com.example.learning.domain.entity.LearningPath">
+        <id property="pathId" column="path_id"/>
+        <result property="pathName" column="path_name"/>
+        <result property="description" column="description"/>
+        <result property="careerPath" column="career_path"/>
+        <result property="difficultyLevel" column="difficulty_level"/>
+        <result property="totalDuration" column="total_duration"/>
+        <result property="createdBy" column="created_by"/>
+        <result property="createdTime" column="created_time"/>
+        <result property="updatedBy" column="updated_by"/>
+        <result property="updatedTime" column="updated_time"/>
+        <result property="status" column="status"/>
+    </resultMap>
+    
+    <select id="selectLearningPathList" parameterType="com.example.learning.domain.entity.LearningPath" resultMap="LearningPathResult">
+        select * from learning_path
+        <where>
+            <if test="pathName != null and pathName != ''">
+                and path_name like concat('%', #{pathName}, '%')
+            </if>
+            <if test="careerPath != null and careerPath != ''">
+                and career_path = #{careerPath}
+            </if>
+            <if test="difficultyLevel != null">
+                and difficulty_level = #{difficultyLevel}
+            </if>
+            <if test="status != null">
+                and status = #{status}
+            </if>
+        </where>
+    </select>
+    
+    <select id="selectLearningPathById" parameterType="java.lang.Long" resultMap="LearningPathResult">
+        select * from learning_path where path_id = #{pathId}
+    </select>
+    
+    <select id="selectLearningPathByCareerPath" parameterType="java.lang.String" resultMap="LearningPathResult">
+        select * from learning_path where career_path = #{careerPath}
+    </select>
+    
+    <insert id="insertLearningPath" parameterType="com.example.learning.domain.entity.LearningPath" useGeneratedKeys="true" keyProperty="pathId">
+        insert into learning_path
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="pathName != null and pathName != ''">path_name,</if>
+            <if test="description != null and description != ''">description,</if>
+            <if test="careerPath != null and careerPath != ''">career_path,</if>
+            <if test="difficultyLevel != null">difficulty_level,</if>
+            <if test="totalDuration != null">total_duration,</if>
+            <if test="createdBy != null and createdBy != ''">created_by,</if>
+            <if test="createdTime != null">created_time,</if>
+            <if test="updatedBy != null and updatedBy != ''">updated_by,</if>
+            <if test="updatedTime != null">updated_time,</if>
+            <if test="status != null">status,</if>
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="pathName != null and pathName != ''">#{pathName},</if>
+            <if test="description != null and description != ''">#{description},</if>
+            <if test="careerPath != null and careerPath != ''">#{careerPath},</if>
+            <if test="difficultyLevel != null">#{difficultyLevel},</if>
+            <if test="totalDuration != null">#{totalDuration},</if>
+            <if test="createdBy != null and createdBy != ''">#{createdBy},</if>
+            <if test="createdTime != null">#{createdTime},</if>
+            <if test="updatedBy != null and updatedBy != ''">#{updatedBy},</if>
+            <if test="updatedTime != null">#{updatedTime},</if>
+            <if test="status != null">#{status},</if>
+        </trim>
+    </insert>
+    
+    <update id="updateLearningPath" parameterType="com.example.learning.domain.entity.LearningPath">
+        update learning_path
+        <set>
+            <if test="pathName != null and pathName != ''">path_name = #{pathName},</if>
+            <if test="description != null and description != ''">description = #{description},</if>
+            <if test="careerPath != null and careerPath != ''">career_path = #{careerPath},</if>
+            <if test="difficultyLevel != null">difficulty_level = #{difficultyLevel},</if>
+            <if test="totalDuration != null">total_duration = #{totalDuration},</if>
+            <if test="updatedBy != null and updatedBy != ''">updated_by = #{updatedBy},</if>
+            <if test="updatedTime != null">updated_time = #{updatedTime},</if>
+            <if test="status != null">status = #{status},</if>
+        </set>
+        where path_id = #{pathId}
+    </update>
+    
+    <delete id="deleteLearningPathById" parameterType="java.lang.Long">
+        delete from learning_path where path_id = #{pathId}
+    </delete>
+    
+    <delete id="deleteLearningPathByIds" parameterType="java.lang.Long[]">
+        delete from learning_path where path_id in
+        <foreach item="pathId" collection="array" open="(" separator="," close=")">
+            #{pathId}
+        </foreach>
+    </delete>
+</mapper>

@@ -1,0 +1,10 @@
+com\example\activity\service\impl\ActivityServiceImpl.class
+com\example\activity\mapper\ActivityFavoriteMapper.class
+com\example\activity\domain\entity\Activity.class
+com\example\activity\mapper\ActivityMapper.class
+com\example\activity\service\ActivityService.class
+com\example\activity\mapper\ActivityRegistrationMapper.class
+com\example\activity\domain\entity\ActivityRegistration.class
+com\example\activity\ActivityApplication.class
+com\example\activity\controller\ActivityController.class
+com\example\activity\domain\entity\ActivityFavorite.class

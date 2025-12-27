@@ -1,0 +1,11 @@
+com\example\tag\service\ITagService.class
+com\example\tag\controller\TagController.class
+com\example\tag\service\impl\EntityTagServiceImpl.class
+com\example\tag\mapper\EntityTagMapper.class
+com\example\tag\domain\EntityTag.class
+com\example\tag\service\IEntityTagService.class
+com\example\tag\controller\EntityTagController.class
+com\example\tag\domain\Tag.class
+com\example\tag\service\impl\TagServiceImpl.class
+com\example\tag\TagApplication.class
+com\example\tag\mapper\TagMapper.class

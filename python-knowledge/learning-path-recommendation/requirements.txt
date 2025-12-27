@@ -1,0 +1,25 @@
+# 学习路径推荐模块依赖
+
+# Web框架
+Flask>=2.0.0
+Flask-CORS>=3.0.10
+
+# 数据处理
+pandas>=1.5.0
+numpy>=1.21.0
+
+# 机器学习
+scikit-learn>=1.1.0
+
+# HTTP请求
+requests>=2.28.0
+
+# 缓存
+redis>=4.3.4
+
+# 知识图谱
+neo4j>=4.4.0
+
+# 工具库
+python-dotenv>=0.21.0
+python-dateutil>=2.8.2

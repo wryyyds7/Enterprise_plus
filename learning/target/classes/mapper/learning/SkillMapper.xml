@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.learning.mapper.SkillMapper">
+    
+    <resultMap id="SkillResult" type="com.example.learning.domain.entity.Skill">
+        <id property="skillId" column="skill_id"/>
+        <result property="skillName" column="skill_name"/>
+        <result property="description" column="description"/>
+        <result property="category" column="category"/>
+        <result property="createdBy" column="created_by"/>
+        <result property="createdTime" column="created_time"/>
+        <result property="updatedBy" column="updated_by"/>
+        <result property="updatedTime" column="updated_time"/>
+        <result property="status" column="status"/>
+    </resultMap>
+    
+    <select id="selectSkillList" parameterType="com.example.learning.domain.entity.Skill" resultMap="SkillResult">
+        select * from skill
+        <where>
+            <if test="skillName != null and skillName != ''">
+                and skill_name like concat('%', #{skillName}, '%')
+            </if>
+            <if test="category != null and category != ''">
+                and category = #{category}
+            </if>
+            <if test="status != null">
+                and status = #{status}
+            </if>
+        </where>
+    </select>
+    
+    <select id="selectSkillById" parameterType="java.lang.Long" resultMap="SkillResult">
+        select * from skill where skill_id = #{skillId}
+    </select>
+    
+    <select id="selectSkillByName" parameterType="java.lang.String" resultMap="SkillResult">
+        select * from skill where skill_name = #{skillName}
+    </select>
+    
+    <select id="selectSkillByCategory" parameterType="java.lang.String" resultMap="SkillResult">
+        select * from skill where category = #{category}
+    </select>
+    
+    <insert id="insertSkill" parameterType="com.example.learning.domain.entity.Skill" useGeneratedKeys="true" keyProperty="skillId">
+        insert into skill
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="skillName != null and skillName != ''">skill_name,</if>
+            <if test="description != null and description != ''">description,</if>
+            <if test="category != null and category != ''">category,</if>
+            <if test="createdBy != null and createdBy != ''">created_by,</if>
+            <if test="createdTime != null">created_time,</if>
+            <if test="updatedBy != null and updatedBy != ''">updated_by,</if>
+            <if test="updatedTime != null">updated_time,</if>
+            <if test="status != null">status,</if>
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="skillName != null and skillName != ''">#{skillName},</if>
+            <if test="description != null and description != ''">#{description},</if>
+            <if test="category != null and category != ''">#{category},</if>
+            <if test="createdBy != null and createdBy != ''">#{createdBy},</if>
+            <if test="createdTime != null">#{createdTime},</if>
+            <if test="updatedBy != null and updatedBy != ''">#{updatedBy},</if>
+            <if test="updatedTime != null">#{updatedTime},</if>
+            <if test="status != null">#{status},</if>
+        </trim>
+    </insert>
+    
+    <update id="updateSkill" parameterType="com.example.learning.domain.entity.Skill">
+        update skill
+        <set>
+            <if test="skillName != null and skillName != ''">skill_name = #{skillName},</if>
+            <if test="description != null and description != ''">description = #{description},</if>
+            <if test="category != null and category != ''">category = #{category},</if>
+            <if test="updatedBy != null and updatedBy != ''">updated_by = #{updatedBy},</if>
+            <if test="updatedTime != null">updated_time = #{updatedTime},</if>
+            <if test="status != null">status = #{status},</if>
+        </set>
+        where skill_id = #{skillId}
+    </update>
+    
+    <delete id="deleteSkillById" parameterType="java.lang.Long">
+        delete from skill where skill_id = #{skillId}
+    </delete>
+    
+    <delete id="deleteSkillByIds" parameterType="java.lang.Long[]">
+        delete from skill where skill_id in
+        <foreach item="skillId" collection="array" open="(" separator="," close=")">
+            #{skillId}
+        </foreach>
+    </delete>
+</mapper>

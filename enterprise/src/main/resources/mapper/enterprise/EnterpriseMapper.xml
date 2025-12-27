@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.enterprise.mapper.EnterpriseMapper">
+
+    <resultMap type="com.example.common.domain.entity.Enterprise" id="EnterpriseResult">
+        <result property="enterpriseId"    column="enterprise_id"    />
+        <result property="enterpriseName"    column="enterprise_name"    />
+        <result property="country"    column="country"    />
+        <result property="province"    column="province"    />
+        <result property="city"    column="city"    />
+        <result property="address"    column="address"    />
+        <result property="phone"    column="phone"    />
+        <result property="email"    column="email"    />
+        <result property="website"    column="website"    />
+        <result property="regNo"    column="reg_no"    />
+        <result property="operName"    column="oper_name"    />
+        <result property="enterpriseClassification" column="enterprise_classification"/>
+    </resultMap>
+
+    <sql id="selectEnterpriseVo">
+        select enterprise_id, enterprise_name, country, province, city, address, phone, email, website, reg_no, oper_name, enterprise_classification from enterprise
+    </sql>
+
+    <select id="selectEnterpriseList" parameterType="com.example.common.domain.entity.Enterprise" resultMap="EnterpriseResult">
+        <include refid="selectEnterpriseVo"/>
+        <where>  
+            <if test="enterpriseName != null  and enterpriseName != ''"> and enterprise_name like concat('%', #{enterpriseName}, '%')</if>
+            <if test="country != null  and country != ''"> and country = #{country}</if>
+            <if test="province != null  and province != ''"> and province = #{province}</if>
+            <if test="city != null  and city != ''"> and city = #{city}</if>
+            <if test="address != null  and address != ''"> and address = #{address}</if>
+            <if test="phone != null  and phone != ''"> and phone = #{phone}</if>
+            <if test="email != null  and email != ''"> and email = #{email}</if>
+            <if test="website != null  and website != ''"> and website = #{website}</if>
+            <if test="regNo != null  and regNo != ''"> and reg_no = #{regNo}</if>
+            <if test="operName != null  and operName != ''"> and oper_name like concat('%', #{operName}, '%')</if>
+            <if test="enterpriseClassification != null  and enterpriseClassification != ''"> and enterprise_classification = #{enterpriseClassification}</if>
+        </where>
+    </select>
+    
+    <select id="selectEnterpriseByEnterpriseId" parameterType="Long" resultMap="EnterpriseResult">
+        <include refid="selectEnterpriseVo"/>
+        where enterprise_id = #{enterpriseId}
+    </select>
+
+    <insert id="insertEnterprise" parameterType="com.example.common.domain.entity.Enterprise" useGeneratedKeys="true" keyProperty="enterpriseId">
+        insert into enterprise
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="enterpriseName != null and enterpriseName != ''">enterprise_name,</if>
+            <if test="country != null">country,</if>
+            <if test="province != null">province,</if>
+            <if test="city != null">city,</if>
+            <if test="address != null">address,</if>
+            <if test="phone != null">phone,</if>
+            <if test="email != null">email,</if>
+            <if test="website != null">website,</if>
+            <if test="regNo != null">reg_no,</if>
+            <if test="operName != null">oper_name,</if>
+            <if test="enterpriseClassification != null">enterprise_classification,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="enterpriseName != null and enterpriseName != ''">#{enterpriseName},</if>
+            <if test="country != null">#{country},</if>
+            <if test="province != null">#{province},</if>
+            <if test="city != null">#{city},</if>
+            <if test="address != null">#{address},</if>
+            <if test="phone != null">#{phone},</if>
+            <if test="email != null">#{email},</if>
+            <if test="website != null">#{website},</if>
+            <if test="regNo != null">#{regNo},</if>
+            <if test="operName != null">#{operName},</if>
+            <if test="enterpriseClassification != null">#{enterpriseClassification},</if>
+         </trim>
+    </insert>
+
+    <update id="updateEnterprise" parameterType="com.example.common.domain.entity.Enterprise">
+        update enterprise
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="enterpriseName != null and enterpriseName != ''">enterprise_name = #{enterpriseName},</if>
+            <if test="country != null">country = #{country},</if>
+            <if test="province != null">province = #{province},</if>
+            <if test="city != null">city = #{city},</if>
+            <if test="address != null">address = #{address},</if>
+            <if test="phone != null">phone = #{phone},</if>
+            <if test="email != null">email = #{email},</if>
+            <if test="website != null">website = #{website},</if>
+            <if test="regNo != null">reg_no = #{regNo},</if>
+            <if test="operName != null">oper_name = #{operName},</if>
+            <if test="enterpriseClassification != null">enterprise_classification = #{enterpriseClassification},</if>
+        </trim>
+        where enterprise_id = #{enterpriseId}
+    </update>
+
+    <delete id="deleteEnterpriseByEnterpriseId" parameterType="Long">
+        delete from enterprise where enterprise_id = #{enterpriseId}
+    </delete>
+
+    <delete id="deleteEnterpriseByEnterpriseIds" parameterType="String">
+        delete from enterprise where enterprise_id in 
+        <foreach item="enterpriseId" collection="array" open="(" separator="," close=")">
+            #{enterpriseId}
+        </foreach>
+    </delete>
+</mapper>

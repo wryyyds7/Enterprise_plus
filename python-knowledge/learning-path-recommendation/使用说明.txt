@@ -1,0 +1,327 @@
+# 学习路径推荐知识图谱模块使用说明
+
+## 一、模块简介
+
+学习路径推荐模块是一个基于知识图谱的个性化学习路径推荐系统，能够根据用户的当前技能、目标技能和学习偏好，推荐最优的学习路径。
+
+## 二、快速开始
+
+### 1. 环境准备
+
+- Python 3.8+
+- Neo4j 4.0+
+- Redis 4.0+
+
+### 2. 安装依赖
+
+```bash
+cd d:\bianchenglianxi\java\project\enterprise_plus\python-knowledge\learning-path-recommendation
+pip install -r requirements.txt
+```
+
+### 3. 启动服务
+
+```bash
+python app.py
+```
+
+服务将在 `http://localhost:5001` 启动。
+
+## 三、核心功能使用
+
+### 1. 全局学习标签词典
+
+为了解决标签数据不足的问题，模块实现了全局学习标签词典功能。全局学习标签词典包含了95个预定义的标签，涵盖了编程语言、框架技术、数据库、资源类型、学习目标和资源属性等多个维度。
+
+**全局学习标签词典位置**：`utils/similarity.py`中的`GLOBAL_LEARNING_TAGS`变量
+
+**主要标签类别**：
+- 编程语言：Java、Python、JavaScript、C++等
+- 框架技术：Spring Boot、Django、React、Vue等
+- 数据库：MySQL、PostgreSQL、MongoDB、Redis等
+- 资源类型：视频教程、在线课程、文档、代码示例等
+- 学习目标：入门、进阶、精通、实战等
+
+### 2. 模拟数据生成
+
+当实际数据不足时，模块会自动生成模拟数据用于测试和演示。模拟数据包括：
+- 模拟技能（50-100个）
+- 模拟学习资源（100-200个）
+- 技能之间的依赖关系
+- 技能与资源的关联关系
+
+**模拟数据生成配置**：
+- 默认生成50个技能和200个学习资源
+- 技能难度分为1-5级（1：入门，5：精通）
+- 技能之间根据难度生成合理的依赖关系
+- 资源与技能的相关度在0.1-1.0之间
+
+### 3. 管理技能和学习资源
+
+技能和学习资源是通过Java后端进行管理的。Python模块通过调用Java API获取相关数据。
+
+**Java后端添加技能示例**：
+
+```java
+// 创建技能
+Skill skill = new Skill();
+skill.setName("Spring Boot");
+skill.setDifficulty("中级");
+skill.setCategory("后端开发");
+skill.setDescription("Spring Boot是基于Spring框架的快速开发框架");
+skillMapper.insertSkill(skill);
+
+// 添加技能之间的依赖关系
+SkillDependency dependency = new SkillDependency();
+dependency.setSkillId(skill.getSkillId());
+dependency.setPreSkillId(preSkillId); // Java基础的skillId
+dependency.setWeight(1.0); // 依赖权重
+skillDependencyMapper.insertSkillDependency(dependency);
+```
+
+**Java后端添加学习资源示例**：
+
+```java
+// 创建学习资源
+Resource resource = new Resource();
+resource.setTitle("Spring Boot实战教程");
+resource.setType("视频教程");
+resource.setDifficulty("中级");
+resource.setDuration(45); // 45小时
+resource.setUrl("http://example.com/spring-boot-tutorial");
+resource.setRelevance(0.9); // 与技能的相关度
+resourceMapper.insertResource(resource);
+
+// 将资源关联到技能
+ResourceSkillRelation relation = new ResourceSkillRelation();
+relation.setResourceId(resource.getResourceId());
+relation.setSkillId(skill.getSkillId());
+relation.setWeight(0.8); // 权重
+resourceSkillRelationMapper.insertResourceSkillRelation(relation);
+```
+
+### 2. 调用学习路径推荐API
+
+**API地址**：`POST /api/recommend/learning-path`
+
+**请求参数**：
+```json
+{
+  "userId": "123",
+  "currentSkills": ["Java基础", "SQL入门"],
+  "targetSkills": ["Spring Boot", "微服务架构"],
+  "timeframe": "3个月",
+  "learningStyle": "理论+实践"
+}
+```
+
+**调用示例（Python）**：
+```python
+import requests
+
+url = "http://localhost:5001/api/recommend/learning-path"
+data = {
+    "userId": "123",
+    "currentSkills": ["Java基础", "SQL入门"],
+    "targetSkills": ["Spring Boot", "微服务架构"],
+    "timeframe": "3个月",
+    "learningStyle": "理论+实践"
+}
+
+response = requests.post(url, json=data)
+print(response.json())
+```
+
+**响应示例**：
+```json
+{
+  "code": 200,
+  "msg": "success",
+  "data": {
+    "userId": "123",
+    "targetSkills": ["Spring Boot", "微服务架构"],
+    "timeframe": "3个月",
+    "learningStyle": "理论+实践",
+    "progress": {
+      "progress": 0,
+      "completedSkills": [],
+      "remainingSkills": ["Spring Boot", "微服务架构"],
+      "totalSkills": 2
+    },
+    "path": [
+      {
+        "skillId": "skill1",
+        "name": "Java面向对象",
+        "difficulty": "中级",
+        "category": "编程语言",
+        "resources": [
+          {
+            "resourceId": "res1",
+            "title": "Java面向对象编程详解",
+            "type": "视频教程",
+            "difficulty": "中级",
+            "duration": 10,
+            "url": "http://example.com/resource1",
+            "relevance": 0.9
+          }
+        ],
+        "prerequisites": ["Java基础"]
+      },
+      {
+        "skillId": "skill2",
+        "name": "Spring Boot",
+        "difficulty": "中级",
+        "category": "后端开发",
+        "resources": [
+          {
+            "resourceId": "res2",
+            "title": "Spring Boot实战教程",
+            "type": "视频教程",
+            "difficulty": "中级",
+            "duration": 45,
+            "url": "http://example.com/resource2",
+            "relevance": 0.95
+          }
+        ],
+        "prerequisites": ["Java面向对象"]
+      },
+      {
+        "skillId": "skill3",
+        "name": "微服务架构",
+        "difficulty": "高级",
+        "category": "架构设计",
+        "resources": [
+          {
+            "resourceId": "res3",
+            "title": "微服务架构实战",
+            "type": "文档",
+            "difficulty": "高级",
+            "duration": 30,
+            "url": "http://example.com/resource3",
+            "relevance": 0.9
+          }
+        ],
+        "prerequisites": ["Spring Boot"]
+      }
+    ],
+    "estimatedTime": "约 85 天",
+    "totalSkills": 3,
+    "totalResources": 3
+  }
+}
+```
+
+### 3. 健康检查
+
+**API地址**：`GET /health`
+
+**调用示例**：
+```bash
+curl http://localhost:5001/health
+```
+
+**响应示例**：
+```json
+{
+  "code": 200,
+  "msg": "success",
+  "data": {
+    "status": "healthy",
+    "service": "learning-path-recommendation"
+  }
+}
+```
+
+## 四、知识图谱管理
+
+### 1. 查看知识图谱统计信息
+
+**API地址**：`GET /api/graph/stats`
+
+**调用示例**：
+```bash
+curl http://localhost:5001/api/graph/stats
+```
+
+**响应示例**：
+```json
+{
+  "code": 200,
+  "msg": "success",
+  "data": {
+    "totalSkills": 200,
+    "totalResources": 500,
+    "totalUsers": 300,
+    "totalRelations": 800
+  }
+}
+```
+
+### 2. 手动更新知识图谱
+
+如果知识图谱数据发生变化，可以手动触发更新：
+
+**API地址**：`POST /api/graph/update`
+
+**调用示例**：
+```bash
+curl -X POST http://localhost:5001/api/graph/update
+```
+
+## 五、Java后端整合
+
+### 1. 创建Feign客户端
+
+```java
+@FeignClient(value = "python-learning-path-recommend", url = "http://localhost:5001")
+public interface PythonLearningPathClient {
+    @PostMapping("/api/recommend/learning-path")
+    AjaxResult recommendLearningPath(@RequestBody LearningPathRequest request);
+}
+```
+
+### 2. 调用示例
+
+```java
+LearningPathRequest request = new LearningPathRequest();
+request.setUserId("123");
+request.setCurrentSkills(Arrays.asList("Java基础", "SQL入门"));
+request.setTargetSkills(Arrays.asList("Spring Boot", "微服务架构"));
+request.setTimeframe("3个月");
+request.setLearningStyle("理论+实践");
+
+AjaxResult result = pythonLearningPathClient.recommendLearningPath(request);
+```
+
+## 六、常见问题
+
+### 1. 为什么推荐的学习路径不符合预期？
+
+- 检查用户的当前技能是否正确设置
+- 检查目标技能是否在知识图谱中有足够的依赖关系
+- 调整学习风格或时间框架参数
+- 确保知识图谱数据是最新的，可以手动触发更新
+
+### 2. 如何添加新的学习路径模板？
+
+学习路径模板可以通过在Java后端添加预定义的技能序列来实现，然后通过API同步到Python模块的知识图谱中。
+
+### 3. 服务启动失败怎么办？
+
+- 检查端口5001是否被占用
+- 检查Neo4j和Redis是否正常运行
+- 检查配置文件中的数据库连接信息是否正确
+- 查看日志文件app.log了解详细错误信息
+
+## 七、维护与更新
+
+- 定期备份Neo4j数据库
+- 监控Redis缓存使用情况
+- 根据用户反馈调整推荐算法参数
+- 定期更新技能和学习资源数据
+
+---
+
+# 联系信息
+
+如有问题，请联系开发人员。

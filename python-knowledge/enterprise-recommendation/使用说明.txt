@@ -1,0 +1,241 @@
+# 企业推荐知识图谱模块使用说明
+
+## 一、模块简介
+
+企业推荐模块是一个基于知识图谱的企业推荐系统，能够根据用户输入的标签（如"软件工程师"、"软件公司"）为求职者推荐合适的企业。
+
+## 二、快速开始
+
+### 1. 环境准备
+
+- Python 3.8+
+- Neo4j 4.0+
+- Redis 4.0+
+
+### 2. 安装依赖
+
+```bash
+cd d:\bianchenglianxi\java\project\enterprise_plus\python-knowledge\enterprise-recommendation
+pip install -r requirements.txt
+```
+
+### 3. 启动服务
+
+```bash
+python app.py
+```
+
+服务将在 `http://localhost:5000` 启动。
+
+## 三、核心功能使用
+
+### 1. 全局标签词典
+
+为了解决标签数据不足的问题，模块实现了全局标签词典功能。全局标签词典包含了90个预定义的标签，涵盖了职位、行业、公司类型、规模、福利和能力等多个维度。
+
+**全局标签词典位置**：`utils/similarity.py`中的`GLOBAL_TAGS`变量
+
+**主要标签类别**：
+- 职位相关：软件工程师、Java开发工程师、Python开发工程师等
+- 行业相关：软件公司、互联网公司、科技公司等
+- 公司类型：国企、外企、上市公司、独角兽等
+- 能力相关：团队协作、沟通能力、学习能力等
+
+### 2. 模拟数据生成
+
+当实际数据不足时，模块会自动生成模拟数据用于测试和演示。模拟数据包括：
+- 模拟企业（20-50家）
+- 模拟职位（100-200个）
+- 模拟标签关联关系
+
+**模拟数据生成配置**：
+- 默认生成50家企业和200个职位
+- 每个企业平均关联3-5个标签
+- 每个职位平均关联2-4个标签
+
+### 3. 添加企业标签
+
+企业标签是通过Java后端的标签系统进行管理的。Python模块通过调用Java API获取标签数据。
+
+**Java后端添加标签示例**：
+
+```java
+// 创建标签
+Tag tag = new Tag();
+tag.setName("软件公司");
+tag.setType("enterprise_type");
+tagMapper.insertTag(tag);
+
+// 将标签关联到企业
+TagRelation relation = new TagRelation();
+relation.setTagId(tag.getTagId());
+relation.setEntityId(enterpriseId);
+relation.setEntityType("enterprise");
+tagRelationMapper.insertTagRelation(relation);
+```
+
+### 2. 调用企业推荐API
+
+**API地址**：`POST /api/recommend/enterprise`
+
+**请求参数**：
+```json
+{
+  "userId": "123",
+  "tags": ["软件工程师", "软件公司"],
+  "preferences": {
+    "location": ["北京", "上海"],
+    "industry": ["互联网", "金融科技"]
+  }
+}
+```
+
+**调用示例（Python）**：
+```python
+import requests
+
+url = "http://localhost:5000/api/recommend/enterprise"
+data = {
+    "userId": "123",
+    "tags": ["软件工程师", "软件公司"],
+    "preferences": {
+        "location": ["北京", "上海"],
+        "industry": ["互联网", "金融科技"]
+    }
+}
+
+response = requests.post(url, json=data)
+print(response.json())
+```
+
+**响应示例**：
+```json
+{
+  "code": 200,
+  "msg": "success",
+  "data": {
+    "userId": "123",
+    "recommendedEnterprises": [
+      {
+        "enterpriseId": "ent1",
+        "name": "科技有限公司",
+        "industry": "互联网",
+        "location": "北京",
+        "score": 0.95,
+        "tags": ["软件公司", "互联网", "高薪"],
+        "description": "一家专注于软件开发的高科技企业"
+      }
+    ],
+    "total": 1
+  }
+}
+```
+
+### 3. 查询企业详细信息
+
+**API地址**：`GET /api/enterprise/{enterpriseId}`
+
+**调用示例**：
+```bash
+curl http://localhost:5000/api/enterprise/ent1
+```
+
+### 4. 搜索企业
+
+**API地址**：`GET /api/enterprise/search?keyword=科技`
+
+**调用示例**：
+```bash
+curl http://localhost:5000/api/enterprise/search?keyword=科技
+```
+
+## 四、知识图谱管理
+
+### 1. 查看知识图谱统计信息
+
+**API地址**：`GET /api/graph/stats`
+
+**调用示例**：
+```bash
+curl http://localhost:5000/api/graph/stats
+```
+
+**响应示例**：
+```json
+{
+  "code": 200,
+  "msg": "success",
+  "data": {
+    "totalEnterprises": 100,
+    "totalUsers": 500,
+    "totalTags": 200,
+    "totalRelations": 800
+  }
+}
+```
+
+### 2. 手动更新知识图谱
+
+如果知识图谱数据发生变化，可以手动触发更新：
+
+**API地址**：`POST /api/graph/update`
+
+**调用示例**：
+```bash
+curl -X POST http://localhost:5000/api/graph/update
+```
+
+## 五、Java后端整合
+
+### 1. 创建Feign客户端
+
+```java
+@FeignClient(value = "python-enterprise-recommend", url = "http://localhost:5000")
+public interface PythonEnterpriseRecommendClient {
+    @PostMapping("/api/recommend/enterprise")
+    AjaxResult recommendEnterprise(@RequestBody EnterpriseRecommendRequest request);
+}
+```
+
+### 2. 调用示例
+
+```java
+EnterpriseRecommendRequest request = new EnterpriseRecommendRequest();
+request.setUserId("123");
+request.setTags(Arrays.asList("软件工程师", "软件公司"));
+request.setPreferences(preferences);
+
+AjaxResult result = pythonEnterpriseRecommendClient.recommendEnterprise(request);
+```
+
+## 六、常见问题
+
+### 1. 为什么没有推荐结果？
+
+- 检查Neo4j数据库中是否有企业数据
+- 检查标签是否正确关联到企业
+- 检查API请求参数是否正确
+
+### 2. 如何提高推荐准确性？
+
+- 为企业添加更多相关标签
+- 为用户添加更详细的偏好信息
+- 定期更新知识图谱
+
+### 3. 服务启动失败怎么办？
+
+- 检查端口是否被占用（默认5000）
+- 检查Neo4j和Redis是否正常运行
+- 检查配置文件中的数据库连接信息是否正确
+
+## 七、维护与更新
+
+- 定期备份Neo4j数据库
+- 监控Redis缓存使用情况
+- 根据业务需求调整推荐算法参数
+
+---
+
+# 联系信息
+
+如有问题，请联系开发人员。

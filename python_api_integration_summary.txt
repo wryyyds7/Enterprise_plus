@@ -1,0 +1,99 @@
+# Python API集成方法汇总
+
+## 1. 企业推荐相关API
+
+### 已实现方法
+- **方法**: `TagController.recommendRelatedTags()`
+- **路径**: `/tag/recommend-related-tags`
+- **模块**: tag
+- **Python API**: `EnterpriseRecommendationClient.recommendTags()`
+- **Python地址**: `http://localhost:5000/api/recommend/tags`
+- **集成状态**: 已实现
+
+### 已实现方法
+- **方法**: `UserController.getEnterpriseRecommendationList()`
+- **路径**: `/home/enterpriseRecommendation/list`
+- **模块**: users
+- **Python API**: `EnterpriseRecommendationClient.recommendEnterprises()`
+- **Python地址**: `http://localhost:5000/api/recommend/enterprise`
+- **集成状态**: 已实现
+
+## 2. 学习路径推荐相关API
+
+### 待实现方法
+- **方法**: 学习路径推荐方法（具体路径待确定）
+- **路径**: 待确定
+- **模块**: 待确定
+- **Python API**: `PythonLearningPathClient.recommendLearningPath()`
+- **Python地址**: `http://localhost:5001/api/recommend/learning-path`
+- **集成状态**: 未实现
+
+## 3. 搜索相关API
+
+### 已实现方法
+- **方法**: `UserController.searchEnterprise()`
+- **路径**: `/home/search/enterprise`
+- **模块**: users
+- **Python API**: 可能需要调用企业推荐API进行搜索增强
+- **Python地址**: `http://localhost:5000`
+- **集成状态**: 已实现
+
+## 4. 校园招聘活动相关API
+
+### 已实现方法
+- **方法**: `UserController.getCampusRecruitmentEventList()`
+- **路径**: `/home/campusRecruitmentEvent/list`
+- **模块**: users
+- **Python API**: 可能需要调用推荐API进行活动推荐
+- **Python地址**: 待确定
+- **集成状态**: 已实现
+
+## 5. 企业收藏相关API
+
+### 已实现方法
+- **方法**: `UserController.favoriteEnterprise()`
+- **路径**: `/home/enterpriseRecommendation/favorite`
+- **模块**: users
+- **Python API**: 无需Python API集成（本地收藏功能）
+- **集成状态**: 已实现
+
+- **方法**: `UserController.unfavoriteEnterprise()`
+- **路径**: `/home/enterpriseRecommendation/favorite`
+- **模块**: users
+- **Python API**: 无需Python API集成（本地收藏功能）
+- **集成状态**: 已实现
+
+## 6. 用户偏好相关API
+
+### 待实现方法
+- **方法**: 用户偏好相关方法
+- **路径**: 多个用户偏好相关路径
+- **模块**: user/users
+- **Python API**: 可能需要调用推荐API基于偏好提供推荐
+- **Python地址**: `http://localhost:5000`
+- **集成状态**: 部分已实现，部分未实现
+
+## 7. AI企业官网判断相关API
+
+### 待实现方法
+- **方法**: AI企业官网判断方法
+- **路径**: 待确定
+- **模块**: 待确定
+- **Python API**: 企业官网判断API
+- **Python地址**: 待确定
+- **集成状态**: 未实现
+
+## 总结
+
+根据分析，以下方法**必须**集成Python API：
+1. `TagController.recommendRelatedTags()` (已实现)
+2. `UserController.getEnterpriseRecommendationList()` (已实现)
+3. 学习路径推荐方法 (未实现)
+4. `UserController.searchEnterprise()` (已实现)
+5. `UserController.getCampusRecruitmentEventList()` (已实现)
+
+其中，1、2、3是明确需要调用Python推荐API的核心功能，4和5可能需要基于业务需求决定是否集成Python API。
+
+所有需要集成的Python API地址：
+- 企业推荐/标签推荐: `http://localhost:5000`
+- 学习路径推荐: `http://localhost:5001`

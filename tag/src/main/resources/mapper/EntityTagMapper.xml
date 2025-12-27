@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.tag.mapper.EntityTagMapper">
+    <resultMap type="EntityTag" id="EntityTagResult">
+        <id     property="entityTagId" column="entity_tag_id" />
+        <result property="entityType"  column="entity_type"   />
+        <result property="entityId"    column="entity_id"     />
+        <result property="tagId"       column="tag_id"        />
+        <result property="createBy"    column="create_by"     />
+        <result property="createTime"  column="create_time"   />
+        <result property="updateBy"    column="update_by"     />
+        <result property="updateTime"  column="update_time"   />
+        <result property="remark"      column="remark"        />
+    </resultMap>
+
+    <sql id="selectEntityTagVo">
+        select entity_tag_id, entity_type, entity_id, tag_id, create_by, create_time, update_by, update_time, remark from entity_tag
+    </sql>
+
+    <select id="selectEntityTagByEntityTagId" parameterType="Long" resultMap="EntityTagResult">
+        <include refid="selectEntityTagVo" />
+        where entity_tag_id = #{entityTagId}
+    </select>
+
+    <select id="selectEntityTagList" parameterType="EntityTag" resultMap="EntityTagResult">
+        <include refid="selectEntityTagVo" />
+        <where>
+            <if test="entityType != null and entityType != ''">
+                and entity_type = #{entityType}
+            </if>
+            <if test="entityId != null">
+                and entity_id = #{entityId}
+            </if>
+            <if test="tagId != null">
+                and tag_id = #{tagId}
+            </if>
+            <if test="createBy != null and createBy != ''">
+                and create_by like concat('%', #{createBy}, '%')
+            </if>
+            <if test="createTime != null">
+                and create_time between #{createTime} and date_add(#{createTime}, interval 1 day)
+            </if>
+        </where>
+    </select>
+
+    <select id="selectEntityTagsByEntity" resultMap="EntityTagResult">
+        <include refid="selectEntityTagVo" />
+        where entity_type = #{entityType} and entity_id = #{entityId}
+    </select>
+
+    <select id="selectEntityTagsByTagId" parameterType="Long" resultMap="EntityTagResult">
+        <include refid="selectEntityTagVo" />
+        where tag_id = #{tagId}
+    </select>
+
+    <insert id="insertEntityTag" parameterType="EntityTag" useGeneratedKeys="true" keyProperty="entityTagId">
+        insert into entity_tag
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="entityType != null and entityType != ''">entity_type,</if>
+            <if test="entityId != null">entity_id,</if>
+            <if test="tagId != null">tag_id,</if>
+            <if test="createBy != null and createBy != ''">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null and updateBy != ''">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null and remark != ''">remark,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="entityType != null and entityType != ''">#{entityType},</if>
+            <if test="entityId != null">#{entityId},</if>
+            <if test="tagId != null">#{tagId},</if>
+            <if test="createBy != null and createBy != ''">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null and updateBy != ''">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null and remark != ''">#{remark},</if>
+        </trim>
+    </insert>
+
+    <insert id="batchInsertEntityTags" parameterType="java.util.List">
+        insert into entity_tag (entity_type, entity_id, tag_id, create_by, create_time, update_by, update_time, remark)
+        values
+        <foreach collection="list" item="entityTag" separator=",">
+            (#{entityTag.entityType}, #{entityTag.entityId}, #{entityTag.tagId}, #{entityTag.createBy}, #{entityTag.createTime}, #{entityTag.updateBy}, #{entityTag.updateTime}, #{entityTag.remark})
+        </foreach>
+    </insert>
+
+    <delete id="deleteEntityTagByEntityTagId" parameterType="Long">
+        delete from entity_tag where entity_tag_id = #{entityTagId}
+    </delete>
+
+    <delete id="deleteEntityTagByEntityTagIds" parameterType="Long[]">
+        delete from entity_tag where entity_tag_id in
+        <foreach item="entityTagId" collection="array" open="(" separator="," close=")">
+            #{entityTagId}
+        </foreach>
+    </delete>
+
+    <delete id="deleteEntityTagsByEntity">
+        delete from entity_tag where entity_type = #{entityType} and entity_id = #{entityId}
+    </delete>
+
+    <delete id="deleteEntityTagsByTagId" parameterType="Long">
+        delete from entity_tag where tag_id = #{tagId}
+    </delete>
+</mapper>

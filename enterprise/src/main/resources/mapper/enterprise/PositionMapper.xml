@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.enterprise.mapper.PositionMapper">
+    
+    <resultMap type="com.example.common.domain.entity.Position" id="PositionResult">
+        <result property="positionId"    column="position_id"    />
+        <result property="enterpriseId"    column="enterprise_id"    />
+        <result property="enterpriseName"    column="enterprise_name"    />
+        <result property="name"    column="name"    />
+        <result property="salary"    column="salary"    />
+        <result property="description"    column="description"    />
+        <result property="country"    column="country"    />
+        <result property="province"    column="province"    />
+        <result property="city"    column="city"    />
+        <result property="url"    column="url"    />
+    </resultMap>
+
+    <sql id="selectPositionVo">
+        select position_id, enterprise_id, enterprise_name, name, salary, description, country, province, city, url from position
+    </sql>
+
+    <select id="selectPositionList" parameterType="com.example.common.domain.entity.Position" resultMap="PositionResult">
+        <include refid="selectPositionVo"/>
+        <where>  
+            <if test="enterpriseId != null "> and enterprise_id = #{enterpriseId}</if>
+            <if test="enterpriseName != null  and enterpriseName != ''"> and enterprise_name like concat('%', #{enterpriseName}, '%')</if>
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="salary != null  and salary != ''"> and salary = #{salary}</if>
+            <if test="description != null  and description != ''"> and description = #{description}</if>
+            <if test="country != null  and country != ''"> and country = #{country}</if>
+            <if test="province != null  and province != ''"> and province = #{province}</if>
+            <if test="city != null  and city != ''"> and city = #{city}</if>
+            <if test="url != null  and url != ''"> and url = #{url}</if>
+        </where>
+    </select>
+    
+    <select id="selectPositionByPositionId" parameterType="Long" resultMap="PositionResult">
+        <include refid="selectPositionVo"/>
+        where position_id = #{positionId}
+    </select>
+
+    <insert id="insertPosition" parameterType="com.example.common.domain.entity.Position" useGeneratedKeys="true" keyProperty="positionId">
+        insert into position
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="enterpriseId != null">enterprise_id,</if>
+            <if test="enterpriseName != null">enterprise_name,</if>
+            <if test="name != null and name != ''">name,</if>
+            <if test="salary != null">salary,</if>
+            <if test="description != null">description,</if>
+            <if test="country != null">country,</if>
+            <if test="province != null">province,</if>
+            <if test="city != null">city,</if>
+            <if test="url != null">url,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="enterpriseId != null">#{enterpriseId},</if>
+            <if test="enterpriseName != null">#{enterpriseName},</if>
+            <if test="name != null and name != ''">#{name},</if>
+            <if test="salary != null">#{salary},</if>
+            <if test="description != null">#{description},</if>
+            <if test="country != null">#{country},</if>
+            <if test="province != null">#{province},</if>
+            <if test="city != null">#{city},</if>
+            <if test="url != null">#{url},</if>
+         </trim>
+    </insert>
+
+    <update id="updatePosition" parameterType="com.example.common.domain.entity.Position">
+        update position
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="enterpriseId != null">enterprise_id = #{enterpriseId},</if>
+            <if test="enterpriseName != null">enterprise_name = #{enterpriseName},</if>
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="salary != null">salary = #{salary},</if>
+            <if test="description != null">description = #{description},</if>
+            <if test="country != null">country = #{country},</if>
+            <if test="province != null">province = #{province},</if>
+            <if test="city != null">city = #{city},</if>
+            <if test="url != null">url = #{url},</if>
+        </trim>
+        where position_id = #{positionId}
+    </update>
+
+    <delete id="deletePositionByPositionId" parameterType="Long">
+        delete from position where position_id = #{positionId}
+    </delete>
+
+    <delete id="deletePositionByPositionIds" parameterType="String">
+        delete from position where position_id in 
+        <foreach item="positionId" collection="array" open="(" separator="," close=")">
+            #{positionId}
+        </foreach>
+    </delete>
+</mapper>
