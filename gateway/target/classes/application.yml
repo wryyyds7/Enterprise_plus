@@ -45,7 +45,7 @@ spring:
         - id: enterprise
           uri:  lb://enterprise
           predicates:
-            - Path=/system/enterprise/**,/system/position/**,
+            - Path=/system/enterprise/**,/system/position/**
 #          filters:
 #            - auth
         - id: AI

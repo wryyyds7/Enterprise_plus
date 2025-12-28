@@ -2,7 +2,6 @@ com\example\learning\domain\entity\LearningResource.class
 com\example\learning\domain\entity\Skill.class
 com\example\learning\config\WebConfig.class
 com\example\learning\domain\entity\UserAvatar.class
-com\example\learning\service\LearningResourceService.class
 com\example\learning\domain\entity\SkillDependency.class
 com\example\learning\service\ILearningPathService.class
 com\example\learning\mapper\LearningPathMapper.class
@@ -13,13 +12,10 @@ com\example\learning\domain\entity\PathSkillRelation.class
 com\example\learning\controller\LearningPathController.class
 com\example\learning\service\impl\SkillServiceImpl.class
 com\example\learning\controller\SkillController.class
-com\example\learning\service\LearningPathService.class
 com\example\learning\mapper\LearningResourceMapper.class
 com\example\learning\mapper\SkillMapper.class
-com\example\learning\service\SkillService.class
 com\example\learning\domain\entity\UserLearningProgress.class
 com\example\learning\LearningApplication.class
-com\example\learning\service\impl\LearningPathServiceImpl.class
 com\example\learning\controller\LearningResourceController.class
 com\example\learning\service\impl\LearningResourceServiceImpl.class
 com\example\learning\service\ILearningResourceService.class

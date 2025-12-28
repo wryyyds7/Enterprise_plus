@@ -41,20 +41,35 @@ public class UserInfoInterceptor implements HandlerInterceptor{
 
         // 白名单路径，不需要认证
         List<String> whiteList = Arrays.asList(
-                "/in/login",
-                "/in/logout",
-                "/in/register",
-                "/actuator/",
-                "/swagger-ui/",
-                "/v3/api-docs/"
+                "/in/**",
+                "/actuator/**",
+                "/swagger-ui/**",
+                "/v3/api-docs/**"
         );
         
         // 检查请求路径是否在白名单中
         String requestURI = request.getRequestURI();
         for (String whitePath : whiteList) {
-            if (requestURI.startsWith(whitePath)) {
-                System.out.println("✅ [UserInfoInterceptor] Path in whitelist: " + requestURI);
-                return true;
+            // 使用ant风格路径匹配
+            if (org.springframework.util.AntPathMatcher.DEFAULT_PATH_SEPARATOR.equals(whitePath.substring(whitePath.length() - 1))) {
+                // 如果白名单路径以/结尾，检查前缀匹配
+                if (requestURI.startsWith(whitePath)) {
+                    System.out.println("✅ [UserInfoInterceptor] Path in whitelist: " + requestURI);
+                    return true;
+                }
+            } else if (whitePath.endsWith("/**")) {
+                // 处理/**通配符
+                String prefix = whitePath.substring(0, whitePath.length() - 3);
+                if (requestURI.startsWith(prefix)) {
+                    System.out.println("✅ [UserInfoInterceptor] Path in whitelist: " + requestURI);
+                    return true;
+                }
+            } else {
+                // 精确匹配
+                if (requestURI.equals(whitePath)) {
+                    System.out.println("✅ [UserInfoInterceptor] Path in whitelist: " + requestURI);
+                    return true;
+                }
             }
         }
 

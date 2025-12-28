@@ -3,6 +3,7 @@ com\example\common\utils\PositionUtils.class
 com\example\common\domain\entity\Result$ResultBuilder.class
 com\example\common\domain\dto\LearningPathRecommendationResponseDTO.class
 com\example\common\domain\entity\EnterpriseInfo.class
+com\example\common\domain\entity\Complaint$ComplaintBuilder.class
 com\example\common\exception\file\InvalidExtensionException.class
 com\example\common\domain\enums\UserStatus.class
 com\example\common\domain\entity\UserDetailsImpl.class
@@ -12,6 +13,7 @@ com\example\common\domain\entity\TableDataInfo.class
 com\example\common\exception\file\InvalidExtensionException$InvalidVideoExtensionException.class
 com\example\common\exception\user\BlackListException.class
 com\example\common\config\ServerConfig.class
+com\example\common\domain\entity\Complaint.class
 com\example\common\utils\ExcelUtil.class
 com\example\common\constant\URLConstant.class
 com\example\common\exception\user\UserPasswordNotMatchException.class
@@ -51,6 +53,7 @@ com\example\common\exception\file\FileUploadException.class
 com\example\common\feign\SearchClient.class
 com\example\common\domain\dto\TagRecommendationResponseDTO$TagRecommendationData.class
 com\example\common\domain\entity\PositionInfo$PositionInfoBuilder.class
+com\example\common\domain\entity\ComplaintAttachment.class
 com\example\common\utils\FileTypeUtils.class
 com\example\common\constant\APIConstant.class
 com\example\common\constant\RoleConstants.class
@@ -76,6 +79,7 @@ com\example\common\utils\ImageUtils.class
 com\example\common\config\MvcConfig.class
 com\example\common\exception\user\CaptchaException.class
 com\example\common\domain\entity\Role.class
+com\example\common\domain\entity\ComplaintAttachment$ComplaintAttachmentBuilder.class
 com\example\common\utils\CurrentHolder.class
 com\example\common\exception\file\FileSizeLimitExceededException.class
 com\example\common\utils\IpUtils.class

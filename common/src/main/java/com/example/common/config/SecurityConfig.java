@@ -22,6 +22,7 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        System.out.println("using common security config");
         http
             .csrf(csrf -> csrf.disable()) // 禁用CSRF，对于REST API通常需要
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // 无状态会话管理

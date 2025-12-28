@@ -18,22 +18,28 @@ spring:
   application:
     name: activity
   main:
-    web-application-type: servlet
     allow-bean-definition-overriding: true
 
   cloud:
     nacos:
+      username: nacos
+      password: nacos
       server-addr: 127.0.0.1:8848
-      discovery:
-        # 增加连接超时时间
-        timeout: 10000
-        # 设置注册延迟时间
-        register-delay-time: 5000
-        # 失败后允许重试
-        fail-fast: false
-        # 重试配置
-        retry-times: 3
-        retry-delay: 2000
+
+# MyBatis配置
+mybatis:
+  mapper-locations: classpath:mapper/**/*.xml
+  type-aliases-package: com.example.activity.domain.entity
+  discovery:
+    # 增加连接超时时间
+    timeout: 10000
+    # 设置注册延迟时间
+    register-delay-time: 5000
+    # 失败后允许重试
+    fail-fast: false
+    # 重试配置
+    retry-times: 3
+    retry-delay: 2000
 
 logging:
   level:

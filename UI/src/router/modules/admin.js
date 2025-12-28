@@ -69,15 +69,55 @@ export default [
         } 
       },
       { 
-        path: 'statistics', 
-        name: 'Statistics', 
-        component: () => import('@/views/admin/Statistics.vue'), 
-        meta: { 
-          title: '统计页面', 
-          requiresAuth: true, 
-          roles: ['ADMIN'] 
-        } 
-      }
+    path: 'statistics', 
+    name: 'Statistics', 
+    component: () => import('@/views/admin/Statistics.vue'), 
+    meta: { 
+      title: '统计页面', 
+      requiresAuth: true, 
+      roles: ['ADMIN'] 
+    } 
+  },
+  { 
+    path: 'positions', 
+    name: 'PositionManagement', 
+    component: () => import('@/views/admin/PositionManagement.vue'), 
+    meta: { 
+      title: '职位管理', 
+      requiresAuth: true, 
+      roles: ['ADMIN'] 
+    } 
+  },
+  { 
+    path: 'forum-sections', 
+    name: 'ForumSectionManagement', 
+    component: () => import('@/views/admin/ForumSectionManagement.vue'), 
+    meta: { 
+      title: '论坛板块管理', 
+      requiresAuth: true, 
+      roles: ['ADMIN'] 
+    } 
+  },
+  { 
+    path: 'forum-topics', 
+    name: 'ForumTopicManagement', 
+    component: () => import('@/views/admin/ForumTopicManagement.vue'), 
+    meta: { 
+      title: '论坛主题管理', 
+      requiresAuth: true, 
+      roles: ['ADMIN'] 
+    } 
+  },
+  { 
+    path: 'forum-replies', 
+    name: 'ForumReplyManagement', 
+    component: () => import('@/views/admin/ForumReplyManagement.vue'), 
+    meta: { 
+      title: '论坛回复管理', 
+      requiresAuth: true, 
+      roles: ['ADMIN'] 
+    } 
+  }
     ]
   }
 ]

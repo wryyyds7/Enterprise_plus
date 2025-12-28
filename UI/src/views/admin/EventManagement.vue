@@ -241,8 +241,10 @@
           :before-upload="handleImageBeforeUpload"
         >
           <img v-if="eventForm.eventImage" :src="eventForm.eventImage" class="event-image-preview" />
-          <el-icon v-else class="upload-icon"><Plus /></el-icon>
-          <div v-else class="upload-text">点击或拖拽上传图片</div>
+          <div v-else class="upload-placeholder">
+            <el-icon class="upload-icon"><Plus /></el-icon>
+            <div class="upload-text">点击或拖拽上传图片</div>
+          </div>
         </el-upload>
         <div class="upload-hint">支持JPG、PNG格式，大小限制1MB</div>
       </el-form-item>

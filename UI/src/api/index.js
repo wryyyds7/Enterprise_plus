@@ -21,8 +21,10 @@ const request = axios.create({
 request.interceptors.request.use(
   config => {
     // 添加token等认证信息
-    const token = localStorage.getItem('token')
+    let token = localStorage.getItem('token')
     if (token) {
+      // 清理token中的空格和其他无效字符，确保Base64URL格式正确
+      token = token.trim()
       config.headers.Authorization = `Bearer ${token}`
     }
     return config

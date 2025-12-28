@@ -201,7 +201,7 @@ const getEnterpriseList = async () => {
     loading.value = true
     const params = {
       ...filterForm.value,
-      pageNum: currentPage.value,
+      page: currentPage.value,
       pageSize: pageSize.value
     }
     const response = await enterpriseApi.getEnterpriseList(params)
@@ -307,7 +307,7 @@ const handleClearFilter = (field) => {
   getEnterpriseList()
 }
 
-// 处理审核
+// 处理审核 - 注意：后端没有专门的审核接口，通过更新企业信息实现
 const handleAudit = (enterprise, status) => {
   const newStatus = status === 'APPROVED' ? '已通过' : '已拒绝'
   ElMessageBox.confirm(`确定要${newStatus}该企业吗？`, '审核确认', {
@@ -317,8 +317,8 @@ const handleAudit = (enterprise, status) => {
   }).then(async () => {
     try {
       loading.value = true
-      // 调用企业审核接口
-      await enterpriseApi.auditEnterprise({
+      // 调用更新企业接口，更新审核状态
+      await enterpriseApi.updateEnterprise({
         enterpriseId: enterprise.enterpriseId,
         auditStatus: status
       })

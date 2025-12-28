@@ -3,6 +3,7 @@ com\example\forum\service\ForumTopicService.class
 com\example\forum\controller\ForumReplyController.class
 com\example\forum\mapper\ForumSectionMapper.class
 com\example\forum\service\ForumReplyService.class
+com\example\forum\config\SecurityConfig.class
 com\example\forum\service\impl\ForumSectionServiceImpl.class
 com\example\forum\controller\ForumSectionController.class
 com\example\forum\service\impl\ForumFavoriteServiceImpl.class

@@ -33,12 +33,26 @@ public class PermittionService{
             UserContext.setRoles(userRoles);
         }
 
-        // 角色匹配逻辑（与权限匹配一致）
-        return userRoles.stream()
-                .anyMatch(r ->
-                        r.equals(role) ||
-                                (r.endsWith(":*") && role.startsWith(r.substring(0, r.length() - 1)))
-                );
+        // 角色层次结构：admin > enterprise > user
+        // admin可以访问所有资源，enterprise可以访问enterprise和user资源，user只能访问user资源
+        for (String userRole : userRoles) {
+            // 直接匹配
+            if (userRole.equals(role)) {
+                return true;
+            }
+            // 角色层次匹配
+            if (userRole.equals("ADMIN")) {
+                // admin可以访问所有角色的资源
+                return true;
+            } else if (userRole.equals("ENTERPRISE") && role.equals("USER")) {
+                // enterprise可以访问user资源
+                return true;
+            } else if (userRole.endsWith(":*") && role.startsWith(userRole.substring(0, userRole.length() - 1))) {
+                // 通配符匹配
+                return true;
+            }
+        }
+        return false;
     }
 
     // 已废弃：使用基于角色的授权

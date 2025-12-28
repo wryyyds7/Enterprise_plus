@@ -3,6 +3,7 @@ D:\bianchenglianxi\java\project\enterprise_plus\forum\src\main\java\com\example\
 D:\bianchenglianxi\java\project\enterprise_plus\forum\src\main\java\com\example\forum\domain\entity\ForumTopic.java
 D:\bianchenglianxi\java\project\enterprise_plus\forum\src\main\java\com\example\forum\service\impl\ForumTopicServiceImpl.java
 D:\bianchenglianxi\java\project\enterprise_plus\forum\src\main\java\com\example\forum\mapper\ForumSectionMapper.java
+D:\bianchenglianxi\java\project\enterprise_plus\forum\src\main\java\com\example\forum\config\SecurityConfig.java
 D:\bianchenglianxi\java\project\enterprise_plus\forum\src\main\java\com\example\forum\mapper\ForumReplyMapper.java
 D:\bianchenglianxi\java\project\enterprise_plus\forum\src\main\java\com\example\forum\service\impl\ForumFavoriteServiceImpl.java
 D:\bianchenglianxi\java\project\enterprise_plus\forum\src\main\java\com\example\forum\controller\ForumFavoriteController.java

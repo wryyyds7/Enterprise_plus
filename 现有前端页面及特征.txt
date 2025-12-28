@@ -142,6 +142,33 @@
   - 支持事件编辑、删除等操作
   - 已修复：路由路径，确保正确渲染
 
+#### ForumSectionManagement.vue
+- **URL**：/admin/forum/sections
+- **功能**：论坛板块管理页面
+- **特征**：
+  - 支持论坛板块列表展示
+  - 包含搜索和筛选功能
+  - 支持板块编辑、删除、批量删除、新增操作
+  - 已修复：API调用，确保与后端接口匹配
+
+#### ForumTopicManagement.vue
+- **URL**：/admin/forum/topics
+- **功能**：论坛主题管理页面
+- **特征**：
+  - 支持论坛主题列表展示
+  - 包含搜索和筛选功能
+  - 支持主题编辑、删除、批量删除、新增操作
+  - 已修复：API调用，确保与后端接口匹配
+
+#### ForumReplyManagement.vue
+- **URL**：/admin/forum/replies
+- **功能**：论坛回复管理页面
+- **特征**：
+  - 支持论坛回复列表展示
+  - 包含搜索和筛选功能
+  - 支持回复删除、批量删除操作
+  - 已修复：API调用，确保与后端接口匹配
+
 #### Statistics.vue
 - **URL**：/admin/statistics
 - **功能**：统计页面
@@ -597,6 +624,12 @@
 
 4. **登录跳转问题**：
    - ✅ 修复了管理员登录成功后没有跳转页面的问题，添加了对res.code === 200的支持，确保API返回不同格式的成功响应时都能正确跳转
+
+5. **API调用问题**：
+   - ✅ 修复了EnterpriseManagement.vue中的API导入错误，将adminApi改为enterpriseApi
+   - ✅ 修复了EnterpriseManagement.vue中的审核功能，使用updateEnterprise接口实现审核
+   - ✅ 确保所有管理页面的API调用与后端文档匹配
+   - ✅ 更新了forumApi、enterpriseApi等API模块，确保与后端接口一致
 
 ## 四、现有问题及不足
 

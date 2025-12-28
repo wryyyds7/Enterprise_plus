@@ -74,9 +74,8 @@ public class JwtAuthenticationFilter implements WebFilter {
                 // 处理无效 Token（签名错误/格式错误）
                 return handleUnauthorized(exchange, "Invalid token format or signature");
             } catch (Exception e) {
-                // token 无效
-                e.printStackTrace();
-                return exchange.getResponse().setComplete();
+                // 处理其他 token 相关错误
+                return handleUnauthorized(exchange, "Invalid token: " + e.getMessage());
             }
         }
         // 未认证
@@ -94,7 +93,12 @@ public class JwtAuthenticationFilter implements WebFilter {
 
     private boolean isExcludedPath(String path) {
         // 免认证路径
-        String[] excludePaths = {"/in/**"};
+        String[] excludePaths = {
+            "/in/**",
+            "/actuator/**",
+            "/swagger-ui/**",
+            "/v3/api-docs/**"
+        };
         for (String excludePath : excludePaths) {
             if (pathMatcher.match(excludePath, path)) {
                 return true;
