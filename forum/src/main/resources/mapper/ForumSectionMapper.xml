@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.forum.mapper.ForumSectionMapper">
+    
+    <!-- 新增论坛版块 -->
+    <insert id="insertForumSection" parameterType="com.example.forum.domain.entity.ForumSection">
+        insert into forum_section (name, description, create_time, update_time)
+        values (#{name}, #{description}, #{createTime}, #{updateTime})
+    </insert>
+    
+    <!-- 根据版块ID查询论坛版块信息 -->
+    <select id="selectForumSectionById" parameterType="Long" resultType="com.example.forum.domain.entity.ForumSection">
+        select section_id, name, description, create_time, update_time
+        from forum_section
+        where section_id = #{sectionId}
+    </select>
+    
+    <!-- 查询论坛版块列表 -->
+    <select id="selectForumSectionList" parameterType="com.example.forum.domain.entity.ForumSection" resultType="com.example.forum.domain.entity.ForumSection">
+        select section_id, name, description, create_time, update_time
+        from forum_section
+        <where>
+            <if test="sectionId != null">
+                and section_id = #{sectionId}
+            </if>
+            <if test="name != null and name != ''">
+                and name like concat('%', #{name}, '%')
+            </if>
+        </where>
+    </select>
+    
+    <!-- 更新论坛版块 -->
+    <update id="updateForumSection" parameterType="com.example.forum.domain.entity.ForumSection">
+        update forum_section
+        <set>
+            <if test="name != null and name != ''">
+                name = #{name},
+            </if>
+            <if test="description != null and description != ''">
+                description = #{description},
+            </if>
+            update_time = #{updateTime}
+        </set>
+        where section_id = #{sectionId}
+    </update>
+    
+    <!-- 删除论坛版块 -->
+    <delete id="deleteForumSectionById" parameterType="Long">
+        delete from forum_section
+        where section_id = #{sectionId}
+    </delete>
+    
+    <!-- 批量删除论坛版块 -->
+    <delete id="deleteForumSectionByIds" parameterType="Long[]">
+        delete from forum_section
+        where section_id in
+        <foreach item="sectionId" collection="array" open="(" separator="," close=")">
+            #{sectionId}
+        </foreach>
+    </delete>
+</mapper>

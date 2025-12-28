@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.forum.mapper.ForumTopicMapper">
+    
+    <!-- 新增论坛主题 -->
+    <insert id="insertForumTopic" parameterType="com.example.forum.domain.entity.ForumTopic">
+        insert into forum_topic (title, content, user_id, section_id, view_count, reply_count, create_time, update_time, status)
+        values (#{title}, #{content}, #{userId}, #{sectionId}, #{viewCount}, #{replyCount}, #{createTime}, #{updateTime}, #{status})
+    </insert>
+    
+    <!-- 根据主题ID查询论坛主题信息 -->
+    <select id="selectForumTopicById" parameterType="Long" resultType="com.example.forum.domain.entity.ForumTopic">
+        select topic_id, title, content, user_id, section_id, view_count, reply_count, create_time, update_time, status
+        from forum_topic
+        where topic_id = #{topicId}
+    </select>
+    
+    <!-- 查询论坛主题列表 -->
+    <select id="selectForumTopicList" parameterType="com.example.forum.domain.entity.ForumTopic" resultType="com.example.forum.domain.entity.ForumTopic">
+        select topic_id, title, content, user_id, section_id, view_count, reply_count, create_time, update_time, status
+        from forum_topic
+        <where>
+            <if test="topicId != null">
+                and topic_id = #{topicId}
+            </if>
+            <if test="title != null and title != ''">
+                and title like concat('%', #{title}, '%')
+            </if>
+            <if test="content != null and content != ''">
+                and content like concat('%', #{content}, '%')
+            </if>
+            <if test="userId != null">
+                and user_id = #{userId}
+            </if>
+            <if test="sectionId != null">
+                and section_id = #{sectionId}
+            </if>
+            <if test="status != null">
+                and status = #{status}
+            </if>
+        </where>
+    </select>
+    
+    <!-- 更新论坛主题 -->
+    <update id="updateForumTopic" parameterType="com.example.forum.domain.entity.ForumTopic">
+        update forum_topic
+        <set>
+            <if test="title != null and title != ''">
+                title = #{title},
+            </if>
+            <if test="content != null and content != ''">
+                content = #{content},
+            </if>
+            <if test="sectionId != null">
+                section_id = #{sectionId},
+            </if>
+            <if test="viewCount != null">
+                view_count = #{viewCount},
+            </if>
+            <if test="replyCount != null">
+                reply_count = #{replyCount},
+            </if>
+            <if test="status != null">
+                status = #{status},
+            </if>
+            update_time = #{updateTime}
+        </set>
+        where topic_id = #{topicId}
+    </update>
+    
+    <!-- 删除论坛主题 -->
+    <delete id="deleteForumTopicById" parameterType="Long">
+        delete from forum_topic
+        where topic_id = #{topicId}
+    </delete>
+    
+    <!-- 批量删除论坛主题 -->
+    <delete id="deleteForumTopicByIds" parameterType="Long[]">
+        delete from forum_topic
+        where topic_id in
+        <foreach item="topicId" collection="array" open="(" separator="," close=")">
+            #{topicId}
+        </foreach>
+    </delete>
+    
+    <!-- 更新主题浏览次数 -->
+    <update id="incrementViewCount" parameterType="Long">
+        update forum_topic
+        set view_count = view_count + 1
+        where topic_id = #{topicId}
+    </update>
+    
+    <!-- 更新主题回复次数 -->
+    <update id="incrementReplyCount" parameterType="Long">
+        update forum_topic
+        set reply_count = reply_count + 1
+        where topic_id = #{topicId}
+    </update>
+    
+    <!-- 更新主题回复次数（减少） -->
+    <update id="decrementReplyCount" parameterType="Long">
+        update forum_topic
+        set reply_count = reply_count - 1
+        where topic_id = #{topicId} and reply_count > 0
+    </update>
+</mapper>

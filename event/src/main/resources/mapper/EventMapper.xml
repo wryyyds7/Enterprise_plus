@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.event.mapper.EventMapper">
+    
+    <!-- 新增事件 -->
+    <insert id="insertEvent" parameterType="com.example.event.domain.entity.Event">
+        insert into event (event_name, event_type, start_time, end_time, location, 
+                          organizer, description, cover_image, display_position, 
+                          view_count, click_count, status, create_time, update_time)
+        values (#{eventName}, #{eventType}, #{startTime}, #{endTime}, #{location}, 
+                #{organizer}, #{description}, #{coverImage}, #{displayPosition}, 
+                #{viewCount}, #{clickCount}, #{status}, #{createTime}, #{updateTime})
+    </insert>
+    
+    <!-- 根据事件ID查询事件信息 -->
+    <select id="selectEventById" parameterType="Long" resultType="com.example.event.domain.entity.Event">
+        select event_id, event_name, event_type, start_time, end_time, location, 
+               organizer, description, cover_image, display_position, 
+               view_count, click_count, status, create_time, update_time
+        from event
+        where event_id = #{eventId}
+    </select>
+    
+    <!-- 查询事件列表 -->
+    <select id="selectEventList" parameterType="com.example.event.domain.entity.Event" resultType="com.example.event.domain.entity.Event">
+        select event_id, event_name, event_type, start_time, end_time, location, 
+               organizer, description, cover_image, display_position, 
+               view_count, click_count, status, create_time, update_time
+        from event
+        <where>
+            <if test="eventId != null">
+                and event_id = #{eventId}
+            </if>
+            <if test="eventName != null and eventName != ''">
+                and event_name like concat('%', #{eventName}, '%')
+            </if>
+            <if test="eventType != null and eventType != ''">
+                and event_type = #{eventType}
+            </if>
+            <if test="status != null">
+                and status = #{status}
+            </if>
+            <if test="displayPosition != null and displayPosition != ''">
+                and display_position = #{displayPosition}
+            </if>
+        </where>
+    </select>
+    
+    <!-- 更新事件信息 -->
+    <update id="updateEvent" parameterType="com.example.event.domain.entity.Event">
+        update event
+        <set>
+            <if test="eventName != null and eventName != ''">
+                event_name = #{eventName},
+            </if>
+            <if test="eventType != null and eventType != ''">
+                event_type = #{eventType},
+            </if>
+            <if test="startTime != null">
+                start_time = #{startTime},
+            </if>
+            <if test="endTime != null">
+                end_time = #{endTime},
+            </if>
+            <if test="location != null and location != ''">
+                location = #{location},
+            </if>
+            <if test="organizer != null and organizer != ''">
+                organizer = #{organizer},
+            </if>
+            <if test="description != null and description != ''">
+                description = #{description},
+            </if>
+            <if test="coverImage != null and coverImage != ''">
+                cover_image = #{coverImage},
+            </if>
+            <if test="displayPosition != null and displayPosition != ''">
+                display_position = #{displayPosition},
+            </if>
+            <if test="viewCount != null">
+                view_count = #{viewCount},
+            </if>
+            <if test="clickCount != null">
+                click_count = #{clickCount},
+            </if>
+            <if test="status != null">
+                status = #{status},
+            </if>
+            update_time = #{updateTime}
+        </set>
+        where event_id = #{eventId}
+    </update>
+    
+    <!-- 删除事件 -->
+    <delete id="deleteEventById" parameterType="Long">
+        delete from event
+        where event_id = #{eventId}
+    </delete>
+    
+    <!-- 批量删除事件 -->
+    <delete id="deleteEventByIds" parameterType="Long[]">
+        delete from event
+        where event_id in
+        <foreach item="eventId" collection="array" open="(" separator="," close=")">
+            #{eventId}
+        </foreach>
+    </delete>
+    
+    <!-- 根据事件类型查询事件列表 -->
+    <select id="selectEventListByType" parameterType="String" resultType="com.example.event.domain.entity.Event">
+        select event_id, event_name, event_type, start_time, end_time, location, 
+               organizer, description, cover_image, display_position, 
+               view_count, click_count, status, create_time, update_time
+        from event
+        where event_type = #{eventType}
+    </select>
+    
+    <!-- 根据展示位置查询事件列表 -->
+    <select id="selectEventListByPosition" parameterType="String" resultType="com.example.event.domain.entity.Event">
+        select event_id, event_name, event_type, start_time, end_time, location, 
+               organizer, description, cover_image, display_position, 
+               view_count, click_count, status, create_time, update_time
+        from event
+        where display_position = #{displayPosition}
+    </select>
+    
+    <!-- 更新事件点击次数 -->
+    <update id="incrementClickCount" parameterType="Long">
+        update event
+        set click_count = click_count + 1
+        where event_id = #{eventId}
+    </update>
+    
+    <!-- 更新事件浏览次数 -->
+    <update id="incrementViewCount" parameterType="Long">
+        update event
+        set view_count = view_count + 1
+        where event_id = #{eventId}
+    </update>
+</mapper>

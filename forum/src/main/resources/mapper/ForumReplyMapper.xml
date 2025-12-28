@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.forum.mapper.ForumReplyMapper">
+    
+    <!-- 新增论坛回复 -->
+    <insert id="insertForumReply" parameterType="com.example.forum.domain.entity.ForumReply">
+        insert into forum_reply (topic_id, user_id, content, reply_time, parent_reply_id)
+        values (#{topicId}, #{userId}, #{content}, #{replyTime}, #{parentReplyId})
+    </insert>
+    
+    <!-- 根据回复ID查询论坛回复信息 -->
+    <select id="selectForumReplyById" parameterType="Long" resultType="com.example.forum.domain.entity.ForumReply">
+        select reply_id, topic_id, user_id, content, reply_time, parent_reply_id
+        from forum_reply
+        where reply_id = #{replyId}
+    </select>
+    
+    <!-- 查询论坛回复列表 -->
+    <select id="selectForumReplyList" parameterType="com.example.forum.domain.entity.ForumReply" resultType="com.example.forum.domain.entity.ForumReply">
+        select reply_id, topic_id, user_id, content, reply_time, parent_reply_id
+        from forum_reply
+        <where>
+            <if test="replyId != null">
+                and reply_id = #{replyId}
+            </if>
+            <if test="topicId != null">
+                and topic_id = #{topicId}
+            </if>
+            <if test="userId != null">
+                and user_id = #{userId}
+            </if>
+            <if test="parentReplyId != null">
+                and parent_reply_id = #{parentReplyId}
+            </if>
+        </where>
+    </select>
+    
+    <!-- 更新论坛回复 -->
+    <update id="updateForumReply" parameterType="com.example.forum.domain.entity.ForumReply">
+        update forum_reply
+        <set>
+            <if test="content != null and content != ''">
+                content = #{content},
+            </if>
+            <if test="replyTime != null">
+                reply_time = #{replyTime}
+            </if>
+        </set>
+        where reply_id = #{replyId}
+    </update>
+    
+    <!-- 删除论坛回复 -->
+    <delete id="deleteForumReplyById" parameterType="Long">
+        delete from forum_reply
+        where reply_id = #{replyId}
+    </delete>
+    
+    <!-- 批量删除论坛回复 -->
+    <delete id="deleteForumReplyByIds" parameterType="Long[]">
+        delete from forum_reply
+        where reply_id in
+        <foreach item="replyId" collection="array" open="(" separator="," close=")">
+            #{replyId}
+        </foreach>
+    </delete>
+</mapper>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.activity.mapper.ActivityRegistrationMapper">
+    
+    <!-- 新增活动报名 -->
+    <insert id="insertActivityRegistration" parameterType="com.example.activity.domain.entity.ActivityRegistration">
+        insert into activity_registration (activity_id, user_id, registration_time)
+        values (#{activityId}, #{userId}, #{registrationTime})
+    </insert>
+    
+    <!-- 根据报名ID查询活动报名信息 -->
+    <select id="selectActivityRegistrationById" parameterType="Long" resultType="com.example.activity.domain.entity.ActivityRegistration">
+        select registration_id, activity_id, user_id, registration_time
+        from activity_registration
+        where registration_id = #{registrationId}
+    </select>
+    
+    <!-- 查询活动报名列表 -->
+    <select id="selectActivityRegistrationList" parameterType="com.example.activity.domain.entity.ActivityRegistration" resultType="com.example.activity.domain.entity.ActivityRegistration">
+        select registration_id, activity_id, user_id, registration_time
+        from activity_registration
+        <where>
+            <if test="registrationId != null">
+                and registration_id = #{registrationId}
+            </if>
+            <if test="activityId != null">
+                and activity_id = #{activityId}
+            </if>
+            <if test="userId != null">
+                and user_id = #{userId}
+            </if>
+        </where>
+    </select>
+    
+    <!-- 删除活动报名 -->
+    <delete id="deleteActivityRegistrationById" parameterType="Long">
+        delete from activity_registration
+        where registration_id = #{registrationId}
+    </delete>
+    
+    <!-- 批量删除活动报名 -->
+    <delete id="deleteActivityRegistrationByIds" parameterType="Long[]">
+        delete from activity_registration
+        where registration_id in
+        <foreach item="registrationId" collection="array" open="(" separator="," close=")">
+            #{registrationId}
+        </foreach>
+    </delete>
+    
+    <!-- 根据活动ID和用户ID查询报名记录 -->
+    <select id="selectByActivityIdAndUserId" parameterType="java.util.Map" resultType="com.example.activity.domain.entity.ActivityRegistration">
+        select registration_id, activity_id, user_id, registration_time
+        from activity_registration
+        where activity_id = #{activityId} and user_id = #{userId}
+    </select>
+    
+    <!-- 根据活动ID统计报名人数 -->
+    <select id="countByActivityId" parameterType="Long" resultType="int">
+        select count(*) from activity_registration
+        where activity_id = #{activityId}
+    </select>
+    
+    <!-- 根据用户ID查询报名活动列表 -->
+    <select id="selectRegistrationListByUserId" parameterType="Long" resultType="com.example.activity.domain.entity.ActivityRegistration">
+        select registration_id, activity_id, user_id, registration_time
+        from activity_registration
+        where user_id = #{userId}
+    </select>
+</mapper>

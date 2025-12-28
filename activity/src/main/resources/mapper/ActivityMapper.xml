@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.activity.mapper.ActivityMapper">
+    
+    <!-- 新增活动 -->
+    <insert id="insertActivity" parameterType="com.example.activity.domain.entity.Activity">
+        insert into activity (event_name, event_type, start_time, end_time, location, organizer, description, cover_image, display_position, view_count, click_count, status, create_time, update_time)
+        values (#{eventName}, #{eventType}, #{startTime}, #{endTime}, #{location}, #{organizer}, #{description}, #{coverImage}, #{displayPosition}, #{viewCount}, #{clickCount}, #{status}, #{createTime}, #{updateTime})
+    </insert>
+    
+    <!-- 根据活动ID查询活动信息 -->
+    <select id="selectActivityById" parameterType="Long" resultType="com.example.activity.domain.entity.Activity">
+        select event_id, event_name, event_type, start_time, end_time, location, organizer, description, cover_image, display_position, view_count, click_count, status, create_time, update_time
+        from activity
+        where event_id = #{eventId}
+    </select>
+    
+    <!-- 查询活动列表 -->
+    <select id="selectActivityList" parameterType="com.example.activity.domain.entity.Activity" resultType="com.example.activity.domain.entity.Activity">
+        select event_id, event_name, event_type, start_time, end_time, location, organizer, description, cover_image, display_position, view_count, click_count, status, create_time, update_time
+        from activity
+        <where>
+            <if test="eventId != null">
+                and event_id = #{eventId}
+            </if>
+            <if test="eventName != null and eventName != ''">
+                and event_name like concat('%', #{eventName}, '%')
+            </if>
+            <if test="eventType != null and eventType != ''">
+                and event_type = #{eventType}
+            </if>
+            <if test="status != null">
+                and status = #{status}
+            </if>
+            <if test="displayPosition != null and displayPosition != ''">
+                and display_position = #{displayPosition}
+            </if>
+        </where>
+    </select>
+    
+    <!-- 更新活动信息 -->
+    <update id="updateActivity" parameterType="com.example.activity.domain.entity.Activity">
+        update activity
+        <set>
+            <if test="eventName != null and eventName != ''">
+                event_name = #{eventName},
+            </if>
+            <if test="eventType != null and eventType != ''">
+                event_type = #{eventType},
+            </if>
+            <if test="startTime != null">
+                start_time = #{startTime},
+            </if>
+            <if test="endTime != null">
+                end_time = #{endTime},
+            </if>
+            <if test="location != null and location != ''">
+                location = #{location},
+            </if>
+            <if test="organizer != null and organizer != ''">
+                organizer = #{organizer},
+            </if>
+            <if test="description != null and description != ''">
+                description = #{description},
+            </if>
+            <if test="coverImage != null and coverImage != ''">
+                cover_image = #{coverImage},
+            </if>
+            <if test="displayPosition != null and displayPosition != ''">
+                display_position = #{displayPosition},
+            </if>
+            <if test="viewCount != null">
+                view_count = #{viewCount},
+            </if>
+            <if test="clickCount != null">
+                click_count = #{clickCount},
+            </if>
+            <if test="status != null">
+                status = #{status},
+            </if>
+            update_time = #{updateTime}
+        </set>
+        where event_id = #{eventId}
+    </update>
+    
+    <!-- 删除活动 -->
+    <delete id="deleteActivityById" parameterType="Long">
+        delete from activity
+        where event_id = #{eventId}
+    </delete>
+    
+    <!-- 批量删除活动 -->
+    <delete id="deleteActivityByIds" parameterType="Long[]">
+        delete from activity
+        where event_id in
+        <foreach item="eventId" collection="array" open="(" separator="," close=")">
+            #{eventId}
+        </foreach>
+    </delete>
+    
+    <!-- 更新活动点击次数 -->
+    <update id="incrementClickCount" parameterType="Long">
+        update activity
+        set click_count = click_count + 1
+        where event_id = #{eventId}
+    </update>
+    
+    <!-- 更新活动浏览次数 -->
+    <update id="incrementViewCount" parameterType="Long">
+        update activity
+        set view_count = view_count + 1
+        where event_id = #{eventId}
+    </update>
+    
+    <!-- 根据活动类型查询活动列表 -->
+    <select id="selectActivityListByType" parameterType="String" resultType="com.example.activity.domain.entity.Activity">
+        select event_id, event_name, event_type, start_time, end_time, location, organizer, description, cover_image, display_position, view_count, click_count, status, create_time, update_time
+        from activity
+        where event_type = #{eventType}
+    </select>
+    
+    <!-- 根据展示位置查询活动列表 -->
+    <select id="selectActivityListByPosition" parameterType="String" resultType="com.example.activity.domain.entity.Activity">
+        select event_id, event_name, event_type, start_time, end_time, location, organizer, description, cover_image, display_position, view_count, click_count, status, create_time, update_time
+        from activity
+        where display_position = #{displayPosition}
+    </select>
+</mapper>
