@@ -1,0 +1,412 @@
+# 前端页面详解
+
+## 一、管理员界面
+
+**说明**：管理员界面采用侧边栏导航，无顶部导航栏设计，通过侧边栏菜单进行功能切换。
+
+### 1. 仪表盘 (Dashboard)
+- **功能描述**：管理员登录后的主页面，展示平台的核心统计数据和关键指标
+- **主要功能**：
+  - 显示登录流量统计
+  - 展示用户统计数据
+  - 展示企业统计数据
+  - 展示职位统计数据
+  - 展示活动统计数据
+  - 展示收藏统计数据
+  - 展示注册统计数据
+- **对应后端接口**：
+  - GET /admin/statistics/loginFlow
+  - GET /admin/statistics/users
+  - GET /admin/statistics/enterprises
+  - GET /admin/statistics/positions
+  - GET /admin/statistics/events
+  - GET /admin/statistics/favorites
+  - GET /admin/statistics/registrations
+- **页面路径**：/admin/dashboard
+
+### 2. 企业管理 (EnterpriseManagement)
+- **功能描述**：管理平台上的企业信息
+- **主要功能**：
+  - 查询企业信息列表
+  - 新增企业信息
+  - 修改企业信息
+  - 删除企业信息
+  - 导出企业信息
+  - 管理企业标签
+  - 更新企业名录
+- **对应后端接口**：
+  - POST /system/enterprise/list
+  - POST /system/enterprise/insert
+  - PUT /system/enterprise/update
+  - DELETE /system/enterprise/id/{enterpriseIds}
+  - POST /system/enterprise/export
+  - GET /system/enterprise/id/{enterpriseId}/tags
+  - POST /system/enterprise/id/{enterpriseId}/tags
+  - DELETE /system/enterprise/id/{enterpriseId}/tags
+  - POST /system/enterprise/updateDirectory
+- **页面路径**：/admin/enterprise-management
+
+### 3. 用户管理 (UserManagement)
+- **功能描述**：管理平台上的用户信息
+- **主要功能**：
+  - 分页搜索用户
+  - 搜索用户
+  - 删除用户
+  - 更新用户信息
+  - 更新用户状态
+  - 添加用户
+  - 管理用户标签
+- **对应后端接口**：
+  - POST /users/admin/searchUserByPage
+  - GET /users/user/searchUser
+  - POST /users/admin/deleteUser
+  - PUT /users/user/updateUser
+  - PUT /users/admin/updateUserStatus
+  - POST /users/admin/add
+  - GET /users/user/tags/{userId}
+  - POST /users/user/tags/{userId}
+  - DELETE /users/user/tags/{userId}
+- **页面路径**：/admin/user-management
+
+### 4. 活动管理 (ContentManagement)
+- **功能描述**：管理平台上的活动信息
+- **主要功能**：
+  - 查询活动列表
+  - 新增活动
+  - 更新活动信息
+  - 删除活动
+  - 批量删除活动
+- **对应后端接口**：
+  - GET /api/activity
+  - POST /api/activity
+  - PUT /api/activity
+  - DELETE /api/activity/{activityId}
+  - DELETE /api/activity/batch
+- **页面路径**：/admin/content-management
+
+### 5. 事件管理 (EventManagement)
+- **功能描述**：管理平台上的事件信息
+- **主要功能**：
+  - 查询事件列表
+  - 新增事件
+  - 更新事件信息
+  - 删除事件
+  - 批量删除事件
+  - 根据事件类型查询事件列表
+  - 根据展示位置查询事件列表
+- **对应后端接口**：
+  - GET /api/event
+  - POST /api/event
+  - PUT /api/event
+  - DELETE /api/event/{eventId}
+  - DELETE /api/event/batch
+  - GET /api/event/type/{eventType}
+  - GET /api/event/position/{displayPosition}
+- **页面路径**：/admin/event-management
+
+### 6. 统计页面 (Statistics)
+- **功能描述**：查看平台的详细统计数据
+- **主要功能**：
+  - 查看登录流量统计
+  - 查看用户统计数据
+  - 查看企业统计数据
+  - 查看职位统计数据
+  - 查看活动统计数据
+  - 查看收藏统计数据
+  - 查看注册统计数据
+- **对应后端接口**：
+  - 同仪表盘接口
+- **页面路径**：/admin/statistics
+
+### 7. 论坛管理 (ForumManagement)
+- **功能描述**：管理平台上的论坛内容
+- **主要功能**：
+  - 论坛板块管理：新增、编辑、删除论坛板块
+  - 论坛主题管理：查看、编辑、删除论坛主题
+  - 论坛回复管理：查看、编辑、删除论坛回复
+  - 论坛收藏管理：查看和管理论坛收藏
+- **对应后端接口**：
+  - GET /api/forum/section：查询论坛板块列表
+  - POST /api/forum/section：新增论坛板块
+  - PUT /api/forum/section：更新论坛板块
+  - DELETE /api/forum/section/{sectionId}：删除论坛板块
+  - GET /api/forum/topic：查询论坛主题列表
+  - GET /api/forum/topic/{topicId}：获取主题详情
+  - PUT /api/forum/topic：更新主题
+  - DELETE /api/forum/topic/{topicId}：删除主题
+  - GET /api/forum/reply：查询回复列表
+  - PUT /api/forum/reply：更新回复
+  - DELETE /api/forum/reply/{replyId}：删除回复
+  - GET /api/forum/favorite：查询收藏列表
+  - DELETE /api/forum/favorite/{favoriteId}：删除收藏
+- **页面路径**：/admin/forum-management
+
+### 8. 注册管理员 (RegisterAdmin)
+- **功能描述**：注册新的管理员账号
+- **主要功能**：
+  - 填写管理员信息
+  - 提交注册请求
+- **对应后端接口**：
+  - POST /in/register (用户注册接口，管理员注册可能复用此接口)
+- **页面路径**：/admin/register
+
+## 二、用户界面
+
+### 1. 首页 (HomePage)
+- **功能描述**：平台的主页面，展示企业推荐和校招活动
+- **主要功能**：
+  - 轮播图展示：根据后端配置动态显示广告轮播图
+  - 广告位展示：根据后端配置展示广告内容
+  - 个性化企业推荐列表
+  - 校园招聘活动提醒
+  - 搜索功能入口
+  - 用户中心入口
+  - 导航菜单
+- **对应后端接口**：
+  - GET /api/advertisement/position/{displayPosition}：获取指定位置的广告
+  - GET /users/home/enterpriseRecommendation/list
+  - GET /users/home/campusRecruitmentEvent/list
+- **页面路径**：/
+
+### 2. 企业推荐 (EnterpriseRecommendation)
+- **功能描述**：展示个性化推荐的企业列表
+- **主要功能**：
+  - 展示推荐企业卡片
+  - 企业收藏功能
+  - 企业详情跳转
+- **对应后端接口**：
+  - GET /users/home/enterpriseRecommendation/list
+  - POST /users/home/enterpriseRecommendation/favorite
+  - DELETE /users/home/enterpriseRecommendation/favorite
+- **页面路径**：/home/enterprise-recommendation
+
+### 3. 企业详情 (EnterpriseDetail)
+- **功能描述**：展示企业的详细信息
+- **主要功能**：
+  - 企业基本信息展示
+  - 企业职位列表
+  - 企业标签展示
+  - 企业收藏功能
+- **对应后端接口**：
+  - GET /users/home/enterpriseRecommendation/detail/{enterpriseId}
+  - GET /system/enterprise/id/{enterpriseId}/tags
+- **页面路径**：/home/enterprise-detail/:enterpriseId
+
+### 4. 校园招聘活动列表 (CampusEventList)
+- **功能描述**：展示校园招聘活动列表
+- **主要功能**：
+  - 活动列表展示
+  - 活动筛选和排序
+  - 活动报名功能
+  - 活动详情跳转
+- **对应后端接口**：
+  - GET /users/home/campusRecruitmentEvent/list
+  - POST /users/home/campusRecruitmentEvent/register
+  - DELETE /users/home/campusRecruitmentEvent/register
+- **页面路径**：/home/campus-event-list
+
+### 5. 活动详情 (EventDetail)
+- **功能描述**：展示活动的详细信息
+- **主要功能**：
+  - 活动基本信息展示
+  - 活动报名功能
+  - 活动收藏功能
+- **对应后端接口**：
+  - GET /users/home/campusRecruitmentEvent/detail/{eventId}
+  - POST /users/home/campusRecruitmentEvent/register
+  - DELETE /users/home/campusRecruitmentEvent/register
+- **页面路径**：/home/event-detail/:eventId
+
+### 6. 搜索结果 (SearchResult)
+- **功能描述**：展示搜索结果，支持企业和职位搜索
+- **主要功能**：
+  - 标签页切换（企业/职位）
+  - 搜索结果展示
+  - 结果筛选和排序
+  - 企业/职位详情跳转
+- **对应后端接口**：
+  - POST /system/enterprise/user/list
+  - 职位搜索相关接口
+- **页面路径**：/search/result
+
+### 7. AI聊天 (AIChat)
+- **功能描述**：提供AI聊天服务，帮助用户获取信息和建议
+- **主要功能**：
+  - 实时AI对话
+  - 聊天历史记录
+  - 多种AI模型支持
+- **对应后端接口**：
+  - POST /ai/chat/aiChat
+  - POST /ai/api/spark/chat
+  - POST /ai/api/spark/stream-chat
+  - POST /ai/api/spark/json-chat
+- **页面路径**：/ai/chat
+
+### 8. 论坛首页 (ForumHome)
+- **功能描述**：论坛的主页面，展示论坛板块和热门主题
+- **主要功能**：
+  - 论坛板块列表
+  - 热门主题展示
+  - 主题搜索功能
+  - 发布主题入口
+- **对应后端接口**：
+  - GET /api/forum/section
+  - GET /api/forum/topic
+- **页面路径**：/forum
+
+### 9. 论坛板块详情 (ForumSectionDetail)
+- **功能描述**：展示特定论坛板块的主题列表
+- **主要功能**：
+  - 主题列表展示
+  - 主题排序和筛选
+  - 发布主题功能
+  - 主题详情跳转
+- **对应后端接口**：
+  - GET /api/forum/topic/section/{sectionId}
+  - POST /api/forum/topic
+- **页面路径**：/forum/section/:sectionId
+
+### 10. 论坛主题详情 (ForumTopicDetail)
+- **功能描述**：展示论坛主题的详细内容和回复
+- **主要功能**：
+  - 主题内容展示
+  - 回复列表展示
+  - 发布回复功能
+  - 主题收藏功能
+  - 回复点赞功能
+- **对应后端接口**：
+  - GET /api/forum/topic/{topicId}
+  - GET /api/forum/reply/topic/{topicId}
+  - POST /api/forum/reply
+  - POST /api/forum/favorite/topic
+  - DELETE /api/forum/favorite/topic/{topicId}/user/{userId}
+  - PUT /api/forum/reply/like/{replyId}/{increment}
+- **页面路径**：/forum/topic/:topicId
+
+### 11. 个人中心 (Profile)
+- **功能描述**：用户的个人中心，管理个人信息和偏好
+- **主要功能**：
+  - 个人信息查看和编辑
+  - 求职偏好设置
+  - 收藏管理（企业、活动）
+  - 活动报名记录
+  - 投诉管理：查看和管理用户的投诉记录
+- **对应后端接口**：
+  - GET /users/user/jobPreference
+  - PUT /users/user/jobPreference
+  - GET /users/user/enterpriseFavorites
+  - GET /users/user/activityFavorites
+  - GET /users/user/eventRegistrations
+  - GET /users/complaint/user/{userId}
+- **页面路径**：/user/profile
+
+### 13. 投诉功能 (Complaint)
+- **功能描述**：用户投诉功能，用于投诉企业、职位、用户、活动等
+- **主要功能**：
+  - 创建投诉：填写投诉内容和上传附件
+  - 查看投诉列表：查看用户提交的投诉记录
+  - 查看投诉详情：查看投诉的处理进度和结果
+- **对应后端接口**：
+  - POST /users/complaint：创建投诉
+  - GET /users/complaint/user/{userId}：获取用户的投诉列表
+  - GET /users/complaint/{complaintId}：获取投诉详情
+  - POST /users/complaint/attachment：上传投诉附件
+- **页面路径**：/user/complaint, /user/complaint/create
+
+### 14. 登录/注册 (Login/Register)
+- **功能描述**：用户认证页面，提供登录和注册功能
+- **主要功能**：
+  - 用户名密码登录
+  - 短信验证码登录
+  - 用户注册
+  - 忘记密码
+- **对应后端接口**：
+  - POST /in/login
+  - POST /in/register
+  - POST /in/refreshToken
+- **页面路径**：/login, /register
+
+### 15. 聊天系统 (Chat)
+- **功能描述**：提供用户之间的聊天功能
+- **主要功能**：
+  - 聊天会话列表
+  - 聊天消息详情
+  - 发送消息功能
+  - 创建新会话
+- **对应后端接口**：
+  - GET /system/session/list
+  - GET /system/session/{sessionId}
+  - GET /system/message/list
+  - POST /system/message
+  - POST /system/session
+- **页面路径**：/chat, /chat/session/:sessionId
+
+## 三、公共组件
+
+### 1. 导航头部 (NavigationHeader)
+- **功能描述**：页面顶部的导航栏
+- **主要功能**：
+  - 网站logo展示
+  - 主导航菜单
+  - 用户头像和下拉菜单
+  - 搜索框
+- **使用页面**：所有页面
+
+### 2. 侧边栏菜单 (SidebarMenu)
+- **功能描述**：可折叠的侧边栏菜单
+- **主要功能**：
+  - 模块导航链接
+  - 菜单折叠/展开功能
+  - 当前页面高亮
+- **使用页面**：主要用于管理后台页面
+
+### 3. 聊天输入组件 (ChatInput)
+- **功能描述**：聊天消息输入组件
+- **主要功能**：
+  - 消息输入框
+  - 发送按钮
+  - 表情选择
+  - 图片上传
+- **使用页面**：聊天相关页面
+
+### 4. 消息项组件 (MessageItem)
+- **功能描述**：单个聊天消息的展示组件
+- **主要功能**：
+  - 消息内容展示
+  - 发送者信息
+  - 发送时间
+  - 消息状态
+- **使用页面**：聊天相关页面
+
+## 四、技术实现特点
+
+1. **组件化开发**：前端采用Vue 3组件化开发，将页面拆分为多个可复用组件
+2. **路由模块化**：按功能模块划分路由，便于管理和扩展
+3. **API模块化**：后端接口按功能模块划分，前端API调用也对应模块化
+4. **状态管理**：使用Vuex进行状态管理，便于组件间数据共享
+5. **响应式设计**：支持移动端访问，提供良好的跨设备体验
+6. **权限控制**：根据用户角色展示不同的菜单和功能
+7. **异步数据处理**：使用axios处理异步API请求，提供良好的用户体验
+8. **UI框架**：集成Element Plus UI框架，提供统一的设计风格
+
+## 五、页面设计原则
+
+1. **简洁明了**：页面布局清晰，信息层次分明
+2. **用户中心**：以用户需求为中心，提供便捷的操作流程
+3. **视觉一致性**：统一的设计语言和视觉风格
+4. **响应式设计**：适配不同屏幕尺寸
+5. **性能优化**：优化页面加载速度和交互体验
+6. **可访问性**：考虑不同用户的使用需求，提供良好的可访问性
+7. **安全性**：确保用户数据安全，防止恶意攻击
+
+## 六、未来扩展方向
+
+1. **移动端适配优化**：进一步优化移动端的用户体验
+2. **AI功能增强**：扩展AI在求职指导、简历优化等方面的应用
+3. **数据分析可视化**：提供更丰富的数据可视化图表
+4. **社交功能扩展**：增强用户之间的互动和交流功能
+5. **个性化推荐算法优化**：提升推荐的准确性和相关性
+6. **多语言支持**：支持中英文等多种语言
+7. **无障碍设计**：提升网站的无障碍访问能力
+
+通过以上页面设计和功能实现，平台将为用户提供一个功能完整、体验良好的校招企业推荐服务，同时为管理员提供便捷的管理工具。

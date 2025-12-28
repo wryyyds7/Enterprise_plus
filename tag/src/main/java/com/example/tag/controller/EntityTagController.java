@@ -38,7 +38,7 @@ public class EntityTagController extends BaseController {
     /**
      * 查询实体标签关联列表
      */
-    @PreAuthorize("@permittionService.hasRole('ADMIN')")
+    @PreAuthorize("@permittionService.hasRole('USER')")
     @GetMapping("/list")
     public TableDataInfo list(EntityTag entityTag) {
         startPage();
@@ -49,7 +49,7 @@ public class EntityTagController extends BaseController {
     /**
      * 获取实体标签关联详细信息
      */
-    @PreAuthorize("@permittionService.hasRole('ADMIN')")
+    @PreAuthorize("@permittionService.hasRole('USER')")
     @GetMapping(value = "{entityTagId}")
     public AjaxResult getInfo(@PathVariable("entityTagId") Long entityTagId) {
         return success(entityTagService.selectEntityTagByEntityTagId(entityTagId));
@@ -58,7 +58,7 @@ public class EntityTagController extends BaseController {
     /**
      * 根据实体类型和ID查询标签
      */
-    @PreAuthorize("@permittionService.hasRole('ADMIN')")
+    @PreAuthorize("@permittionService.hasRole('USER')")
     @GetMapping("/byEntity/{entityType}/{entityId}")
     public AjaxResult getByEntity(@PathVariable("entityType") String entityType, @PathVariable("entityId") Long entityId) {
         return success(entityTagService.selectEntityTagsByEntity(entityType, entityId));
@@ -67,7 +67,7 @@ public class EntityTagController extends BaseController {
     /**
      * 新增实体标签关联
      */
-    @PreAuthorize("@permittionService.hasRole('ADMIN')")
+    @PreAuthorize("@permittionService.hasRole('USER')")
     @Log(title = "实体标签关联", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody EntityTag entityTag) {
@@ -77,7 +77,7 @@ public class EntityTagController extends BaseController {
     /**
      * 批量新增实体标签关联
      */
-    @PreAuthorize("@permittionService.hasRole('ADMIN')")
+    @PreAuthorize("@permittionService.hasRole('USER')")
     @Log(title = "实体标签关联", businessType = BusinessType.INSERT)
     @PostMapping("/batch")
     public AjaxResult batchAdd(@RequestBody List<EntityTag> entityTags) {
@@ -87,7 +87,7 @@ public class EntityTagController extends BaseController {
     /**
      * 删除实体标签关联
      */
-    @PreAuthorize("@permittionService.hasRole('ADMIN')")
+    @PreAuthorize("@permittionService.hasRole('USER')")
     @Log(title = "实体标签关联", businessType = BusinessType.DELETE)
     @DeleteMapping("{entityTagIds}")
     public AjaxResult remove(@PathVariable Long[] entityTagIds) {
@@ -97,7 +97,7 @@ public class EntityTagController extends BaseController {
     /**
      * 根据实体类型和ID删除标签关联
      */
-    @PreAuthorize("@permittionService.hasRole('ADMIN')")
+    @PreAuthorize("@permittionService.hasRole('USER')")
     @Log(title = "实体标签关联", businessType = BusinessType.DELETE)
     @DeleteMapping("/byEntity/{entityType}/{entityId}")
     public AjaxResult removeByEntity(@PathVariable("entityType") String entityType, @PathVariable("entityId") Long entityId) {

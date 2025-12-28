@@ -50,7 +50,7 @@ public class PositionController extends BaseController
     /**
      * 查询招聘职位列表
      */
-    @PreAuthorize("@permittionService.hasRole('ADMIN')")
+    @PreAuthorize("@permittionService.hasRole('USER')")
     @GetMapping("/list")
     public TableDataInfo list(Position position)
     {
@@ -64,7 +64,7 @@ public class PositionController extends BaseController
     /**
      * 导出招聘职位列表
      */
-    @PreAuthorize("@permittionService.hasRole('ADMIN')")
+    @PreAuthorize("@permittionService.hasRole('USER')")
     @Log(title = "招聘职位", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, Position position)
@@ -81,7 +81,7 @@ public class PositionController extends BaseController
     /**
      * 获取招聘职位详细信息
      */
-    @PreAuthorize("@permittionService.hasRole('ADMIN')")
+    @PreAuthorize("@permittionService.hasRole('USER')")
     @GetMapping(value = "/{positionId}")
     public AjaxResult getInfo(@PathVariable("positionId") Long positionId)
     {
@@ -91,7 +91,7 @@ public class PositionController extends BaseController
     /**
      * 新增招聘职位
      */
-    @PreAuthorize("@permittionService.hasRole('ADMIN')")
+    @PreAuthorize("@permittionService.hasRole('USER')")
     @Log(title = "招聘职位", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody Position position)
@@ -102,7 +102,7 @@ public class PositionController extends BaseController
     /**
      * 修改招聘职位
      */
-    @PreAuthorize("@permittionService.hasRole('ADMIN')")
+    @PreAuthorize("@permittionService.hasRole('USER')")
     @Log(title = "招聘职位", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult update(@RequestBody Position position)
@@ -113,7 +113,7 @@ public class PositionController extends BaseController
     /**
      * 删除招聘职位
      */
-    @PreAuthorize("@permittionService.hasRole('ADMIN')")
+    @PreAuthorize("@permittionService.hasRole('USER')")
     @Log(title = "招聘职位", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{positionIds}")
     public AjaxResult delete(@PathVariable Long[] positionIds)
@@ -124,7 +124,7 @@ public class PositionController extends BaseController
     /**
      * 获取职位标签
      */
-    @PreAuthorize("@permittionService.hasRole('ADMIN')")
+    @PreAuthorize("@permittionService.hasRole('USER')")
     @GetMapping(value = "/{positionId}/tags")
     public AjaxResult getPositionTags(@PathVariable("positionId") Long positionId) {
         return tagClient.getTagsByEntity("position", positionId);
@@ -133,7 +133,7 @@ public class PositionController extends BaseController
     /**
      * 添加职位标签
      */
-    @PreAuthorize("@permittionService.hasRole('ADMIN')")
+    @PreAuthorize("@permittionService.hasRole('USER')")
     @Log(title = "招聘职位", businessType = BusinessType.UPDATE)
     @PostMapping(value = "/{positionId}/tags")
     public AjaxResult addPositionTags(@PathVariable("positionId") Long positionId, @RequestBody List<Long> tagIds) {
@@ -146,7 +146,7 @@ public class PositionController extends BaseController
     /**
      * 删除职位标签
      */
-    @PreAuthorize("@permittionService.hasRole('ADMIN')")
+    @PreAuthorize("@permittionService.hasRole('USER')")
     @Log(title = "招聘职位", businessType = BusinessType.UPDATE)
     @DeleteMapping(value = "/{positionId}/tags")
     public AjaxResult removePositionTags(@PathVariable("positionId") Long positionId) {

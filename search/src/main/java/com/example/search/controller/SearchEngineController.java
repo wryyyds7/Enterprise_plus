@@ -24,7 +24,7 @@ public class SearchEngineController extends BaseController {
      * 查询企业信息列表
      * 期间正好更新岗位
      */
-    @PreAuthorize("@permittionService.hasRole('ADMIN')")
+    @PreAuthorize("@permittionService.hasRole('USER')")
     @Log(title = "利用engine寻找企业", businessType = BusinessType.OTHER)
     @GetMapping("/enterprise")
     public List<Enterprise> list(@RequestParam String enterpriseName) {

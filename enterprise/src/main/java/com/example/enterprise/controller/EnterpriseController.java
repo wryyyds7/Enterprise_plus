@@ -92,7 +92,7 @@ public class EnterpriseController extends BaseController
      * 查询企业信息列表
      */
     @ApiOperation(value = "查询企业信息服务", notes = "没有该企业时会自动搜索")
-    @PreAuthorize("@permittionService.hasRole('ADMIN')")
+    @PreAuthorize("@permittionService.hasRole('USER')")
     @PostMapping("/list")
     public TableDataInfo list(@RequestParam String enterpriseName)
     {
@@ -130,7 +130,7 @@ public class EnterpriseController extends BaseController
      * 10.12 换成nacos注册中心远程调用,利用注解完成负载均衡
      * TODO: 寻找岗位
      */
-    @PreAuthorize("@permittionService.hasRole('ADMIN')")
+    @PreAuthorize("@permittionService.hasRole('USER')")
     @GetMapping("/searchEnterpriseByName")
     @Log(title = "寻找", businessType = BusinessType.OTHER)
     @ApiOperation("企业寻找服务")
@@ -215,7 +215,7 @@ public class EnterpriseController extends BaseController
      * 导出企业信息列表
      */
     @ApiOperation(value = "导出企业信息")
-    @PreAuthorize("@permittionService.hasRole('ADMIN')")
+    @PreAuthorize("@permittionService.hasRole('USER')")
     @Log(title = "企业信息", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, Enterprise enterprise)
@@ -233,7 +233,7 @@ public class EnterpriseController extends BaseController
      * 获取企业信息详细信息
      */
     @ApiOperation(value = "获取企业信息详情", tags = "根据企业id值，基本不用")
-    @PreAuthorize("@permittionService.hasRole('ADMIN')")
+    @PreAuthorize("@permittionService.hasRole('USER')")
     @GetMapping(value = "/id/{enterpriseId}")
     public AjaxResult getInfo(@PathVariable("enterpriseId") Long enterpriseId)
     {
@@ -244,7 +244,7 @@ public class EnterpriseController extends BaseController
      * 新增企业信息
      */
     @ApiOperation(value = "新增企业信息", tags = "新增企业信息")
-    @PreAuthorize("@permittionService.hasRole('ADMIN')")
+    @PreAuthorize("@permittionService.hasRole('USER')")
     @Log(title = "企业信息", businessType = BusinessType.INSERT)
     @PostMapping(value = "/insert")
     public AjaxResult insert(@RequestBody Enterprise enterprise)
@@ -256,7 +256,7 @@ public class EnterpriseController extends BaseController
      * 修改企业信息
      */
     @ApiOperation(value = "修改企业信息", tags = "修改企业信息")
-    @PreAuthorize("@permittionService.hasRole('ADMIN')")
+    @PreAuthorize("@permittionService.hasRole('USER')")
     @Log(title = "企业信息", businessType = BusinessType.UPDATE)
     @PutMapping(value = "/update")
     public AjaxResult update(@RequestBody Enterprise enterprise)
@@ -268,7 +268,7 @@ public class EnterpriseController extends BaseController
      * 删除企业信息
      */
     @ApiOperation(value = "删除企业信息", tags = "删除企业信息")
-    @PreAuthorize("@permittionService.hasRole('ADMIN')")
+    @PreAuthorize("@permittionService.hasRole('USER')")
     @Log(title = "企业信息", businessType = BusinessType.DELETE)
 	@DeleteMapping(value = "/id/{enterpriseIds}")
     public AjaxResult delete(@PathVariable Long[] enterpriseIds)
@@ -354,7 +354,7 @@ public class EnterpriseController extends BaseController
     /**
      * 获取企业标签
      */
-    @PreAuthorize("@permittionService.hasRole('ADMIN')")
+    @PreAuthorize("@permittionService.hasRole('USER')")
     @GetMapping(value = "/id/{enterpriseId}/tags")
     public AjaxResult getEnterpriseTags(@PathVariable("enterpriseId") Long enterpriseId) {
         return tagClient.getTagsByEntity("enterprise", enterpriseId);
@@ -363,7 +363,7 @@ public class EnterpriseController extends BaseController
     /**
      * 添加企业标签
      */
-    @PreAuthorize("@permittionService.hasRole('ADMIN')")
+    @PreAuthorize("@permittionService.hasRole('USER')")
     @Log(title = "企业信息", businessType = BusinessType.UPDATE)
     @PostMapping(value = "/id/{enterpriseId}/tags")
     public AjaxResult addEnterpriseTags(@PathVariable("enterpriseId") Long enterpriseId, @RequestBody List<Long> tagIds) {
@@ -376,7 +376,7 @@ public class EnterpriseController extends BaseController
     /**
      * 删除企业标签
      */
-    @PreAuthorize("@permittionService.hasRole('ADMIN')")
+    @PreAuthorize("@permittionService.hasRole('USER')")
     @Log(title = "企业信息", businessType = BusinessType.UPDATE)
     @DeleteMapping(value = "/id/{enterpriseId}/tags")
     public AjaxResult removeEnterpriseTags(@PathVariable("enterpriseId") Long enterpriseId) {
@@ -401,7 +401,7 @@ public class EnterpriseController extends BaseController
      * 更新企业名录
      */
     @ApiOperation(value = "更新企业名录", notes = "从文件读取企业信息并使用SearchClient更新企业名录")
-    @PreAuthorize("@permittionService.hasRole('ADMIN')")
+    @PreAuthorize("@permittionService.hasRole('USER')")
     @PostMapping(value = "/updateDirectory")
     public AjaxResult updateEnterpriseDirectory() {
         try {

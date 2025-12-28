@@ -34,6 +34,9 @@ import com.example.common.domain.entity.AjaxResult;
 import com.example.common.service.PermittionService;
 import jakarta.servlet.http.HttpServletRequest;
 import io.jsonwebtoken.Claims;
+import com.example.users.domain.dto.ComplaintDTO;
+import com.example.users.domain.entity.UserComplaint;
+import com.example.users.domain.entity.UserComplaintAttachment;
 
 @RestController
 @RequestMapping("/users")
@@ -77,7 +80,7 @@ public class UserController extends BaseController {
         }
     }
 
-    @PreAuthorize("@permittionService.hasRole('ADMIN')")
+    @PreAuthorize("@permittionService.hasRole('USER')")
     @GetMapping("/user/searchUser")
     @ApiOperation("用户搜索服务")
     public Result searchUser(@RequestBody SearchUserDTO userDTO){
@@ -100,7 +103,7 @@ public class UserController extends BaseController {
         }
     }
 
-    @PreAuthorize("@permittionService.hasRole('ADMIN')")
+    @PreAuthorize("@permittionService.hasRole('USER')")
     @PutMapping("/user/updateUser")
     @ApiOperation("用户更新服务")
     public Result updateUser(@RequestBody UserDTO userDTO){
@@ -133,112 +136,112 @@ public class UserController extends BaseController {
         }
     }
 
-    @PreAuthorize("@permittionService.hasRole('ADMIN')")
+    @PreAuthorize("@permittionService.hasRole('USER')")
     @GetMapping("/user/jobPreference")
     @ApiOperation("获取用户求职偏好")
     public Result getJobPreference(@RequestParam Long userId){
         return Result.success(userService.getJobPreference(userId));
     }
 
-    @PreAuthorize("@permittionService.hasRole('ADMIN')")
+    @PreAuthorize("@permittionService.hasRole('USER')")
     @PutMapping("/user/jobPreference")
     @ApiOperation("更新用户求职偏好")
     public Result updateJobPreference(@RequestBody JobPreferenceDTO jobPreferenceDTO){
         return Result.success(userService.updateJobPreference(jobPreferenceDTO));
     }
 
-    @PreAuthorize("@permittionService.hasRole('ADMIN')")
+    @PreAuthorize("@permittionService.hasRole('USER')")
     @GetMapping("/user/enterpriseFavorites")
     @ApiOperation("获取用户收藏的企业列表")
     public Result getEnterpriseFavorites(@RequestParam Long userId){
         return Result.success(userService.getEnterpriseFavorites(userId));
     }
 
-    @PreAuthorize("@permittionService.hasRole('ADMIN')")
+    @PreAuthorize("@permittionService.hasRole('USER')")
     @PostMapping("/user/enterpriseFavorite")
     @ApiOperation("添加企业收藏")
     public Result addEnterpriseFavorite(@RequestBody EnterpriseFavoriteDTO enterpriseFavoriteDTO){
         return Result.success(userService.addEnterpriseFavorite(enterpriseFavoriteDTO));
     }
 
-    @PreAuthorize("@permittionService.hasRole('ADMIN')")
+    @PreAuthorize("@permittionService.hasRole('USER')")
     @DeleteMapping("/user/enterpriseFavorite")
     @ApiOperation("删除企业收藏")
     public Result removeEnterpriseFavorite(@RequestBody EnterpriseFavoriteDTO enterpriseFavoriteDTO){
         return Result.success(userService.removeEnterpriseFavorite(enterpriseFavoriteDTO));
     }
 
-    @PreAuthorize("@permittionService.hasRole('ADMIN')")
+    @PreAuthorize("@permittionService.hasRole('USER')")
     @GetMapping("/user/isEnterpriseFavorited")
     @ApiOperation("检查用户是否已收藏企业")
     public Result isEnterpriseFavorited(@RequestParam Long userId, @RequestParam Long enterpriseId){
         return Result.success(userService.isEnterpriseFavorited(userId, enterpriseId));
     }
     
-    @PreAuthorize("@permittionService.hasRole('ADMIN')")
+    @PreAuthorize("@permittionService.hasRole('USER')")
     @GetMapping("/user/activityFavorites")
     @ApiOperation("获取用户收藏的活动列表")
     public Result getActivityFavorites(@RequestParam Long userId){
         return Result.success(userService.getActivityFavorites(userId));
     }
     
-    @PreAuthorize("@permittionService.hasRole('ADMIN')")
+    @PreAuthorize("@permittionService.hasRole('USER')")
     @PostMapping("/user/activityFavorite")
     @ApiOperation("添加活动收藏")
     public Result addActivityFavorite(@RequestBody ActivityFavoriteDTO activityFavoriteDTO){
         return Result.success(userService.addActivityFavorite(activityFavoriteDTO));
     }
     
-    @PreAuthorize("@permittionService.hasRole('ADMIN')")
+    @PreAuthorize("@permittionService.hasRole('USER')")
     @DeleteMapping("/user/activityFavorite")
     @ApiOperation("删除活动收藏")
     public Result removeActivityFavorite(@RequestBody ActivityFavoriteDTO activityFavoriteDTO){
         return Result.success(userService.removeActivityFavorite(activityFavoriteDTO));
     }
     
-    @PreAuthorize("@permittionService.hasRole('ADMIN')")
+    @PreAuthorize("@permittionService.hasRole('USER')")
     @GetMapping("/user/isActivityFavorited")
     @ApiOperation("检查用户是否已收藏活动")
     public Result isActivityFavorited(@RequestParam Long userId, @RequestParam Long activityId){
         return Result.success(userService.isActivityFavorited(userId, activityId));
     }
     
-    @PreAuthorize("@permittionService.hasRole('ADMIN')")
+    @PreAuthorize("@permittionService.hasRole('USER')")
     @GetMapping("/user/eventRegistrations")
     @ApiOperation("获取用户的活动注册记录列表")
     public Result getEventRegistrations(@RequestParam Long userId){
         return Result.success(userService.getEventRegistrations(userId));
     }
     
-    @PreAuthorize("@permittionService.hasRole('ADMIN')")
+    @PreAuthorize("@permittionService.hasRole('USER')")
     @PostMapping("/user/eventRegistration")
     @ApiOperation("添加活动注册")
     public Result addEventRegistration(@RequestBody EventRegistrationDTO eventRegistrationDTO){
         return Result.success(userService.addEventRegistration(eventRegistrationDTO));
     }
     
-    @PreAuthorize("@permittionService.hasRole('ADMIN')")
+    @PreAuthorize("@permittionService.hasRole('USER')")
     @PutMapping("/user/eventRegistration")
     @ApiOperation("更新活动注册信息")
     public Result updateEventRegistration(@RequestBody EventRegistrationDTO eventRegistrationDTO){
         return Result.success(userService.updateEventRegistration(eventRegistrationDTO));
     }
     
-    @PreAuthorize("@permittionService.hasRole('ADMIN')")
+    @PreAuthorize("@permittionService.hasRole('USER')")
     @DeleteMapping("/user/eventRegistration")
     @ApiOperation("取消活动注册")
     public Result cancelEventRegistration(@RequestBody EventRegistrationDTO eventRegistrationDTO){
         return Result.success(userService.cancelEventRegistration(eventRegistrationDTO));
     }
     
-    @PreAuthorize("@permittionService.hasRole('ADMIN')")
+    @PreAuthorize("@permittionService.hasRole('USER')")
     @GetMapping("/user/isEventRegistered")
     @ApiOperation("检查用户是否已注册活动")
     public Result isEventRegistered(@RequestParam Long userId, @RequestParam Long eventId){
         return Result.success(userService.isEventRegistered(userId, eventId));
     }
     
-    @PreAuthorize("@permittionService.hasRole('ADMIN')")
+    @PreAuthorize("@permittionService.hasRole('USER')")
     @GetMapping("/user/eventRegistration")
     @ApiOperation("获取特定的活动注册记录")
     public Result getEventRegistration(@RequestParam Long userId, @RequestParam Long eventId){
@@ -248,7 +251,7 @@ public class UserController extends BaseController {
     /**
      * 获取用户标签
      */
-    @PreAuthorize("@permittionService.hasRole('ADMIN')")
+    @PreAuthorize("@permittionService.hasRole('USER')")
     @GetMapping("/user/tags/{userId}")
     @ApiOperation("获取用户标签")
     public Result getUserTags(@PathVariable("userId") Long userId) {
@@ -259,7 +262,7 @@ public class UserController extends BaseController {
     /**
      * 添加用户标签
      */
-    @PreAuthorize("@permittionService.hasRole('ADMIN')")
+    @PreAuthorize("@permittionService.hasRole('USER')")
     @PostMapping("/user/tags/{userId}")
     @ApiOperation("添加用户标签")
     public Result addUserTags(@PathVariable("userId") Long userId, @RequestBody List<Long> tagIds) {
@@ -273,7 +276,7 @@ public class UserController extends BaseController {
     /**
      * 删除用户标签
      */
-    @PreAuthorize("@permittionService.hasRole('ADMIN')")
+    @PreAuthorize("@permittionService.hasRole('USER')")
     @DeleteMapping("/user/tags/{userId}")
     @ApiOperation("删除用户标签")
     public Result removeUserTags(@PathVariable("userId") Long userId) {
@@ -284,7 +287,7 @@ public class UserController extends BaseController {
     /**
      * 获取用户推荐企业列表
      */
-    @PreAuthorize("@permittionService.hasRole('ADMIN')")
+    @PreAuthorize("@permittionService.hasRole('USER')")
     @PostMapping("/user/enterpriseRecommendations")
     @ApiOperation("获取用户推荐企业列表")
     public Result getEnterpriseRecommendations(@RequestBody EnterpriseRecommendationRequestDTO request) {
@@ -300,7 +303,7 @@ public class UserController extends BaseController {
     /**
      * 获取用户推荐学习路径
      */
-    @PreAuthorize("@permittionService.hasRole('ADMIN')")
+    @PreAuthorize("@permittionService.hasRole('USER')")
     @PostMapping("/user/learningPathRecommendations")
     @ApiOperation("获取用户推荐学习路径")
     public Result getLearningPathRecommendations(@RequestBody LearningPathRecommendationRequestDTO request) {
@@ -316,7 +319,7 @@ public class UserController extends BaseController {
     /**
      * 预测用户技能掌握度
      */
-    @PreAuthorize("@permittionService.hasRole('ADMIN')")
+    @PreAuthorize("@permittionService.hasRole('USER')")
     @PostMapping("/user/skillMasteryPrediction")
     @ApiOperation("预测用户技能掌握度")
     public Result predictSkillMastery(@RequestBody SkillMasteryPredictionRequestDTO request) {
@@ -332,7 +335,7 @@ public class UserController extends BaseController {
     /**
      * 获取用户推荐学习资源
      */
-    @PreAuthorize("@permittionService.hasRole('ADMIN')")
+    @PreAuthorize("@permittionService.hasRole('USER')")
     @PostMapping("/user/learningResourceRecommendations")
     @ApiOperation("获取用户推荐学习资源")
     public Result getLearningResourceRecommendations(@RequestBody LearningResourceRecommendationRequestDTO request) {
@@ -348,7 +351,7 @@ public class UserController extends BaseController {
     /**
      * 搜索企业
      */
-    @PreAuthorize("@permittionService.hasRole('ADMIN')")
+    @PreAuthorize("@permittionService.hasRole('USER')")
     @GetMapping("/home/search/enterprise")
     @ApiOperation("搜索企业")
     public Result searchEnterprise(@RequestParam String keyword, 
@@ -372,7 +375,7 @@ public class UserController extends BaseController {
     /**
      * 搜索校园招聘活动
      */
-    @PreAuthorize("@permittionService.hasRole('ADMIN')")
+    @PreAuthorize("@permittionService.hasRole('USER')")
     @GetMapping("/home/search/event")
     @ApiOperation("搜索校园招聘活动")
     public Result searchEvent(@RequestParam String keyword, 
@@ -395,7 +398,7 @@ public class UserController extends BaseController {
     /**
      * 获取个性化企业推荐列表
      */
-    @PreAuthorize("@permittionService.hasRole('ADMIN')")
+    @PreAuthorize("@permittionService.hasRole('USER')")
     @GetMapping("/home/enterpriseRecommendation/list")
     @ApiOperation("获取个性化企业推荐列表")
     public Result getEnterpriseRecommendationList(@RequestParam(required = false) String studentId, 
@@ -424,7 +427,7 @@ public class UserController extends BaseController {
     /**
      * 获取校园招聘活动列表
      */
-    @PreAuthorize("@permittionService.hasRole('ADMIN')")
+    @PreAuthorize("@permittionService.hasRole('USER')")
     @GetMapping("/home/campusRecruitmentEvent/list")
     @ApiOperation("获取校园招聘活动列表")
     public Result getCampusRecruitmentEventList(@RequestParam(required = false) String location, 
@@ -448,7 +451,7 @@ public class UserController extends BaseController {
     /**
      * 获取企业详细信息
      */
-    @PreAuthorize("@permittionService.hasRole('ADMIN')")
+    @PreAuthorize("@permittionService.hasRole('USER')")
     @GetMapping("/home/enterpriseRecommendation/detail/{enterpriseId}")
     @ApiOperation("获取企业详细信息")
     public Result getEnterpriseDetail(@PathVariable("enterpriseId") Long enterpriseId) {
@@ -467,7 +470,7 @@ public class UserController extends BaseController {
     /**
      * 获取活动详细信息
      */
-    @PreAuthorize("@permittionService.hasRole('ADMIN')")
+    @PreAuthorize("@permittionService.hasRole('USER')")
     @GetMapping("/home/campusRecruitmentEvent/detail/{eventId}")
     @ApiOperation("获取活动详细信息")
     public Result getEventDetail(@PathVariable("eventId") Long eventId) {
@@ -486,7 +489,7 @@ public class UserController extends BaseController {
     /**
      * 收藏企业
      */
-    @PreAuthorize("@permittionService.hasRole('ADMIN')")
+    @PreAuthorize("@permittionService.hasRole('USER')")
     @PostMapping("/home/enterpriseRecommendation/favorite")
     @ApiOperation("收藏企业")
     public Result favoriteEnterprise(@RequestBody EnterpriseFavoriteDTO favoriteDTO) {
@@ -589,6 +592,153 @@ public class UserController extends BaseController {
         } catch (Exception e) {
             log.error("获取学生报名的活动列表失败，学生ID: {}", studentId, e);
             return Result.error("获取学生报名的活动列表失败: " + e.getMessage());
+        }
+    }
+
+    /**
+     * 创建投诉
+     */
+    @PostMapping("/complaint")
+    @ApiOperation("创建投诉")
+    public Result createComplaint(@RequestBody ComplaintDTO complaintDTO) {
+        log.info("开始处理创建投诉请求: {}", complaintDTO);
+        try {
+            Result result = Result.success(userService.createComplaint(complaintDTO));
+            log.info("创建投诉请求处理成功，结果: {}", result);
+            return result;
+        } catch (Exception e) {
+            log.error("创建投诉失败: ", e);
+            return Result.error("创建投诉失败: " + e.getMessage());
+        }
+    }
+
+    /**
+     * 获取投诉列表
+     */
+    @PreAuthorize("@permittionService.hasRole('USER')")
+    @GetMapping("/complaint/list")
+    @ApiOperation("获取投诉列表")
+    public Result getComplaintList(ComplaintDTO complaintDTO) {
+        log.info("开始处理获取投诉列表请求: {}", complaintDTO);
+        try {
+            Result result = Result.success(userService.getComplaintList(complaintDTO));
+            log.info("获取投诉列表请求处理成功，结果: {}", result);
+            return result;
+        } catch (Exception e) {
+            log.error("获取投诉列表失败: ", e);
+            return Result.error("获取投诉列表失败: " + e.getMessage());
+        }
+    }
+
+    /**
+     * 获取投诉详情
+     */
+    @PreAuthorize("@permittionService.hasRole('USER')")
+    @GetMapping("/complaint/{complaintId}")
+    @ApiOperation("获取投诉详情")
+    public Result getComplaintDetail(@PathVariable("complaintId") Long complaintId) {
+        log.info("开始处理获取投诉详情请求，投诉ID: {}", complaintId);
+        try {
+            Result result = Result.success(userService.getComplaintDetail(complaintId));
+            log.info("获取投诉详情请求处理成功，投诉ID: {}, 结果: {}", complaintId, result);
+            return result;
+        } catch (Exception e) {
+            log.error("获取投诉详情失败，投诉ID: {}", complaintId, e);
+            return Result.error("获取投诉详情失败: " + e.getMessage());
+        }
+    }
+
+    /**
+     * 更新投诉状态
+     */
+    @PreAuthorize("@permittionService.hasRole('USER')")
+    @PutMapping("/complaint/status/{complaintId}")
+    @ApiOperation("更新投诉状态")
+    public Result updateComplaintStatus(@PathVariable("complaintId") Long complaintId, 
+                                       @RequestBody String status) {
+        log.info("开始处理更新投诉状态请求，投诉ID: {}, 状态: {}", complaintId, status);
+        try {
+            Result result = Result.success(userService.updateComplaintStatus(complaintId, status));
+            log.info("更新投诉状态请求处理成功，结果: {}", result);
+            return result;
+        } catch (Exception e) {
+            log.error("更新投诉状态失败: ", e);
+            return Result.error("更新投诉状态失败: " + e.getMessage());
+        }
+    }
+
+    /**
+     * 处理投诉
+     */
+    @PreAuthorize("@permittionService.hasRole('USER')")
+    @PutMapping("/complaint/handle/{complaintId}")
+    @ApiOperation("处理投诉")
+    public Result handleComplaint(@PathVariable("complaintId") Long complaintId, 
+                                 @RequestParam String status, 
+                                 @RequestParam String handleResult, 
+                                 @RequestParam Long handlerId) {
+        log.info("开始处理投诉请求，投诉ID: {}, 状态: {}, 处理结果: {}, 处理人ID: {}", 
+                 complaintId, status, handleResult, handlerId);
+        try {
+            Result result = Result.success(userService.handleComplaint(complaintId, status, handleResult, handlerId));
+            log.info("处理投诉请求处理成功，结果: {}", result);
+            return result;
+        } catch (Exception e) {
+            log.error("处理投诉失败: ", e);
+            return Result.error("处理投诉失败: " + e.getMessage());
+        }
+    }
+
+    /**
+     * 获取用户的投诉列表
+     */
+    @PreAuthorize("@permittionService.hasRole('USER')")
+    @GetMapping("/complaint/user/{userId}")
+    @ApiOperation("获取用户的投诉列表")
+    public Result getComplaintsByUserId(@PathVariable("userId") Long userId) {
+        log.info("开始处理获取用户投诉列表请求，用户ID: {}", userId);
+        try {
+            Result result = Result.success(userService.getComplaintsByUserId(userId));
+            log.info("获取用户投诉列表请求处理成功，用户ID: {}, 结果: {}", userId, result);
+            return result;
+        } catch (Exception e) {
+            log.error("获取用户投诉列表失败，用户ID: {}", userId, e);
+            return Result.error("获取用户投诉列表失败: " + e.getMessage());
+        }
+    }
+
+    /**
+     * 上传投诉附件
+     */
+    @PostMapping("/complaint/attachment")
+    @ApiOperation("上传投诉附件")
+    public Result uploadComplaintAttachment(@RequestBody UserComplaintAttachment attachment) {
+        log.info("开始处理上传投诉附件请求: {}", attachment);
+        try {
+            Result result = Result.success(userService.uploadComplaintAttachment(attachment));
+            log.info("上传投诉附件请求处理成功，结果: {}", result);
+            return result;
+        } catch (Exception e) {
+            log.error("上传投诉附件失败: ", e);
+            return Result.error("上传投诉附件失败: " + e.getMessage());
+        }
+    }
+
+    /**
+     * 获取投诉附件列表
+     */
+    @PreAuthorize("@permittionService.hasRole('USER')")
+    @GetMapping("/complaint/{complaintId}/attachments")
+    @ApiOperation("获取投诉附件列表")
+    public Result getComplaintAttachments(@PathVariable("complaintId") Long complaintId) {
+        log.info("开始处理获取投诉附件列表请求，投诉ID: {}", complaintId);
+        try {
+            Result result = Result.success(userService.getComplaintAttachments(complaintId));
+            log.info("获取投诉附件列表请求处理成功，投诉ID: {}, 结果: {}", complaintId, result);
+            return result;
+        } catch (Exception e) {
+            log.error("获取投诉附件列表失败，投诉ID: {}", complaintId, e);
+            return Result.error("获取投诉附件列表失败: " + e.getMessage());
         }
     }
 }

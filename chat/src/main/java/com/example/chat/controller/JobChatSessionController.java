@@ -39,7 +39,7 @@ public class JobChatSessionController extends BaseController
     /**
      * 查询聊天会话列表
      */
-//    @PreAuthorize("@permittionService.hasRole('ADMIN')")
+//    @PreAuthorize("@permittionService.hasRole('USER')")
 //    @GetMapping("/list")
 //    public TableDataInfo list(JobChatSession jobChatSession)
 //    {
@@ -48,7 +48,7 @@ public class JobChatSessionController extends BaseController
 //        return getDataTable(list);
 //    }
 
-    @PreAuthorize("@permittionService.hasRole('ADMIN')")
+    @PreAuthorize("@permittionService.hasRole('USER')")
     @GetMapping("/list")
     public AjaxResult list(JobChatSession jobChatSession)
     {
@@ -61,7 +61,7 @@ public class JobChatSessionController extends BaseController
     /**
      * 导出聊天会话列表
      */
-    @PreAuthorize("@permittionService.hasRole('ADMIN')")
+    @PreAuthorize("@permittionService.hasRole('USER')")
     @Log(title = "聊天会话 export", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, JobChatSession jobChatSession) throws IOException
@@ -74,7 +74,7 @@ public class JobChatSessionController extends BaseController
     /**
      * 获取聊天会话详细信息
      */
-    @PreAuthorize("@permittionService.hasRole('ADMIN')")
+    @PreAuthorize("@permittionService.hasRole('USER')")
     @Log(title = "聊天会话getInfo", businessType = BusinessType.SELECT)
     @GetMapping(value = "/{sessionId}")
     public AjaxResult select(@PathVariable("sessionId") Long sessionId)
@@ -85,7 +85,7 @@ public class JobChatSessionController extends BaseController
     /**
      * 新增聊天会话
      */
-    @PreAuthorize("@permittionService.hasRole('ADMIN')")
+    @PreAuthorize("@permittionService.hasRole('USER')")
     @Log(title = "聊天会话insert", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult insert(@RequestBody JobChatSession jobChatSession)
@@ -96,7 +96,7 @@ public class JobChatSessionController extends BaseController
     /**
      * 修改聊天会话
      */
-    @PreAuthorize("@permittionService.hasRole('ADMIN')")
+    @PreAuthorize("@permittionService.hasRole('USER')")
     @Log(title = "聊天会话update", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult update(@RequestBody JobChatSession jobChatSession)
@@ -107,7 +107,7 @@ public class JobChatSessionController extends BaseController
     /**
      * 删除聊天会话
      */
-    @PreAuthorize("@permittionService.hasRole('ADMIN')")
+    @PreAuthorize("@permittionService.hasRole('USER')")
     @Log(title = "聊天会话delete", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{sessionIds}")
     public AjaxResult delete(@PathVariable Long[] sessionIds)

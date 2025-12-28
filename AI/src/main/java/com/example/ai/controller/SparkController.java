@@ -38,7 +38,7 @@ public class SparkController {
      * @param request 用户输入消息
      * @return AI回复内容
      */
-    @PreAuthorize("@permittionService.hasRole('ADMIN')")
+    @PreAuthorize("@permittionService.hasRole('USER')")
     @PostMapping("/chat")
     public ResponseEntity<Map<String, Object>> chat(@RequestBody Map<String, Object> request) {
         System.out.println("用户输入：" + request);
@@ -71,7 +71,7 @@ public class SparkController {
      * @param request 用户输入消息
      * @return AI回复内容
      */
-    @PreAuthorize("@permittionService.hasRole('ADMIN')")
+    @PreAuthorize("@permittionService.hasRole('USER')")
     @PostMapping("/enterpriseFilterByAI")
     public ResponseEntity<Map<String, Object>> AIFilter(@RequestBody Map<String, Object> request) {
         try {
@@ -187,7 +187,7 @@ public class SparkController {
      * @param request 用户输入消息
      * @return 流式响应
      */
-    @PreAuthorize("@permittionService.hasRole('ADMIN')")
+    @PreAuthorize("@permittionService.hasRole('USER')")
     @PostMapping("/stream-chat")
     public ResponseEntity<Map<String, Object>> streamChat(@RequestBody Map<String, Object> request) {
         try {
@@ -219,7 +219,7 @@ public class SparkController {
      * @param request 用户输入消息
      * @return JSON格式的AI回复
      */
-    @PreAuthorize("@permittionService.hasRole('ADMIN')")
+    @PreAuthorize("@permittionService.hasRole('USER')")
     @PostMapping("/json-chat")
     public ResponseEntity<Map<String, Object>> jsonChat(@RequestBody Map<String, Object> request) {
         try {

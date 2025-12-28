@@ -40,7 +40,7 @@ public class TagController extends BaseController {
     /**
      * 查询标签列表
      */
-    @PreAuthorize("@permittionService.hasRole('ADMIN')")
+    @PreAuthorize("@permittionService.hasRole('USER')")
     @GetMapping("/list")
     public TableDataInfo list(Tag tag) {
         startPage();
@@ -51,7 +51,7 @@ public class TagController extends BaseController {
     /**
      * 获取标签详细信息
      */
-    @PreAuthorize("@permittionService.hasRole('ADMIN')")
+    @PreAuthorize("@permittionService.hasRole('USER')")
     @GetMapping(value = "{tagId}")
     public AjaxResult getInfo(@PathVariable("tagId") Long tagId) {
         return success(tagService.selectTagByTagId(tagId));
@@ -60,7 +60,7 @@ public class TagController extends BaseController {
     /**
      * 新增标签
      */
-    @PreAuthorize("@permittionService.hasRole('ADMIN')")
+    @PreAuthorize("@permittionService.hasRole('USER')")
     @Log(title = "标签", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody Tag tag) {
@@ -70,7 +70,7 @@ public class TagController extends BaseController {
     /**
      * 修改标签
      */
-    @PreAuthorize("@permittionService.hasRole('ADMIN')")
+    @PreAuthorize("@permittionService.hasRole('USER')")
     @Log(title = "标签", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody Tag tag) {
@@ -80,7 +80,7 @@ public class TagController extends BaseController {
     /**
      * 删除标签
      */
-    @PreAuthorize("@permittionService.hasRole('ADMIN')")
+    @PreAuthorize("@permittionService.hasRole('USER')")
     @Log(title = "标签", businessType = BusinessType.DELETE)
     @DeleteMapping("{tagIds}")
     public AjaxResult remove(@PathVariable Long[] tagIds) {
@@ -92,7 +92,7 @@ public class TagController extends BaseController {
      * 根据输入的标签列表，推荐相关的标签
      * 集成Python标签推荐服务
      */
-    @PreAuthorize("@permittionService.hasRole('ADMIN')")
+    @PreAuthorize("@permittionService.hasRole('USER')")
     @PostMapping("/recommend-related-tags")
     public AjaxResult recommendRelatedTags(@RequestBody TagRecommendationRequestDTO request) {
         try {

@@ -13,6 +13,8 @@ const keyword = ref(route.query.keyword || '')
 // 搜索结果数据
 const enterpriseResults = ref([])
 const paginatedEnterpriseResults = ref([])
+const positionResults = ref([])
+const paginatedPositionResults = ref([])
 const eventResults = ref([])
 const paginatedEventResults = ref([])
 const loading = ref(false)
@@ -128,22 +130,34 @@ const search = async () => {
             // 调用真实API
             if (activeTab.value === 'enterprise') {
                 // 使用多条件搜索API
-                const response = await searchApi.searchEnterpriseWithFilters({
-                    keyword: keyword.value,
-                    industry: filters.value.industry,
-                    location: filters.value.location
-                })
+                const response = await enterpriseApi.getEnterpriseList({ enterpriseName: keyword.value })
                 
                 // 适配API响应格式
                 if (response.code === 200 && response.data) {
-                    enterpriseResults.value = response.data || []
-                    total.value = enterpriseResults.value.length || 0
+                    enterpriseResults.value = response.data.records || []
+                    total.value = response.data.total || 0
                     // 应用分页
                     applyPagination()
                     ElMessage.success('搜索成功')
                 } else {
                     ElMessage.warning('搜索结果为空')
                     enterpriseResults.value = []
+                    total.value = 0
+                }
+            } else if (activeTab.value === 'position') {
+                // 职位搜索，调用position模块的搜索方法
+                const response = await enterpriseApi.getPositionList({ positionName: keyword.value })
+                
+                // 适配API响应格式
+                if (response.code === 200 && response.data) {
+                    positionResults.value = response.data.records || []
+                    total.value = response.data.total || 0
+                    // 应用分页
+                    applyPagination()
+                    ElMessage.success('搜索成功')
+                } else {
+                    ElMessage.warning('搜索结果为空')
+                    positionResults.value = []
                     total.value = 0
                 }
             } else {
@@ -158,6 +172,7 @@ const search = async () => {
             ElMessage.error('搜索API调用失败：' + error.message)
             console.error('Search API error:', error)
             enterpriseResults.value = []
+            positionResults.value = []
             eventResults.value = []
             total.value = 0
             applyPagination()
@@ -192,6 +207,10 @@ const applyPagination = () => {
     const startIndex = (currentPage.value - 1) * pageSize.value
     const endIndex = startIndex + pageSize.value
     paginatedEnterpriseResults.value = enterpriseResults.value.slice(startIndex, endIndex)
+  } else if (activeTab.value === 'position') {
+    const startIndex = (currentPage.value - 1) * pageSize.value
+    const endIndex = startIndex + pageSize.value
+    paginatedPositionResults.value = positionResults.value.slice(startIndex, endIndex)
   } else {
     const startIndex = (currentPage.value - 1) * pageSize.value
     const endIndex = startIndex + pageSize.value
@@ -376,6 +395,91 @@ onMounted(() => {
         </div>
       </el-tab-pane>
       
+      <el-tab-pane label="职位" name="position">
+        <div class="filter-section">
+          <div class="filter-item">
+            <label>职位类型：</label>
+            <el-select v-model="filters.jobType" placeholder="选择职位类型" @change="handleFilterChange">
+              <el-option v-for="option in jobTypeOptions" :key="option.value" :label="option.label" :value="option.value"></el-option>
+            </el-select>
+          </div>
+          
+          <div class="filter-item">
+            <label>薪资范围：</label>
+            <el-select v-model="filters.salaryRange" placeholder="选择薪资范围" @change="handleFilterChange">
+              <el-option v-for="option in salaryRangeOptions" :key="option.value" :label="option.label" :value="option.value"></el-option>
+            </el-select>
+          </div>
+          
+          <div class="filter-item">
+            <label>工作经验：</label>
+            <el-select v-model="filters.workExperience" placeholder="选择工作经验" @change="handleFilterChange">
+              <el-option v-for="option in workExperienceOptions" :key="option.value" :label="option.label" :value="option.value"></el-option>
+            </el-select>
+          </div>
+          
+          <div class="filter-item">
+            <label>学历要求：</label>
+            <el-select v-model="filters.education" placeholder="选择学历要求" @change="handleFilterChange">
+              <el-option v-for="option in educationOptions" :key="option.value" :label="option.label" :value="option.value"></el-option>
+            </el-select>
+          </div>
+          
+          <div class="filter-item">
+            <label>排序：</label>
+            <el-select v-model="filters.sortBy" placeholder="选择排序" @change="handleFilterChange">
+              <el-option v-for="option in sortOptions" :key="option.value" :label="option.label" :value="option.value"></el-option>
+            </el-select>
+          </div>
+        </div>
+        
+        <div class="results-section">
+          <div class="results-info">
+            <span>共找到 {{ total }} 条职位结果</span>
+          </div>
+          
+          <div class="position-list">
+            <el-card 
+              v-for="position in paginatedPositionResults" 
+              :key="position.positionId" 
+              class="position-card"
+            >
+              <div class="position-header">
+                <h3>{{ position.positionName }}</h3>
+                <span class="position-salary">{{ position.salary || '薪资面议' }}</span>
+              </div>
+              
+              <div class="position-meta">
+                <span class="meta-item">{{ position.enterpriseName || '未知企业' }}</span>
+                <span class="meta-item">{{ position.city || '未知城市' }}</span>
+                <span class="meta-item">{{ position.jobType || '全职' }}</span>
+              </div>
+              
+              <div class="position-description">
+                {{ position.description || '暂无职位描述' }}
+              </div>
+              
+              <div class="position-actions">
+                <el-button type="primary" size="small">查看详情</el-button>
+                <el-button size="small">申请职位</el-button>
+              </div>
+            </el-card>
+          </div>
+          
+          <div class="pagination-wrapper">
+            <el-pagination
+              v-model:current-page="currentPage"
+              v-model:page-size="pageSize"
+              :page-sizes="[10, 20, 50]"
+              layout="total, sizes, prev, pager, next, jumper"
+              :total="total"
+              @size-change="pageSize = $event; search()"
+              @current-change="handlePageChange"
+            />
+          </div>
+        </div>
+      </el-tab-pane>
+      
       <el-tab-pane label="校招活动" name="event">
         <div class="results-section">
           <div class="results-info">
@@ -494,11 +598,13 @@ onMounted(() => {
 }
 
 .enterprise-card,
+.position-card,
 .event-card {
   transition: transform 0.2s;
 }
 
 .enterprise-card:hover,
+.position-card:hover,
 .event-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
@@ -561,6 +667,59 @@ onMounted(() => {
   display: flex;
   justify-content: flex-end;
   gap: 10px;
+}
+
+/* 职位卡片样式 */
+.position-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.position-header h3 {
+  margin: 0;
+  font-size: 18px;
+  color: #333;
+}
+
+.position-salary {
+  color: #f56c6c;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.position-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-bottom: 15px;
+  font-size: 14px;
+  color: #606266;
+}
+
+.position-description {
+  margin-bottom: 15px;
+  color: #606266;
+  line-height: 1.5;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+.position-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.position-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 20px;
+  margin-bottom: 20px;
 }
 
 .event-header {

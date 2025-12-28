@@ -35,7 +35,7 @@ public class AIController {
 
     public static List<RoleContent> historyList = new ArrayList<>();
 
-    @PreAuthorize("@permittionService.hasRole('ADMIN')")
+    @PreAuthorize("@permittionService.hasRole('USER')")
     @PostMapping("/aiChat")
     @ApiOperation("AI对话服务")
     public String aiChat(@RequestBody String question, @RequestParam String userId) {

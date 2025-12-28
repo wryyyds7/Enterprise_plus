@@ -10,10 +10,13 @@ import com.example.users.mapper.UserFavoriteActivityMapper;
 import com.example.users.mapper.UserJobPreferenceMapper;
 import com.example.users.mapper.UserMapper;
 import com.example.users.mapper.UserEventRegistrationMapper;
+import com.example.users.mapper.UserComplaintMapper;
+import com.example.users.mapper.UserComplaintAttachmentMapper;
 import com.example.users.service.UserService;
 import com.example.common.utils.JwtUtils;
 import com.example.users.domain.dto.SearchUserDTO;
 import com.example.users.domain.dto.UserDTO;
+import com.example.users.domain.dto.ComplaintDTO;
 import com.example.common.domain.entity.LoginInfo;
 import com.example.common.domain.entity.User;
 import com.example.common.domain.entity.UserContext;
@@ -22,6 +25,8 @@ import com.example.users.domain.entity.UserJobPreference;
 import com.example.users.domain.entity.UserFavoriteEnterprise;
 import com.example.users.domain.entity.UserFavoriteActivity;
 import com.example.users.domain.entity.UserEventRegistration;
+import com.example.users.domain.entity.UserComplaint;
+import com.example.users.domain.entity.UserComplaintAttachment;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import org.slf4j.Logger;
@@ -47,6 +52,12 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserFavoriteEnterpriseMapper userFavoriteEnterpriseMapper;
+    
+    @Autowired
+    private UserComplaintMapper userComplaintMapper;
+    
+    @Autowired
+    private UserComplaintAttachmentMapper userComplaintAttachmentMapper;
 
     @Autowired
     private UserFavoriteActivityMapper userFavoriteActivityMapper;
@@ -442,5 +453,57 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserEventRegistration getEventRegistration(Long userId, Long eventId) {
         return userEventRegistrationMapper.selectByUserIdAndEventId(userId, eventId);
+    }
+
+    // 投诉相关方法实现
+    @Override
+    public Long createComplaint(ComplaintDTO complaintDTO) {
+        // 创建投诉实体
+        UserComplaint complaint = new UserComplaint();
+        complaint.setUserId(complaintDTO.getUserId());
+        complaint.setComplainedType(complaintDTO.getComplainedType());
+        complaint.setComplainedId(complaintDTO.getComplainedId());
+        complaint.setComplaintTitle(complaintDTO.getComplaintTitle());
+        complaint.setComplaintContent(complaintDTO.getComplaintContent());
+        complaint.setComplaintStatus(complaintDTO.getComplaintStatus() != null ? complaintDTO.getComplaintStatus() : "PENDING");
+        complaint.setCreateTime(new java.util.Date());
+        complaint.setUpdateTime(new java.util.Date());
+        
+        return userComplaintMapper.insertComplaint(complaint);
+    }
+
+    @Override
+    public List<UserComplaint> getComplaintList(ComplaintDTO complaintDTO) {
+        return userComplaintMapper.selectComplaintList(complaintDTO);
+    }
+
+    @Override
+    public UserComplaint getComplaintDetail(Long complaintId) {
+        return userComplaintMapper.selectComplaintById(complaintId);
+    }
+
+    @Override
+    public Long updateComplaintStatus(Long complaintId, String status) {
+        return userComplaintMapper.updateComplaintStatus(complaintId, status);
+    }
+
+    @Override
+    public Long handleComplaint(Long complaintId, String status, String handleResult, Long handlerId) {
+        return userComplaintMapper.handleComplaint(complaintId, status, handleResult, handlerId);
+    }
+
+    @Override
+    public List<UserComplaint> getComplaintsByUserId(Long userId) {
+        return userComplaintMapper.selectComplaintsByUserId(userId);
+    }
+
+    @Override
+    public Long uploadComplaintAttachment(UserComplaintAttachment attachment) {
+        return userComplaintAttachmentMapper.insertComplaintAttachment(attachment);
+    }
+
+    @Override
+    public List<UserComplaintAttachment> getComplaintAttachments(Long complaintId) {
+        return userComplaintAttachmentMapper.selectAttachmentsByComplaintId(complaintId);
     }
 }

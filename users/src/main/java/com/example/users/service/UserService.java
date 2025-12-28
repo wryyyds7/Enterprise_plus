@@ -6,12 +6,15 @@ import com.example.common.domain.dto.ActivityFavoriteDTO;
 import com.example.common.domain.dto.EventRegistrationDTO;
 import com.example.users.domain.dto.SearchUserDTO;
 import com.example.users.domain.dto.UserDTO;
+import com.example.users.domain.dto.ComplaintDTO;
 import com.example.common.domain.entity.LoginInfo;
 import com.example.common.domain.entity.User;
 import com.example.users.domain.entity.UserJobPreference;
 import com.example.users.domain.entity.UserFavoriteEnterprise;
 import com.example.users.domain.entity.UserFavoriteActivity;
 import com.example.users.domain.entity.UserEventRegistration;
+import com.example.users.domain.entity.UserComplaint;
+import com.example.users.domain.entity.UserComplaintAttachment;
 import com.github.pagehelper.Page;
 import java.util.List;
 
@@ -48,4 +51,14 @@ public interface UserService {
     public Long cancelEventRegistration(EventRegistrationDTO eventRegistrationDTO);
     public boolean isEventRegistered(Long userId, Long eventId);
     public UserEventRegistration getEventRegistration(Long userId, Long eventId);
+    
+    // 投诉相关方法
+    public Long createComplaint(ComplaintDTO complaintDTO);
+    public List<UserComplaint> getComplaintList(ComplaintDTO complaintDTO);
+    public UserComplaint getComplaintDetail(Long complaintId);
+    public Long updateComplaintStatus(Long complaintId, String status);
+    public Long handleComplaint(Long complaintId, String status, String handleResult, Long handlerId);
+    public List<UserComplaint> getComplaintsByUserId(Long userId);
+    public Long uploadComplaintAttachment(UserComplaintAttachment attachment);
+    public List<UserComplaintAttachment> getComplaintAttachments(Long complaintId);
 }

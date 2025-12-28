@@ -4,20 +4,80 @@
       <!-- Logo -->
       <div class="logo">
         <router-link to="/home">
+          <el-icon class="logo-icon"><OfficeBuilding /></el-icon>
           <span class="logo-text">校招企业推荐平台</span>
         </router-link>
       </div>
 
+      <!-- 导航菜单 -->
+      <el-menu
+        :default-active="activePath"
+        class="nav-menu"
+        mode="horizontal"
+        router
+        overflow-x="auto"
+      >
+        <!-- 普通用户导航菜单 -->
+        <template v-if="!isAdmin">
+          <el-menu-item index="/home">首页</el-menu-item>
+          <el-menu-item index="/home/recommendation">企业推荐</el-menu-item>
+          <el-menu-item index="/home/events">校招活动</el-menu-item>
+          <el-menu-item index="/search/result">搜索</el-menu-item>
+          <el-sub-menu index="/activity">
+            <template #title>活动中心</template>
+            <el-menu-item index="/api/activity">活动列表</el-menu-item>
+            <el-menu-item index="/home/events/my">我的活动</el-menu-item>
+          </el-sub-menu>
+          <el-sub-menu index="/learning">
+            <template #title>学习中心</template>
+            <el-menu-item index="/learning/path/list">学习路径</el-menu-item>
+            <el-menu-item index="/learning/resource/list">学习资源</el-menu-item>
+            <el-menu-item index="/learning/skill/list">技能管理</el-menu-item>
+          </el-sub-menu>
+          <el-sub-menu index="/forum">
+            <template #title>论坛</template>
+            <el-menu-item index="/api/forum/section">论坛板块</el-menu-item>
+            <el-menu-item index="/api/forum/topic">主题列表</el-menu-item>
+          </el-sub-menu>
+          <el-menu-item index="/chat/session/list">聊天</el-menu-item>
+          <el-menu-item index="/ai/chat">AI助手</el-menu-item>
+        </template>
+        <!-- 管理员导航菜单 -->
+        <template v-else>
+          <el-menu-item index="/home">首页</el-menu-item>
+          <el-sub-menu index="/admin">
+            <template #title>管理中心</template>
+            <el-menu-item index="/admin/dashboard">仪表盘</el-menu-item>
+            <el-menu-item index="/admin/enterprise-management">企业管理</el-menu-item>
+            <el-menu-item index="/admin/user-management">用户管理</el-menu-item>
+            <el-menu-item index="/admin/content-management">活动管理</el-menu-item>
+            <el-menu-item index="/admin/event-management">事件管理</el-menu-item>
+            <el-menu-item index="/admin/statistics">统计页面</el-menu-item>
+          </el-sub-menu>
+          <el-menu-item index="/search/result">搜索</el-menu-item>
+          <el-menu-item index="/ai/chat">AI助手</el-menu-item>
+        </template>
+      </el-menu>
+
       <!-- 搜索栏 -->
       <div class="search-container">
         <el-dropdown trigger="click" @command="handleFilterCommand">
-          <el-button type="info" class="filter-button">
+          <el-button type="primary" class="filter-button">
             筛选
-            <el-icon class="el-icon--right"><arrow-down /></el-icon>
+            <el-icon class="el-icon--right"><ArrowDown /></el-icon>
           </el-button>
           <template #dropdown>
-            <el-dropdown-menu>
-              <el-dropdown-item divided>
+            <el-dropdown-menu class="filter-dropdown">
+              <el-dropdown-item>
+                <span>搜索类型：</span>
+                <el-select v-model="searchType" placeholder="选择搜索类型" style="width: 150px;">
+                  <el-option label="全部" value="all"></el-option>
+                  <el-option label="企业" value="enterprise"></el-option>
+                  <el-option label="职位" value="position"></el-option>
+                  <el-option label="活动" value="activity"></el-option>
+                </el-select>
+              </el-dropdown-item>
+              <el-dropdown-item>
                 <span>行业：</span>
                 <el-select v-model="searchFilters.industry" placeholder="选择行业" style="width: 150px;">
                   <el-option label="全部" value=""></el-option>
@@ -29,7 +89,7 @@
                   <el-option label="其他" value="其他"></el-option>
                 </el-select>
               </el-dropdown-item>
-              <el-dropdown-item divided>
+              <el-dropdown-item>
                 <span>地区：</span>
                 <el-select v-model="searchFilters.location" placeholder="选择地区" style="width: 150px;">
                   <el-option label="全部" value=""></el-option>
@@ -38,7 +98,36 @@
                   <el-option label="广州" value="广州"></el-option>
                   <el-option label="深圳" value="深圳"></el-option>
                   <el-option label="杭州" value="杭州"></el-option>
+                  <el-option label="成都" value="成都"></el-option>
+                  <el-option label="武汉" value="武汉"></el-option>
+                  <el-option label="西安" value="西安"></el-option>
                 </el-select>
+              </el-dropdown-item>
+              <el-dropdown-item>
+                <span>职位类型：</span>
+                <el-select v-model="searchFilters.jobType" placeholder="选择职位类型" style="width: 150px;">
+                  <el-option label="全部" value=""></el-option>
+                  <el-option label="技术岗" value="技术岗"></el-option>
+                  <el-option label="产品岗" value="产品岗"></el-option>
+                  <el-option label="运营岗" value="运营岗"></el-option>
+                  <el-option label="设计岗" value="设计岗"></el-option>
+                  <el-option label="市场岗" value="市场岗"></el-option>
+                  <el-option label="销售岗" value="销售岗"></el-option>
+                </el-select>
+              </el-dropdown-item>
+              <el-dropdown-item>
+                <span>薪资范围：</span>
+                <el-select v-model="searchFilters.salary" placeholder="选择薪资范围" style="width: 150px;">
+                  <el-option label="全部" value=""></el-option>
+                  <el-option label="5k以下" value="5k以下"></el-option>
+                  <el-option label="5k-10k" value="5k-10k"></el-option>
+                  <el-option label="10k-15k" value="10k-15k"></el-option>
+                  <el-option label="15k-20k" value="15k-20k"></el-option>
+                  <el-option label="20k以上" value="20k以上"></el-option>
+                </el-select>
+              </el-dropdown-item>
+              <el-dropdown-item divided command="reset">
+                <el-button type="default" size="small" style="width: 100%;">重置筛选</el-button>
               </el-dropdown-item>
               <el-dropdown-item divided command="apply">
                 <el-button type="primary" size="small" style="width: 100%;">应用筛选</el-button>
@@ -48,80 +137,57 @@
         </el-dropdown>
         <el-input 
           v-model="searchKeyword" 
-          placeholder="搜索企业名称、行业、关键词" 
+          placeholder="搜索企业名称、职位、活动、关键词" 
           class="search-input"
           clearable
           @keyup.enter="handleSearch"
         >
+          <template #prepend>
+            <el-select v-model="searchType" placeholder="全部" size="small" style="width: 100px;">
+              <el-option label="全部" value="all"></el-option>
+              <el-option label="企业" value="enterprise"></el-option>
+              <el-option label="职位" value="position"></el-option>
+              <el-option label="活动" value="activity"></el-option>
+            </el-select>
+          </template>
           <template #append>
-            <el-button type="primary" @click="handleSearch">搜索</el-button>
+            <el-button type="primary" @click="handleSearch">
+              <el-icon><Search /></el-icon>搜索
+            </el-button>
           </template>
         </el-input>
       </div>
-
-      <!-- 导航菜单 -->
-      <el-menu
-        :default-active="activePath"
-        class="nav-menu"
-        mode="horizontal"
-        router
-      >
-        <el-menu-item index="/home">首页</el-menu-item>
-        <el-menu-item index="/home/recommendation">企业推荐</el-menu-item>
-        <el-menu-item index="/home/events">校招活动</el-menu-item>
-        <el-sub-menu index="/home/enterprise">
-          <template #title>企业中心</template>
-          <el-menu-item index="/home/enterprise/list">企业列表</el-menu-item>
-          <el-menu-item index="/home/enterprise/favorites">我的收藏</el-menu-item>
-        </el-sub-menu>
-          <el-sub-menu index="/learning">
-          <template #title>学习中心</template>
-          <el-menu-item index="/learning/path/list">学习路径</el-menu-item>
-          <el-menu-item index="/learning/resource/list">学习资源</el-menu-item>
-          <el-menu-item index="/learning/skill/list">技能管理</el-menu-item>
-        </el-sub-menu>
-        <el-sub-menu index="/api/forum">
-          <template #title>论坛</template>
-          <el-menu-item index="/api/forum/section">论坛板块</el-menu-item>
-          <el-menu-item index="/api/forum/topic">主题列表</el-menu-item>
-        </el-sub-menu>
-        <el-menu-item index="/api/activity">活动中心</el-menu-item>
-        <el-menu-item index="/chat/session/list">聊天</el-menu-item>
-        <el-menu-item index="/ai/chat">AI助手</el-menu-item>
-        <el-menu-item index="/profile">我的</el-menu-item>
-        <el-menu-item v-if="isAdmin" index="/admin/dashboard">管理员中心</el-menu-item>
-      </el-menu>
 
       <!-- 用户信息 -->
       <div class="user-info">
         <el-dropdown>
           <span class="user-dropdown">
-            <el-avatar :size="40">
-              {{ userInfo.nickName ? userInfo.nickName.substring(0, 1) : 'U' }}
+            <el-avatar :size="40" :src="userInfo.avatar">
+              {{ userInfo.nickName ? userInfo.nickName.substring(0, 1) : userInfo.userName.substring(0, 1) || 'U' }}
             </el-avatar>
             <span class="user-name">{{ userInfo.nickName || userInfo.userName }}</span>
-            <el-icon class="el-icon--right"><arrow-down /></el-icon>
+            <el-icon class="el-icon--right"><ArrowDown /></el-icon>
           </span>
           <template #dropdown>
             <el-dropdown-menu>
               <el-dropdown-item @click="handleUserCenter">
-                <el-icon><user /></el-icon>
+                <el-icon><User /></el-icon>
                 个人中心
               </el-dropdown-item>
               <el-dropdown-item @click="handleMyFavorites">
-                <el-icon><star /></el-icon>
+                <el-icon><Star /></el-icon>
                 我的收藏
               </el-dropdown-item>
               <el-dropdown-item @click="handleMyEvents">
-                <el-icon><calendar /></el-icon>
+                <el-icon><Calendar /></el-icon>
                 我的活动
               </el-dropdown-item>
               <el-dropdown-item v-if="isAdmin" @click="handleAdminCenter">
-                <el-icon><setting /></el-icon>
+                <el-icon><Setting /></el-icon>
                 管理员中心
               </el-dropdown-item>
               <el-dropdown-item divided @click="handleLogout">
-                <el-icon><switch-button /></el-icon>
+                <el-icon><SwitchButton /></el-icon>
                 退出登录
               </el-dropdown-item>
             </el-dropdown-menu>
@@ -136,7 +202,7 @@
 import { ref, computed, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { ElMessage } from 'element-plus'
-import { ArrowDown, User, Star, Calendar, Setting, SwitchButton } from '@element-plus/icons-vue'
+import { ArrowDown, User, Star, Calendar, Setting, SwitchButton, Search, OfficeBuilding } from '@element-plus/icons-vue'
 import { useUserStore } from '@/store/modules/user'
 import { useAuthStore } from '@/store/modules/auth'
 
@@ -147,9 +213,12 @@ const authStore = useAuthStore()
 
 // 搜索功能
 const searchKeyword = ref('')
+const searchType = ref('all') // 搜索类型：all, enterprise, position, activity
 const searchFilters = ref({
   industry: '',
-  location: ''
+  location: '',
+  jobType: '',
+  salary: ''
 })
 
 // 处理搜索
@@ -159,8 +228,11 @@ const handleSearch = () => {
       path: '/search/result', 
       query: {
         keyword: searchKeyword.value.trim(),
+        searchType: searchType.value,
         industry: searchFilters.value.industry,
-        location: searchFilters.value.location
+        location: searchFilters.value.location,
+        jobType: searchFilters.value.jobType,
+        salary: searchFilters.value.salary
       }
     })
   } else {
@@ -173,6 +245,15 @@ const handleFilterCommand = (command) => {
   if (command === 'apply') {
     // 应用筛选并执行搜索
     handleSearch()
+  } else if (command === 'reset') {
+    // 重置筛选条件
+    searchFilters.value = {
+      industry: '',
+      location: '',
+      jobType: '',
+      salary: ''
+    }
+    searchType.value = 'all'
   }
 }
 
@@ -251,21 +332,32 @@ const handleLogout = async () => {
   position: sticky;
   top: 0;
   z-index: 1000;
+  width: 100%;
 }
 
 .header-container {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   width: 100%;
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 0 auto;
   padding: 0 20px;
+  box-sizing: border-box;
 }
 
+/* Logo样式 */
 .logo {
   flex: 0 0 auto;
-  margin-right: 50px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-right: 30px;
+}
+
+.logo-icon {
+  font-size: 24px;
+  color: #409eff;
 }
 
 .logo-text {
@@ -280,47 +372,16 @@ const handleLogout = async () => {
   color: #66b1ff;
 }
 
-/* 搜索栏样式 */
-.search-container {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  max-width: 500px;
-}
-
-.search-input {
-  flex: 1;
-  width: 100%;
-  max-width: 400px;
-  border-radius: 20px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  transition: box-shadow 0.3s ease;
-}
-
-.search-input:hover {
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-}
-
-.filter-button {
-  white-space: nowrap;
-  border-radius: 20px;
-  transition: all 0.3s ease;
-}
-
-.filter-button:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(64, 158, 255, 0.3);
-}
-
+/* 导航菜单样式 */
 .nav-menu {
-  flex: 2;
+  flex: 1;
   background-color: transparent;
   border-bottom: none;
-  margin-right: 30px;
+  margin-right: 20px;
+  overflow-x: auto;
+  white-space: nowrap;
 }
 
-/* 导航菜单项样式 */
 :deep(.el-menu-item), :deep(.el-sub-menu__title) {
   font-size: 15px;
   font-weight: 500;
@@ -350,11 +411,81 @@ const handleLogout = async () => {
   border-radius: 3px 3px 0 0;
 }
 
+/* 搜索栏样式 */
+.search-container {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  max-width: 500px;
+}
+
+.search-input {
+  flex: 1;
+  width: 100%;
+  min-width: 200px;
+  border-radius: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease;
+}
+
+.search-input:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+:deep(.search-input .el-input__prepend),
+:deep(.search-input .el-input__append) {
+  background-color: transparent;
+}
+
+:deep(.search-input .el-select__wrapper) {
+  border-radius: 20px 0 0 20px;
+  border-right: none;
+}
+
+:deep(.search-input .el-button) {
+  border-radius: 0 20px 20px 0;
+}
+
+.filter-button {
+  white-space: nowrap;
+  border-radius: 20px;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.filter-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(64, 158, 255, 0.3);
+}
+
+/* 筛选下拉菜单 */
+.filter-dropdown {
+  min-width: 300px;
+  padding: 10px;
+}
+
+:deep(.filter-dropdown .el-dropdown-item) {
+  padding: 10px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+:deep(.filter-dropdown .el-dropdown-item:last-child) {
+  border-bottom: none;
+}
+
+:deep(.filter-dropdown .el-select) {
+  margin-left: 10px;
+}
+
 /* 用户信息样式 */
 .user-info {
   flex: 0 0 auto;
   display: flex;
   align-items: center;
+  margin-left: 20px;
 }
 
 .user-dropdown {
@@ -408,5 +539,110 @@ const handleLogout = async () => {
 
 :deep(.el-dropdown-menu__item.is-divided) {
   border-color: #f0f0f0;
+}
+
+/* 响应式设计 */
+@media (max-width: 1200px) {
+  .header-container {
+    padding: 0 15px;
+  }
+  
+  .logo {
+    margin-right: 20px;
+  }
+  
+  .logo-text {
+    font-size: 20px;
+  }
+  
+  :deep(.el-menu-item), :deep(.el-sub-menu__title) {
+    font-size: 14px;
+    padding: 0 12px;
+  }
+  
+  .search-container {
+    max-width: 400px;
+  }
+  
+  .search-input {
+    min-width: 150px;
+  }
+}
+
+@media (max-width: 992px) {
+  .header-container {
+    flex-wrap: wrap;
+    height: auto;
+    padding: 10px 15px;
+    line-height: normal;
+  }
+  
+  .logo {
+    margin-right: 20px;
+    margin-bottom: 10px;
+  }
+  
+  .nav-menu {
+    order: 3;
+    flex: 1 0 100%;
+    margin-right: 0;
+    margin-bottom: 10px;
+    overflow-x: auto;
+  }
+  
+  .search-container {
+    order: 2;
+    max-width: 100%;
+    flex: 1;
+    margin-bottom: 10px;
+  }
+  
+  .user-info {
+    order: 1;
+    margin-left: auto;
+    margin-bottom: 10px;
+  }
+  
+  .search-input {
+    min-width: auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .header-container {
+    padding: 8px 10px;
+  }
+  
+  .logo-text {
+    font-size: 18px;
+  }
+  
+  .logo-icon {
+    font-size: 20px;
+  }
+  
+  :deep(.el-menu-item), :deep(.el-sub-menu__title) {
+    font-size: 13px;
+    padding: 0 10px;
+    height: 50px;
+    line-height: 50px;
+  }
+  
+  .search-container {
+    gap: 8px;
+  }
+  
+  .filter-button {
+    font-size: 13px;
+    padding: 6px 12px;
+  }
+  
+  .search-input {
+    font-size: 13px;
+  }
+  
+  .user-name {
+    display: none;
+  }
 }
 </style>

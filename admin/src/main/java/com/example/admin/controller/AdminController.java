@@ -28,7 +28,7 @@ public class AdminController {
      */
     @GetMapping("/programmerMode")
     @ApiOperation("跳转到nacos界面")
-    @PreAuthorize("@permittionService.hasRole('ADMIN')")
+    @PreAuthorize("@permittionService.hasRole('USER')")
     public ModelAndView programmerMode() {
         // 跳转到nacos界面（默认8848端口）
         return new ModelAndView("redirect:http://localhost:8848");
@@ -39,7 +39,7 @@ public class AdminController {
      */
     @GetMapping("/statistics/loginFlow")
     @ApiOperation("获取登录流量统计")
-    @PreAuthorize("@permittionService.hasRole('ADMIN')")
+    @PreAuthorize("@permittionService.hasRole('USER')")
     public Result getLoginFlowStatistics() {
         return adminService.getLoginFlowStatistics();
     }
@@ -49,7 +49,7 @@ public class AdminController {
      */
     @GetMapping("/statistics/users")
     @ApiOperation("获取用户统计")
-    @PreAuthorize("@permittionService.hasRole('ADMIN')")
+    @PreAuthorize("@permittionService.hasRole('USER')")
     public Result getUserStatistics() {
         return adminService.getUserStatistics();
     }
@@ -59,7 +59,7 @@ public class AdminController {
      */
     @GetMapping("/statistics/enterprises")
     @ApiOperation("获取企业统计")
-    @PreAuthorize("@permittionService.hasRole('ADMIN')")
+    @PreAuthorize("@permittionService.hasRole('USER')")
     public Result getEnterpriseStatistics() {
         return adminService.getEnterpriseStatistics();
     }
@@ -69,7 +69,7 @@ public class AdminController {
      */
     @GetMapping("/statistics/positions")
     @ApiOperation("获取职位统计")
-    @PreAuthorize("@permittionService.hasRole('ADMIN')")
+    @PreAuthorize("@permittionService.hasRole('USER')")
     public Result getPositionStatistics() {
         return adminService.getPositionStatistics();
     }
@@ -79,7 +79,7 @@ public class AdminController {
      */
     @GetMapping("/statistics/events")
     @ApiOperation("获取活动统计")
-    @PreAuthorize("@permittionService.hasRole('ADMIN')")
+    @PreAuthorize("@permittionService.hasRole('USER')")
     public Result getEventStatistics() {
         return adminService.getEventStatistics();
     }
@@ -89,7 +89,7 @@ public class AdminController {
      */
     @GetMapping("/statistics/favorites")
     @ApiOperation("获取收藏统计")
-    @PreAuthorize("@permittionService.hasRole('ADMIN')")
+    @PreAuthorize("@permittionService.hasRole('USER')")
     public Result getFavoriteStatistics() {
         return adminService.getFavoriteStatistics();
     }
@@ -99,7 +99,7 @@ public class AdminController {
      */
     @GetMapping("/statistics/registrations")
     @ApiOperation("获取注册统计")
-    @PreAuthorize("@permittionService.hasRole('ADMIN')")
+    @PreAuthorize("@permittionService.hasRole('USER')")
     public Result getRegistrationStatistics() {
         return adminService.getRegistrationStatistics();
     }

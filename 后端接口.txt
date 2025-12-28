@@ -1,0 +1,369 @@
+# 后端接口文档
+
+## 1. 管理系统模块 (Admin)
+
+### 1.1 AdminController
+
+| 方法名 | 方法简介 | 调用方式 | 路径 | 权限 | 参数类型 | 具体调用类型 |
+|-------|---------|---------|------|------|---------|------------|
+| programmerMode | 跳转到nacos界面 | GET | /admin/programmerMode | USER | 无 | 无 |
+| getLoginFlowStatistics | 获取登录流量统计 | GET | /admin/statistics/loginFlow | USER | 无 | 无 |
+| getUserStatistics | 获取用户统计 | GET | /admin/statistics/users | USER | 无 | 无 |
+| getEnterpriseStatistics | 获取企业统计 | GET | /admin/statistics/enterprises | USER | 无 | 无 |
+| getPositionStatistics | 获取职位统计 | GET | /admin/statistics/positions | USER | 无 | 无 |
+| getEventStatistics | 获取活动统计 | GET | /admin/statistics/events | USER | 无 | 无 |
+| getFavoriteStatistics | 获取收藏统计 | GET | /admin/statistics/favorites | USER | 无 | 无 |
+| getRegistrationStatistics | 获取注册统计 | GET | /admin/statistics/registrations | USER | 无 | 无 |
+
+## 2. 活动模块 (Activity)
+
+### 2.1 ActivityController
+
+| 方法名 | 方法简介 | 调用方式 | 路径 | 权限 | 参数类型 | 具体调用类型 |
+|-------|---------|---------|------|------|---------|------------|
+| insertActivity | 新增活动 | POST | /api/activity | 无 | body | Activity (d:\bianchenglianxi\java\project\enterprise_plus\activity\src\main\java\com\example\activity\domain\entity\Activity.java) |
+| selectActivityById | 根据活动ID查询活动信息 | GET | /api/activity/{activityId} | 无 | path | Long |
+| selectActivityList | 查询活动列表 | GET | /api/activity | 无 | param | Activity (d:\bianchenglianxi\java\project\enterprise_plus\activity\src\main\java\com\example\activity\domain\entity\Activity.java) |
+| updateActivity | 更新活动信息 | PUT | /api/activity | 无 | body | Activity (d:\bianchenglianxi\java\project\enterprise_plus\activity\src\main\java\com\example\activity\domain\entity\Activity.java) |
+| deleteActivityById | 删除活动 | DELETE | /api/activity/{activityId} | 无 | path | Long |
+| deleteActivityByIds | 批量删除活动 | DELETE | /api/activity/batch | 无 | body | Long[] |
+| registerActivity | 报名活动 | POST | /api/activity/register | 无 | body | ActivityRegistration (d:\bianchenglianxi\java\project\enterprise_plus\activity\src\main\java\com\example\activity\domain\entity\ActivityRegistration.java) |
+| cancelRegistration | 取消报名 | DELETE | /api/activity/register/{activityId}/{userId} | 无 | path | Long, Long |
+| favoriteActivity | 收藏活动 | POST | /api/activity/favorite | 无 | body | ActivityFavorite (d:\bianchenglianxi\java\project\enterprise_plus\activity\src\main\java\com\example\activity\domain\entity\ActivityFavorite.java) |
+| cancelFavorite | 取消收藏 | DELETE | /api/activity/favorite/{activityId}/{userId} | 无 | path | Long, Long |
+| incrementLikeCount | 更新活动点赞次数 | PUT | /api/activity/like/{activityId} | 无 | path | Long |
+| isRegistered | 查询用户是否已报名活动 | GET | /api/activity/isRegistered/{activityId}/{userId} | 无 | path | Long, Long |
+| isFavorited | 查询用户是否已收藏活动 | GET | /api/activity/isFavorited/{activityId}/{userId} | 无 | path | Long, Long |
+
+## 3. 广告模块 (Advertisement)
+
+### 3.1 AdvertisementController
+
+| 方法名 | 方法简介 | 调用方式 | 路径 | 权限 | 参数类型 | 具体调用类型 |
+|-------|---------|---------|------|------|---------|------------|
+| insertAdvertisement | 新增广告 | POST | /api/advertisement | 无 | body | Advertisement |
+| selectAdvertisementById | 根据广告ID查询广告信息 | GET | /api/advertisement/{adId} | 无 | path | Long |
+| selectAdvertisementList | 查询广告列表 | GET | /api/advertisement | 无 | param | Advertisement |
+| updateAdvertisement | 更新广告信息 | PUT | /api/advertisement | 无 | body | Advertisement |
+| deleteAdvertisementById | 删除广告 | DELETE | /api/advertisement/{adId} | 无 | path | Long |
+| deleteAdvertisementByIds | 批量删除广告 | DELETE | /api/advertisement/batch | 无 | body | Long[] |
+| selectAdvertisementByPosition | 根据展示位置查询广告列表 | GET | /api/advertisement/position/{displayPosition} | 无 | path | String |
+| incrementClickCount | 更新广告点击次数 | PUT | /api/advertisement/click/{adId} | 无 | path | Long |
+| incrementViewCount | 更新广告浏览次数 | PUT | /api/advertisement/view/{adId} | 无 | path | Long |
+
+## 4. AI模块 (AI)
+
+### 4.1 AIController
+
+| 方法名 | 方法简介 | 调用方式 | 路径 | 权限 | 参数类型 | 具体调用类型 |
+|-------|---------|---------|------|------|---------|------------|
+| aiChat | AI对话服务 | POST | /ai/chat/aiChat | USER | body, param | String, String |
+
+### 4.2 SparkController
+
+| 方法名 | 方法简介 | 调用方式 | 路径 | 权限 | 参数类型 | 具体调用类型 |
+|-------|---------|---------|------|------|---------|------------|
+| chat | 普通对话接口 | POST | /ai/api/spark/chat | USER | body | Map<String, Object> |
+| AIFilter | 用于search引擎过滤是否为官网内容 | POST | /ai/api/spark/enterpriseFilterByAI | USER | body | Map<String, Object> |
+| streamChat | 流式对话接口 | POST | /ai/api/spark/stream-chat | USER | body | Map<String, Object> |
+| jsonChat | JSON模式对话接口 | POST | /ai/api/spark/json-chat | USER | body | Map<String, Object> |
+
+## 5. 聊天模块 (Chat)
+
+### 5.1 JobChatSessionController
+
+| 方法名 | 方法简介 | 调用方式 | 路径 | 权限 | 参数类型 | 具体调用类型 |
+|-------|---------|---------|------|------|---------|------------|
+| list | 查询聊天会话列表 | GET | /system/session/list | USER | param | JobChatSession |
+| export | 导出聊天会话列表 | POST | /system/session/export | USER | body, param | HttpServletResponse, JobChatSession |
+| select | 获取聊天会话详细信息 | GET | /system/session/{sessionId} | USER | path | Long |
+| insert | 新增聊天会话 | POST | /system/session | USER | body | JobChatSession |
+| update | 修改聊天会话 | PUT | /system/session | USER | body | JobChatSession |
+| delete | 删除聊天会话 | DELETE | /system/session/{sessionIds} | USER | path | Long[] |
+
+### 5.2 JobChatMessageController
+
+| 方法名 | 方法简介 | 调用方式 | 路径 | 权限 | 参数类型 | 具体调用类型 |
+|-------|---------|---------|------|------|---------|------------|
+| list | 查询聊天消息列表 | GET | /system/message/list | USER | param | JobChatMessage |
+| export | 导出聊天消息列表 | POST | /system/message/export | USER | body, param | HttpServletResponse, JobChatMessage |
+| getInfo | 获取聊天消息详细信息 | GET | /system/message/{msgId} | USER | path | Long |
+| insert | 新增聊天消息 | POST | /system/message | USER | body | JobChatMessage |
+| update | 修改聊天消息 | PUT | /system/message | USER | body | JobChatMessage |
+| delete | 删除聊天消息 | DELETE | /system/message/{msgIds} | USER | path | Long[] |
+
+## 6. 企业模块 (Enterprise)
+
+### 6.1 EnterpriseController
+
+| 方法名 | 方法简介 | 调用方式 | 路径 | 权限 | 参数类型 | 具体调用类型 |
+|-------|---------|---------|------|------|---------|------------|
+| list | 查询企业信息服务 | POST | /system/enterprise/list | USER | param | String |
+| userList | 前端用户搜索企业信息 | POST | /system/enterprise/user/list | 无 | body | Enterprise (d:\bianchenglianxi\java\project\enterprise_plus\common\src\main\java\com\example\common\domain\entity\Enterprise.java) |
+| searchEnterprise | 企业寻找服务 | GET | /system/enterprise/searchEnterpriseByName | USER | param | String |
+| export | 导出企业信息 | POST | /system/enterprise/export | USER | body, param | HttpServletResponse, Enterprise (d:\bianchenglianxi\java\project\enterprise_plus\common\src\main\java\com\example\common\domain\entity\Enterprise.java) |
+| getInfo | 获取企业信息详情 | GET | /system/enterprise/id/{enterpriseId} | USER | path | Long |
+| insert | 新增企业信息 | POST | /system/enterprise/insert | USER | body | Enterprise (d:\bianchenglianxi\java\project\enterprise_plus\common\src\main\java\com\example\common\domain\entity\Enterprise.java) |
+| update | 修改企业信息 | PUT | /system/enterprise/update | USER | body | Enterprise (d:\bianchenglianxi\java\project\enterprise_plus\common\src\main\java\com\example\common\domain\entity\Enterprise.java) |
+| delete | 删除企业信息 | DELETE | /system/enterprise/id/{enterpriseIds} | USER | path | Long[] |
+| getEnterpriseTags | 获取企业标签 | GET | /system/enterprise/id/{enterpriseId}/tags | USER | path | Long |
+| addEnterpriseTags | 添加企业标签 | POST | /system/enterprise/id/{enterpriseId}/tags | USER | path, body | Long, List<Long> |
+| removeEnterpriseTags | 删除企业标签 | DELETE | /system/enterprise/id/{enterpriseId}/tags | USER | path | Long |
+| recommendEnterprises | 推荐企业列表 | POST | /system/enterprise/recommend/list | 无 | body | EnterpriseRecommendationRequestDTO |
+| updateEnterpriseDirectory | 更新企业名录 | POST | /system/enterprise/updateDirectory | USER | 无 | 无 |
+
+### 6.2 PositionController
+
+| 方法名 | 方法简介 | 调用方式 | 路径 | 权限 | 参数类型 | 具体调用类型 |
+|-------|---------|---------|------|------|---------|------------|
+| list | 查询招聘职位列表 | GET | /system/position/list | USER | param | Position |
+| export | 导出招聘职位列表 | POST | /system/position/export | USER | body, param | HttpServletResponse, Position |
+| getInfo | 获取招聘职位详细信息 | GET | /system/position/{positionId} | USER | path | Long |
+| add | 新增招聘职位 | POST | /system/position | USER | body | Position |
+| update | 修改招聘职位 | PUT | /system/position | USER | body | Position |
+| delete | 删除招聘职位 | DELETE | /system/position/{positionIds} | USER | path | Long[] |
+| getPositionTags | 获取职位标签 | GET | /system/position/{positionId}/tags | USER | path | Long |
+| addPositionTags | 添加职位标签 | POST | /system/position/{positionId}/tags | USER | path, body | Long, List<Long> |
+| removePositionTags | 删除职位标签 | DELETE | /system/position/{positionId}/tags | USER | path | Long |
+
+## 7. 事件模块 (Event)
+
+### 7.1 EventController
+
+| 方法名 | 方法简介 | 调用方式 | 路径 | 权限 | 参数类型 | 具体调用类型 |
+|-------|---------|---------|------|------|---------|------------|
+| insertEvent | 新增事件 | POST | /api/event | 无 | body | Event |
+| selectEventById | 根据事件ID查询事件信息 | GET | /api/event/{eventId} | 无 | path | Long |
+| selectEventList | 查询事件列表 | GET | /api/event | 无 | param | Event |
+| updateEvent | 更新事件信息 | PUT | /api/event | 无 | body | Event |
+| deleteEventById | 删除事件 | DELETE | /api/event/{eventId} | 无 | path | Long |
+| deleteEventByIds | 批量删除事件 | DELETE | /api/event/batch | 无 | body | Long[] |
+| selectEventListByType | 根据事件类型查询事件列表 | GET | /api/event/type/{eventType} | 无 | path | String |
+| selectEventListByPosition | 根据展示位置查询事件列表 | GET | /api/event/position/{displayPosition} | 无 | path | String |
+| incrementClickCount | 更新事件点击次数 | PUT | /api/event/click/{eventId} | 无 | path | Long |
+| incrementViewCount | 更新事件浏览次数 | PUT | /api/event/view/{eventId} | 无 | path | Long |
+
+## 8. 用户模块 (Users)
+
+### 8.1 UserController
+
+| 方法名 | 方法简介 | 调用方式 | 路径 | 权限 | 参数类型 | 具体调用类型 |
+|-------|---------|---------|------|------|---------|------------|
+| searchUserBypage | 用户搜索服务(分页) | POST | /users/admin/searchUserByPage | USER | body | SearchUserDTO |
+| searchUser | 用户搜索服务 | GET | /users/user/searchUser | USER | body | SearchUserDTO |
+| deleteUser | 用户删除服务 | POST | /users/admin/deleteUser | USER | body | UserDTO |
+| updateUser | 用户更新服务 | PUT | /users/user/updateUser | USER | body | UserDTO |
+| updateUserStatus | 用户状态更新服务 | PUT | /users/admin/updateUserStatus | USER | body | UserDTO |
+| add | 用户添加服务 | POST | /users/admin/add | USER | body | User |
+| getJobPreference | 获取用户求职偏好 | GET | /users/user/jobPreference | USER | param | Long |
+| updateJobPreference | 更新用户求职偏好 | PUT | /users/user/jobPreference | USER | body | JobPreferenceDTO |
+| getEnterpriseFavorites | 获取用户收藏的企业列表 | GET | /users/user/enterpriseFavorites | USER | param | Long |
+| addEnterpriseFavorite | 添加企业收藏 | POST | /users/user/enterpriseFavorite | USER | body | EnterpriseFavoriteDTO |
+| removeEnterpriseFavorite | 删除企业收藏 | DELETE | /users/user/enterpriseFavorite | USER | body | EnterpriseFavoriteDTO |
+| isEnterpriseFavorited | 检查用户是否已收藏企业 | GET | /users/user/isEnterpriseFavorited | USER | param | Long, Long |
+| getActivityFavorites | 获取用户收藏的活动列表 | GET | /users/user/activityFavorites | USER | param | Long |
+| addActivityFavorite | 添加活动收藏 | POST | /users/user/activityFavorite | USER | body | ActivityFavoriteDTO |
+| removeActivityFavorite | 删除活动收藏 | DELETE | /users/user/activityFavorite | USER | body | ActivityFavoriteDTO |
+| isActivityFavorited | 检查用户是否已收藏活动 | GET | /users/user/isActivityFavorited | USER | param | Long, Long |
+| getEventRegistrations | 获取用户的活动注册记录列表 | GET | /users/user/eventRegistrations | USER | param | Long |
+| addEventRegistration | 添加活动注册 | POST | /users/user/eventRegistration | USER | body | EventRegistrationDTO |
+| updateEventRegistration | 更新活动注册信息 | PUT | /users/user/eventRegistration | USER | body | EventRegistrationDTO |
+| cancelEventRegistration | 取消活动注册 | DELETE | /users/user/eventRegistration | USER | body | EventRegistrationDTO |
+| isEventRegistered | 检查用户是否已注册活动 | GET | /users/user/isEventRegistered | USER | param | Long, Long |
+| getEventRegistration | 获取特定的活动注册记录 | GET | /users/user/eventRegistration | USER | param | Long, Long |
+| getUserTags | 获取用户标签 | GET | /users/user/tags/{userId} | USER | path | Long |
+| addUserTags | 添加用户标签 | POST | /users/user/tags/{userId} | USER | path, body | Long, List<Long> |
+| removeUserTags | 删除用户标签 | DELETE | /users/user/tags/{userId} | USER | path | Long |
+| getEnterpriseRecommendations | 获取用户推荐企业列表 | POST | /users/user/enterpriseRecommendations | USER | body | EnterpriseRecommendationRequestDTO |
+| getLearningPathRecommendations | 获取用户推荐学习路径 | POST | /users/user/learningPathRecommendations | USER | body | LearningPathRecommendationRequestDTO |
+| predictSkillMastery | 预测用户技能掌握度 | POST | /users/user/skillMasteryPrediction | USER | body | SkillMasteryPredictionRequestDTO |
+| getLearningResourceRecommendations | 获取用户推荐学习资源 | POST | /users/user/learningResourceRecommendations | USER | body | LearningResourceRecommendationRequestDTO |
+| searchEnterprise | 搜索企业 | GET | /users/home/search/enterprise | USER | param | String, String, String, String, String |
+| searchEvent | 搜索校园招聘活动 | GET | /users/home/search/event | USER | param | String, String, String, String |
+| getEnterpriseRecommendationList | 获取个性化企业推荐列表 | GET | /users/home/enterpriseRecommendation/list | USER | param | String, String, String, String |
+| getCampusRecruitmentEventList | 获取校园招聘活动列表 | GET | /users/home/campusRecruitmentEvent/list | USER | param | String, String, String, Integer, Integer |
+| getEnterpriseDetail | 获取企业详细信息 | GET | /users/home/enterpriseRecommendation/detail/{enterpriseId} | USER | path | Long |
+| getEventDetail | 获取活动详细信息 | GET | /users/home/campusRecruitmentEvent/detail/{eventId} | USER | path | Long |
+| favoriteEnterprise | 收藏企业 | POST | /users/home/enterpriseRecommendation/favorite | USER | body | EnterpriseFavoriteDTO |
+| unfavoriteEnterprise | 取消收藏企业 | DELETE | /users/home/enterpriseRecommendation/favorite | 无 | body | EnterpriseFavoriteDTO |
+| getFavorites | 获取收藏的企业列表 | GET | /users/home/enterpriseRecommendation/favorites | 无 | param | String |
+| registerCampusEvent | 报名校园招聘活动 | POST | /users/home/campusRecruitmentEvent/register | 无 | body | EventRegistrationDTO |
+| cancelCampusEventRegistration | 取消活动报名 | DELETE | /users/home/campusRecruitmentEvent/register | 无 | body | EventRegistrationDTO |
+| getEventRegistrations | 获取学生报名的活动列表 | GET | /users/home/campusRecruitmentEvent/register/list | 无 | param | String |
+
+### 8.2 ComplaintController
+
+| 方法名 | 方法简介 | 调用方式 | 路径 | 权限 | 参数类型 | 具体调用类型 |
+|-------|---------|---------|------|------|---------|------------|
+| createComplaint | 创建投诉 | POST | /users/complaint | 无 | body | Complaint |
+| getComplaintList | 获取投诉列表 | GET | /users/complaint/list | USER | param | Complaint |
+| getComplaintDetail | 获取投诉详情 | GET | /users/complaint/{complaintId} | USER | path | Long |
+| updateComplaintStatus | 更新投诉状态 | PUT | /users/complaint/status/{complaintId} | USER | path, body | Long, String |
+| handleComplaint | 处理投诉 | PUT | /users/complaint/handle/{complaintId} | USER | path, body | Long, String |
+| getComplaintByUserId | 获取用户的投诉列表 | GET | /users/complaint/user/{userId} | USER | path | Long |
+| uploadComplaintAttachment | 上传投诉附件 | POST | /users/complaint/attachment | 无 | form-data | MultipartFile |
+| getComplaintAttachments | 获取投诉附件列表 | GET | /users/complaint/{complaintId}/attachments | USER | path | Long |
+
+## 9. 学习模块 (Learning)
+
+### 9.1 LearningPathController
+
+| 方法名 | 方法简介 | 调用方式 | 路径 | 权限 | 参数类型 | 具体调用类型 |
+|-------|---------|---------|------|------|---------|------------|
+| list | 获取学习路径列表 | GET | /learning/path/list | 无 | param | LearningPath (d:\bianchenglianxi\java\project\enterprise_plus\learning\src\main\java\com\example\learning\domain\entity\LearningPath.java) |
+| getInfo | 根据ID获取学习路径 | GET | /learning/path/{pathId} | 无 | path | Long |
+| getByCareerPath | 根据职业路径获取学习路径列表 | GET | /learning/path/by-career/{careerPath} | 无 | path | String |
+| add | 新增学习路径 | POST | /learning/path | 无 | body | LearningPath (d:\bianchenglianxi\java\project\enterprise_plus\learning\src\main\java\com\example\learning\domain\entity\LearningPath.java) |
+| edit | 修改学习路径 | PUT | /learning/path | 无 | body | LearningPath (d:\bianchenglianxi\java\project\enterprise_plus\learning\src\main\java\com\example\learning\domain\entity\LearningPath.java) |
+
+### 9.2 LearningResourceController
+
+| 方法名 | 方法简介 | 调用方式 | 路径 | 权限 | 参数类型 | 具体调用类型 |
+|-------|---------|---------|------|------|---------|------------|
+| list | 获取学习资源列表 | GET | /learning/resource/list | 无 | param | LearningResource (d:\bianchenglianxi\java\project\enterprise_plus\learning\src\main\java\com\example\learning\domain\entity\LearningResource.java) |
+| getInfo | 根据ID获取学习资源 | GET | /learning/resource/{resourceId} | 无 | path | Long |
+| getBySkillId | 根据技能ID获取学习资源列表 | GET | /learning/resource/by-skill/{skillId} | 无 | path | Long |
+| getByType | 根据类型获取学习资源列表 | GET | /learning/resource/by-type/{resourceType} | 无 | path | String |
+| add | 新增学习资源 | POST | /learning/resource | 无 | body | LearningResource (d:\bianchenglianxi\java\project\enterprise_plus\learning\src\main\java\com\example\learning\domain\entity\LearningResource.java) |
+| edit | 修改学习资源 | PUT | /learning/resource | 无 | body | LearningResource (d:\bianchenglianxi\java\project\enterprise_plus\learning\src\main\java\com\example\learning\domain\entity\LearningResource.java) |
+| remove | 删除学习资源 | DELETE | /learning/resource/{resourceIds} | 无 | path | Long[] |
+| like | 点赞学习资源 | POST | /learning/resource/like/{resourceId} | 无 | path | Long |
+
+### 9.3 SkillController
+
+| 方法名 | 方法简介 | 调用方式 | 路径 | 权限 | 参数类型 | 具体调用类型 |
+|-------|---------|---------|------|------|---------|------------|
+| list | 获取技能列表 | GET | /learning/skill/list | 无 | param | Skill (d:\bianchenglianxi\java\project\enterprise_plus\learning\src\main\java\com\example\learning\domain\entity\Skill.java) |
+| getInfo | 根据ID获取技能 | GET | /learning/skill/{skillId} | 无 | path | Long |
+| add | 新增技能 | POST | /learning/skill | 无 | body | Skill (d:\bianchenglianxi\java\project\enterprise_plus\learning\src\main\java\com\example\learning\domain\entity\Skill.java) |
+| edit | 修改技能 | PUT | /learning/skill | 无 | body | Skill (d:\bianchenglianxi\java\project\enterprise_plus\learning\src\main\java\com\example\learning\domain\entity\Skill.java) |
+| remove | 删除技能 | DELETE | /learning/skill/{skillIds} | 无 | path | Long[] |
+| getChildSkills | 获取子技能列表 | GET | /learning/skill/child/{parentSkillId} | 无 | path | Long |
+| getSkillsByType | 根据类型获取技能列表 | GET | /learning/skill/type/{skillType} | 无 | path | String |
+
+## 10. 论坛模块 (Forum)
+
+### 10.1 ForumSectionController
+
+| 方法名 | 方法简介 | 调用方式 | 路径 | 权限 | 参数类型 | 具体调用类型 |
+|-------|---------|---------|------|------|---------|------------|
+| insertForumSection | 新增论坛板块 | POST | /api/forum/section | 无 | body | ForumSection (d:\bianchenglianxi\java\project\enterprise_plus\forum\src\main\java\com\example\forum\domain\entity\ForumSection.java) |
+| selectForumSectionById | 根据板块ID查询论坛板块信息 | GET | /api/forum/section/{sectionId} | 无 | path | Long |
+| selectForumSectionList | 查询论坛板块列表 | GET | /api/forum/section | 无 | param | ForumSection (d:\bianchenglianxi\java\project\enterprise_plus\forum\src\main\java\com\example\forum\domain\entity\ForumSection.java) |
+| updateForumSection | 更新论坛板块信息 | PUT | /api/forum/section | 无 | body | ForumSection (d:\bianchenglianxi\java\project\enterprise_plus\forum\src\main\java\com\example\forum\domain\entity\ForumSection.java) |
+| deleteForumSectionById | 删除论坛板块 | DELETE | /api/forum/section/{sectionId} | 无 | path | Long |
+| deleteForumSectionByIds | 批量删除论坛板块 | DELETE | /api/forum/section/batch | 无 | body | Long[] |
+| selectChildSectionListByParentId | 查询子板块列表 | GET | /api/forum/section/child/{parentSectionId} | 无 | path | Long |
+
+### 10.2 ForumTopicController
+
+| 方法名 | 方法简介 | 调用方式 | 路径 | 权限 | 参数类型 | 具体调用类型 |
+|-------|---------|---------|------|------|---------|------------|
+| insertForumTopic | 新增论坛主题 | POST | /api/forum/topic | 无 | body | ForumTopic (d:\bianchenglianxi\java\project\enterprise_plus\forum\src\main\java\com\example\forum\domain\entity\ForumTopic.java) |
+| selectForumTopicById | 根据主题ID查询论坛主题信息 | GET | /api/forum/topic/{topicId} | 无 | path | Long |
+| selectForumTopicList | 查询论坛主题列表 | GET | /api/forum/topic | 无 | param | ForumTopic (d:\bianchenglianxi\java\project\enterprise_plus\forum\src\main\java\com\example\forum\domain\entity\ForumTopic.java) |
+| updateForumTopic | 更新论坛主题信息 | PUT | /api/forum/topic | 无 | body | ForumTopic (d:\bianchenglianxi\java\project\enterprise_plus\forum\src\main\java\com\example\forum\domain\entity\ForumTopic.java) |
+| deleteForumTopicById | 删除论坛主题 | DELETE | /api/forum/topic/{topicId} | 无 | path | Long |
+| deleteForumTopicByIds | 批量删除论坛主题 | DELETE | /api/forum/topic/batch | 无 | body | Long[] |
+| selectTopicListBySectionId | 根据板块ID查询主题列表 | GET | /api/forum/topic/section/{sectionId} | 无 | path | Long |
+| incrementViewCount | 更新主题浏览次数 | PUT | /api/forum/topic/view/{topicId} | 无 | path | Long |
+| updateReplyCount | 更新主题回复次数 | PUT | /api/forum/topic/reply/{topicId}/{increment} | 无 | path | Long, int |
+| updateLikeCount | 更新主题点赞次数 | PUT | /api/forum/topic/like/{topicId}/{increment} | 无 | path | Long, int |
+| updateFavoriteCount | 更新主题收藏次数 | PUT | /api/forum/topic/favorite/{topicId}/{increment} | 无 | path | Long, int |
+| updateLastReplyTime | 更新主题最后回复时间 | PUT | /api/forum/topic/lastReply/{topicId} | 无 | path | Long |
+
+### 10.3 ForumReplyController
+
+| 方法名 | 方法简介 | 调用方式 | 路径 | 权限 | 参数类型 | 具体调用类型 |
+|-------|---------|---------|------|------|---------|------------|
+| insertForumReply | 新增论坛回复 | POST | /api/forum/reply | 无 | body | ForumReply (d:\bianchenglianxi\java\project\enterprise_plus\forum\src\main\java\com\example\forum\domain\entity\ForumReply.java) |
+| selectForumReplyById | 根据回复ID查询论坛回复信息 | GET | /api/forum/reply/{replyId} | 无 | path | Long |
+| selectForumReplyList | 查询论坛回复列表 | GET | /api/forum/reply | 无 | param | ForumReply (d:\bianchenglianxi\java\project\enterprise_plus\forum\src\main\java\com\example\forum\domain\entity\ForumReply.java) |
+| updateForumReply | 更新论坛回复信息 | PUT | /api/forum/reply | 无 | body | ForumReply (d:\bianchenglianxi\java\project\enterprise_plus\forum\src\main\java\com\example\forum\domain\entity\ForumReply.java) |
+| deleteForumReplyById | 删除论坛回复 | DELETE | /api/forum/reply/{replyId} | 无 | path | Long |
+| deleteForumReplyByIds | 批量删除论坛回复 | DELETE | /api/forum/reply/batch | 无 | body | Long[] |
+| selectReplyListByTopicId | 根据主题ID查询回复列表 | GET | /api/forum/reply/topic/{topicId} | 无 | path | Long |
+| selectChildReplyListByParentId | 根据父回复ID查询子回复列表 | GET | /api/forum/reply/child/{parentReplyId} | 无 | path | Long |
+| updateLikeCount | 更新回复点赞次数 | PUT | /api/forum/reply/like/{replyId}/{increment} | 无 | path | Long, int |
+
+### 10.4 ForumFavoriteController
+
+| 方法名 | 方法简介 | 调用方式 | 路径 | 权限 | 参数类型 | 具体调用类型 |
+|-------|---------|---------|------|------|---------|------------|
+| insertForumFavorite | 新增论坛收藏记录 | POST | /api/forum/favorite | 无 | body | ForumFavorite (d:\bianchenglianxi\java\project\enterprise_plus\forum\src\main\java\com\example\forum\domain\entity\ForumFavorite.java) |
+| selectForumFavoriteById | 根据收藏ID查询论坛收藏记录信息 | GET | /api/forum/favorite/{favoriteId} | 无 | path | Long |
+| selectForumFavoriteList | 查询论坛收藏记录列表 | GET | /api/forum/favorite | 无 | param | ForumFavorite (d:\bianchenglianxi\java\project\enterprise_plus\forum\src\main\java\com\example\forum\domain\entity\ForumFavorite.java) |
+| deleteForumFavoriteById | 删除论坛收藏记录 | DELETE | /api/forum/favorite/{favoriteId} | 无 | path | Long |
+| deleteForumFavoriteByIds | 批量删除论坛收藏记录 | DELETE | /api/forum/favorite/batch | 无 | body | Long[] |
+| selectByTopicIdAndUserId | 根据主题ID和用户ID查询收藏记录 | GET | /api/forum/favorite/topic/{topicId}/user/{userId} | 无 | path | Long, Long |
+| countByTopicId | 根据主题ID统计收藏人数 | GET | /api/forum/favorite/count/{topicId} | 无 | path | Long |
+| selectFavoriteListByUserId | 根据用户ID查询收藏主题列表 | GET | /api/forum/favorite/user/{userId} | 无 | path | Long |
+| favoriteTopic | 收藏主题 | POST | /api/forum/favorite/topic | 无 | body | ForumFavorite (d:\bianchenglianxi\java\project\enterprise_plus\forum\src\main\java\com\example\forum\domain\entity\ForumFavorite.java) |
+| cancelFavorite | 取消收藏主题 | DELETE | /api/forum/favorite/topic/{topicId}/user/{userId} | 无 | path | Long, Long |
+| isFavorited | 查询用户是否已收藏主题 | GET | /api/forum/favorite/isFavorited/{topicId}/{userId} | 无 | path | Long, Long |
+
+## 11. 搜索模块 (Search)
+
+### 11.1 SearchEngineController
+
+| 方法名 | 方法简介 | 调用方式 | 路径 | 权限 | 参数类型 | 具体调用类型 |
+|-------|---------|---------|------|------|---------|------------|
+| list | 利用engine寻找企业 | GET | /system/search/engine/enterprise | USER | param | String |
+
+## 12. 标签模块 (Tag)
+
+### 12.1 EntityTagController
+
+| 方法名 | 方法简介 | 调用方式 | 路径 | 权限 | 参数类型 | 具体调用类型 |
+|-------|---------|---------|------|------|---------|------------|
+| list | 查询实体标签关联列表 | GET | /entity/tag/list | USER | param | EntityTag (d:\bianchenglianxi\java\project\enterprise_plus\tag\src\main\java\com\example\tag\domain\EntityTag.java) |
+| getInfo | 获取实体标签关联详细信息 | GET | /entity/tag/{entityTagId} | USER | path | Long |
+| getByEntity | 根据实体类型和ID查询标签 | GET | /entity/tag/byEntity/{entityType}/{entityId} | USER | path | String, Long |
+| add | 新增实体标签关联 | POST | /entity/tag | USER | body | EntityTag (d:\bianchenglianxi\java\project\enterprise_plus\tag\src\main\java\com\example\tag\domain\EntityTag.java) |
+| batchAdd | 批量新增实体标签关联 | POST | /entity/tag/batch | USER | body | List<EntityTag> |
+| remove | 删除实体标签关联 | DELETE | /entity/tag/{entityTagIds} | USER | path | Long[] |
+| removeByEntity | 根据实体类型和ID删除标签关联 | DELETE | /entity/tag/byEntity/{entityType}/{entityId} | USER | path | String, Long |
+
+### 12.2 TagController
+
+| 方法名 | 方法简介 | 调用方式 | 路径 | 权限 | 参数类型 | 具体调用类型 |
+|-------|---------|---------|------|------|---------|------------|
+| list | 查询标签列表 | GET | /tag/list | USER | param | Tag (d:\bianchenglianxi\java\project\enterprise_plus\tag\src\main\java\com\example\tag\domain\Tag.java) |
+| getInfo | 获取标签详细信息 | GET | /tag/{tagId} | USER | path | Long |
+| add | 新增标签 | POST | /tag | USER | body | Tag (d:\bianchenglianxi\java\project\enterprise_plus\tag\src\main\java\com\example\tag\domain\Tag.java) |
+| edit | 修改标签 | PUT | /tag | USER | body | Tag (d:\bianchenglianxi\java\project\enterprise_plus\tag\src\main\java\com\example\tag\domain\Tag.java) |
+| remove | 删除标签 | DELETE | /tag/{tagIds} | USER | path | Long[] |
+| recommendRelatedTags | 推荐相关标签 | POST | /tag/recommend-related-tags | USER | body | TagRecommendationRequestDTO |
+
+## 13. 上传模块 (Common)
+
+### 13.1 UploadController
+
+| 方法名 | 方法简介 | 调用方式 | 路径 | 权限 | 参数类型 | 具体调用类型 |
+|-------|---------|---------|------|------|---------|------------|
+| uploadFile | 通用上传请求（单个） | POST | /upload | USER | form-data | MultipartFile |
+| uploadFiles | 通用上传请求（多个） | POST | /uploads | USER | form-data | List<MultipartFile> |
+
+## 14. 登录模块 (Login)
+
+### 14.1 LoginController
+
+| 方法名 | 方法简介 | 调用方式 | 路径 | 权限 | 参数类型 | 具体调用类型 |
+|-------|---------|---------|------|------|---------|------------|
+| login | 用户登录 | POST | /in/login | 无 | body | UserDTO (d:\bianchenglianxi\java\project\enterprise_plus\users\src\main\java\com\example\users\domain\dto\UserDTO.java) |
+| register | 用户注册 | POST | /in/register | 无 | body | User (d:\bianchenglianxi\java\project\enterprise_plus\common\src\main\java\com\example\common\domain\entity\User.java) |
+| logout | 用户登出 | POST | /in/logout | 无 | body | String |
+| refreshToken | 刷新Token | POST | /in/refreshToken | 无 | body | String |
+
+---
+
+**说明：**
+1. 权限列中显示为"USER"的接口需要USER角色才能访问
+2. 权限列中显示为"无"的接口不需要特定权限
+3. 参数类型说明：
+   - body：请求体参数
+   - param：查询参数
+   - path：路径参数
+   - form-data：表单数据
+   - 无：无参数
+4. 具体调用类型列中，已标注了自定义类型的精确文件路径

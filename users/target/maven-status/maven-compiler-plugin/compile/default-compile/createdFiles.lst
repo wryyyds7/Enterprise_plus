@@ -3,7 +3,6 @@ com\example\users\UsersApplication.class
 com\example\users\mapper\UserJobPreferenceMapper.class
 com\example\users\domain\dto\AdminDTO.class
 com\example\users\mapper\UserMapper.class
-com\example\users\service\UserService.class
 com\example\users\domain\entity\UserFavoriteEnterprise.class
 com\example\users\domain\entity\UserFavoriteActivity.class
 com\example\users\domain\entity\UserJobPreference.class
@@ -11,7 +10,5 @@ com\example\users\mapper\UserFavoriteEnterpriseMapper.class
 com\example\users\mapper\UserFavoriteActivityMapper.class
 com\example\users\config\WebConfig.class
 com\example\users\mapper\UserEventRegistrationMapper.class
-com\example\users\service\impl\UserServiceImpl.class
 com\example\users\domain\dto\SearchUserDTO.class
-com\example\users\controller\UserController.class
 com\example\users\domain\dto\UserDTO.class

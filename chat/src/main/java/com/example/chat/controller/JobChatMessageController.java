@@ -40,7 +40,7 @@ public class JobChatMessageController extends BaseController
     /**
      * 查询聊天消息列表
      */
-    @PreAuthorize("@permittionService.hasRole('ADMIN')")
+    @PreAuthorize("@permittionService.hasRole('USER')")
     @GetMapping("/list")
     public TableDataInfo list(JobChatMessage jobChatMessage)
     {
@@ -52,7 +52,7 @@ public class JobChatMessageController extends BaseController
     /**
      * 导出聊天消息列表
      */
-    @PreAuthorize("@permittionService.hasRole('ADMIN')")
+    @PreAuthorize("@permittionService.hasRole('USER')")
     @PostMapping("/export")
     public void export(HttpServletResponse response, JobChatMessage jobChatMessage)
     {
@@ -68,7 +68,7 @@ public class JobChatMessageController extends BaseController
     /**
      * 获取聊天消息详细信息
      */
-    @PreAuthorize("@permittionService.hasRole('ADMIN')")
+    @PreAuthorize("@permittionService.hasRole('USER')")
     @GetMapping(value = "/{msgId}")
     public AjaxResult getInfo(@PathVariable("msgId") Long msgId)
     {
@@ -78,7 +78,7 @@ public class JobChatMessageController extends BaseController
     /**
      * 新增聊天消息
      */
-    @PreAuthorize("@permittionService.hasRole('ADMIN')")
+    @PreAuthorize("@permittionService.hasRole('USER')")
     @PostMapping
     public AjaxResult insert(@RequestBody JobChatMessage jobChatMessage)
     {
@@ -88,7 +88,7 @@ public class JobChatMessageController extends BaseController
     /**
      * 修改聊天消息
      */
-    @PreAuthorize("@permittionService.hasRole('ADMIN')")
+    @PreAuthorize("@permittionService.hasRole('USER')")
     @PutMapping
     public AjaxResult update(@RequestBody JobChatMessage jobChatMessage)
     {
@@ -98,7 +98,7 @@ public class JobChatMessageController extends BaseController
     /**
      * 删除聊天消息
      */
-    @PreAuthorize("@permittionService.hasRole('ADMIN')")
+    @PreAuthorize("@permittionService.hasRole('USER')")
     @DeleteMapping("/{msgIds}")
     public AjaxResult delete(@PathVariable Long[] msgIds)
     {

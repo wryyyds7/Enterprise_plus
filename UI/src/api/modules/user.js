@@ -2,7 +2,7 @@ import { request } from '../index'
 
 export default {
   // 获取用户列表（管理员）
-  getUserList: (params) => request.get('/users/admin/searchUserByPage', { params }),
+  getUserList: (params) => request.post('/users/admin/searchUserByPage', params),
   // 搜索用户
   searchUser: (params) => request.get('/users/user/searchUser', { params }),
   // 获取用户信息

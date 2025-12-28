@@ -37,11 +37,13 @@ const handleLogin = async () => {
     if (valid) {
       try {
         const res = await authStore.login(loginForm)
-        if (res.success) {
+        // 检查登录结果，兼容不同的返回格式
+        const loginSuccess = res.success || res.code === 200 || res.isSuccess
+        if (loginSuccess) {
           ElMessage.success('登录成功')
           // 跳转逻辑在authStore.login中已处理
         } else {
-          ElMessage.error(res.msg || '登录失败')
+          ElMessage.error(res.msg || res.message || '登录失败')
         }
       } catch (error) {
         ElMessage.error('登录失败，请检查网络连接或服务器状态')
