@@ -1,0 +1,217 @@
+2025-12-29 08:58:30 [main] INFO  c.a.nacos.client.utils.ParamUtil - [settings] [req-serv] nacos-server port:8848
+2025-12-29 08:58:30 [main] INFO  c.a.nacos.client.utils.ParamUtil - [settings] [http-client] connect timeout:1000
+2025-12-29 08:58:30 [main] INFO  c.a.nacos.client.utils.ParamUtil - PER_TASK_CONFIG_SIZE: 3000.0
+2025-12-29 08:58:30 [Thread-2] INFO  c.a.n.c.a.r.i.CredentialWatcher - null No credential found
+2025-12-29 08:58:30 [main] INFO  com.alibaba.nacos.common.labels - DefaultLabelsCollectorManager get labels.....
+2025-12-29 08:58:30 [main] INFO  com.alibaba.nacos.common.labels - Process LabelsCollector with [name:defaultNacosLabelsCollector]
+2025-12-29 08:58:30 [main] INFO  com.alibaba.nacos.common.labels - default nacos collect properties raw labels: null
+2025-12-29 08:58:30 [main] INFO  com.alibaba.nacos.common.labels - default nacos collect properties labels: {}
+2025-12-29 08:58:30 [main] INFO  com.alibaba.nacos.common.labels - default nacos collect jvm raw labels: null
+2025-12-29 08:58:30 [main] INFO  com.alibaba.nacos.common.labels - default nacos collect jvm labels: {}
+2025-12-29 08:58:30 [main] INFO  com.alibaba.nacos.common.labels - default nacos collect env raw labels: null
+2025-12-29 08:58:30 [main] INFO  com.alibaba.nacos.common.labels - default nacos collect env labels: {}
+2025-12-29 08:58:30 [main] INFO  com.alibaba.nacos.common.labels - DefaultLabelsCollectorManager get labels finished,labels :{}
+2025-12-29 08:58:30 [main] INFO  c.a.n.p.a.s.c.ClientAuthPluginManager - [ClientAuthPluginManager] Load ClientAuthService com.alibaba.nacos.client.auth.impl.NacosClientAuthServiceImpl success.
+2025-12-29 08:58:30 [main] INFO  c.a.n.p.a.s.c.ClientAuthPluginManager - [ClientAuthPluginManager] Load ClientAuthService com.alibaba.nacos.client.auth.ram.RamClientAuthServiceImpl success.
+2025-12-29 08:58:31 [main] INFO  c.a.n.c.c.i.LocalConfigInfoProcessor - LOCAL_SNAPSHOT_PATH:C:\Users\24148\nacos\config
+2025-12-29 08:58:31 [main] INFO  c.alibaba.nacos.common.remote.client - [RpcClientFactory] create a new rpc client of 8ded93e2-6133-4437-9013-63288f780e50_config-0
+2025-12-29 08:58:31 [main] INFO  c.alibaba.nacos.common.remote.client - [8ded93e2-6133-4437-9013-63288f780e50_config-0] Register server push request handler:com.alibaba.nacos.client.config.impl.ClientWorker$ConfigRpcTransportClient$$Lambda$1026/0x0000000801087288
+2025-12-29 08:58:31 [main] INFO  c.alibaba.nacos.common.remote.client - [8ded93e2-6133-4437-9013-63288f780e50_config-0] Register server push request handler:com.alibaba.nacos.client.config.impl.ClientWorker$ConfigRpcTransportClient$$Lambda$1027/0x00000008010876a8
+2025-12-29 08:58:31 [main] INFO  c.alibaba.nacos.common.remote.client - [8ded93e2-6133-4437-9013-63288f780e50_config-0] Registry connection listener to current client:com.alibaba.nacos.client.config.impl.ClientWorker$ConfigRpcTransportClient$1
+2025-12-29 08:58:31 [main] INFO  c.alibaba.nacos.common.remote.client - [8ded93e2-6133-4437-9013-63288f780e50_config-0] RpcClient init, ServerListFactory = com.alibaba.nacos.client.config.impl.ClientWorker$ConfigRpcTransportClient$2
+2025-12-29 08:58:31 [main] INFO  c.alibaba.nacos.common.remote.client - [8ded93e2-6133-4437-9013-63288f780e50_config-0] Try to connect to server on start up, server: {serverIp = '127.0.0.1', server main port = 8848}
+2025-12-29 08:58:31 [main] INFO  c.a.n.c.r.client.grpc.GrpcClient - grpc client connection server:127.0.0.1 ip,serverPort:9848,grpcTslConfig:{"sslProvider":"","enableTls":false,"mutualAuthEnable":false,"trustAll":false}
+2025-12-29 08:58:32 [main] INFO  c.a.n.c.a.AbstractAbilityControlManager - Ready to get current node abilities...
+2025-12-29 08:58:32 [main] INFO  c.a.n.c.a.AbstractAbilityControlManager - Ready to initialize current node abilities, support modes: [SDK_CLIENT]
+2025-12-29 08:58:32 [main] INFO  c.a.n.c.a.AbstractAbilityControlManager - Initialize current abilities finish...
+2025-12-29 08:58:32 [main] INFO  c.a.n.c.a.d.NacosAbilityManagerHolder - [AbilityControlManager] Successfully initialize AbilityControlManager
+2025-12-29 08:58:32 [main] INFO  c.alibaba.nacos.common.remote.client - [8ded93e2-6133-4437-9013-63288f780e50_config-0] Success to connect to server [127.0.0.1:8848] on start up, connectionId = 1766969912099_127.0.0.1_61990
+2025-12-29 08:58:32 [com.alibaba.nacos.client.remote.worker.0] INFO  c.alibaba.nacos.common.remote.client - [8ded93e2-6133-4437-9013-63288f780e50_config-0] Notify connected event to listeners.
+2025-12-29 08:58:32 [main] INFO  c.alibaba.nacos.common.remote.client - [8ded93e2-6133-4437-9013-63288f780e50_config-0] Register server push request handler:com.alibaba.nacos.common.remote.client.RpcClient$ConnectResetRequestHandler
+2025-12-29 08:58:32 [com.alibaba.nacos.client.remote.worker.0] INFO  c.a.n.c.config.impl.ClientWorker - [8ded93e2-6133-4437-9013-63288f780e50_config-0] Connected,notify listen context...
+2025-12-29 08:58:32 [main] INFO  c.alibaba.nacos.common.remote.client - [8ded93e2-6133-4437-9013-63288f780e50_config-0] Register server push request handler:com.alibaba.nacos.common.remote.client.RpcClient$$Lambda$1041/0x00000008011cf450
+2025-12-29 08:58:32 [main] INFO  c.a.nacos.client.config.impl.Limiter - limitTime:5.0
+2025-12-29 08:58:32 [main] WARN  c.a.c.n.c.NacosPropertySourceBuilder - Ignore the empty nacos configuration and get it based on dataId[search] & group[DEFAULT_GROUP]
+2025-12-29 08:58:32 [main] WARN  c.a.c.n.c.NacosPropertySourceBuilder - Ignore the empty nacos configuration and get it based on dataId[search.properties] & group[DEFAULT_GROUP]
+2025-12-29 08:58:32 [main] INFO  o.s.c.b.c.PropertySourceBootstrapConfiguration - Located property source: [BootstrapPropertySource {name='bootstrapProperties-search.properties,DEFAULT_GROUP'}, BootstrapPropertySource {name='bootstrapProperties-search,DEFAULT_GROUP'}]
+2025-12-29 08:58:32 [main] INFO  c.e.search.SearchApplicationTests - No active profile set, falling back to 1 default profile: "default"
+2025-12-29 08:58:33 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2025-12-29 08:58:33 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2025-12-29 08:58:33 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 10 ms. Found 0 JDBC repository interfaces.
+2025-12-29 08:58:33 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2025-12-29 08:58:33 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-12-29 08:58:33 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 4 ms. Found 0 JPA repository interfaces.
+2025-12-29 08:58:33 [main] INFO  o.s.cloud.context.scope.GenericScope - BeanFactory id=790853e4-f4e2-3256-afda-f7ef9c02535c
+2025-12-29 08:58:33 [main] WARN  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$LoadBalancerInterceptorConfig' of type [org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$LoadBalancerInterceptorConfig] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). The currently created BeanPostProcessor [lbRestClientPostProcessor] is declared through a non-static factory method on that class; consider declaring it as static instead.
+2025-12-29 08:58:33 [main] WARN  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.cloud.loadbalancer.config.BlockingLoadBalancerClientAutoConfiguration' of type [org.springframework.cloud.loadbalancer.config.BlockingLoadBalancerClientAutoConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected into a currently created BeanPostProcessor [lbRestClientPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies.
+2025-12-29 08:58:33 [main] WARN  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.cloud.loadbalancer.config.LoadBalancerAutoConfiguration' of type [org.springframework.cloud.loadbalancer.config.LoadBalancerAutoConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected into a currently created BeanPostProcessor [lbRestClientPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies.
+2025-12-29 08:58:33 [main] WARN  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.cloud.commons.config.CommonsConfigAutoConfiguration' of type [org.springframework.cloud.commons.config.CommonsConfigAutoConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected into a currently created BeanPostProcessor [lbRestClientPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies.
+2025-12-29 08:58:33 [main] WARN  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.cloud.client.loadbalancer.LoadBalancerDefaultMappingsProviderAutoConfiguration' of type [org.springframework.cloud.client.loadbalancer.LoadBalancerDefaultMappingsProviderAutoConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected into a currently created BeanPostProcessor [lbRestClientPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies.
+2025-12-29 08:58:33 [main] WARN  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'loadBalancerClientsDefaultsMappingsProvider' of type [org.springframework.cloud.client.loadbalancer.LoadBalancerDefaultMappingsProviderAutoConfiguration$$Lambda$1197/0x0000000801377740] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected into a currently created BeanPostProcessor [lbRestClientPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies.
+2025-12-29 08:58:33 [main] WARN  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'defaultsBindHandlerAdvisor' of type [org.springframework.cloud.commons.config.DefaultsBindHandlerAdvisor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected into a currently created BeanPostProcessor [lbRestClientPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies.
+2025-12-29 08:58:33 [main] WARN  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'spring.cloud.loadbalancer-org.springframework.cloud.client.loadbalancer.LoadBalancerClientsProperties' of type [org.springframework.cloud.client.loadbalancer.LoadBalancerClientsProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected into a currently created BeanPostProcessor [lbRestClientPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies.
+2025-12-29 08:58:33 [main] WARN  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'default.org.springframework.cloud.loadbalancer.config.LoadBalancerAutoConfiguration.LoadBalancerClientSpecification' of type [org.springframework.cloud.loadbalancer.annotation.LoadBalancerClientSpecification] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected into a currently created BeanPostProcessor [lbRestClientPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies.
+2025-12-29 08:58:33 [main] WARN  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'default.org.springframework.cloud.loadbalancer.config.BlockingLoadBalancerClientAutoConfiguration.LoadBalancerClientSpecification' of type [org.springframework.cloud.loadbalancer.annotation.LoadBalancerClientSpecification] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected into a currently created BeanPostProcessor [lbRestClientPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies.
+2025-12-29 08:58:33 [main] WARN  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'loadBalancerClientFactory' of type [org.springframework.cloud.loadbalancer.support.LoadBalancerClientFactory] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected into a currently created BeanPostProcessor [lbRestClientPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies.
+2025-12-29 08:58:33 [main] WARN  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'blockingLoadBalancerClient' of type [org.springframework.cloud.loadbalancer.blocking.client.BlockingLoadBalancerClient] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected into a currently created BeanPostProcessor [lbRestClientPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies.
+2025-12-29 08:58:33 [main] WARN  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'loadBalancerServiceInstanceCookieTransformer' of type [org.springframework.cloud.loadbalancer.core.LoadBalancerServiceInstanceCookieTransformer] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected into a currently created BeanPostProcessor [lbRestClientPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies.
+2025-12-29 08:58:34 [main] WARN  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'xForwarderHeadersTransformer' of type [org.springframework.cloud.loadbalancer.blocking.XForwardedHeadersTransformer] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected into a currently created BeanPostProcessor [lbRestClientPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies.
+2025-12-29 08:58:34 [main] WARN  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration' of type [org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected into a currently created BeanPostProcessor [lbRestClientPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies.
+2025-12-29 08:58:34 [main] WARN  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'loadBalancerRequestFactory' of type [org.springframework.cloud.client.loadbalancer.LoadBalancerRequestFactory] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected into a currently created BeanPostProcessor [lbRestClientPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies.
+2025-12-29 08:58:34 [main] WARN  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'loadBalancerInterceptor' of type [org.springframework.cloud.client.loadbalancer.LoadBalancerInterceptor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected into a currently created BeanPostProcessor [lbRestClientPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies.
+2025-12-29 08:58:34 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-12-29 08:58:34 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@5186b78a
+2025-12-29 08:58:34 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-12-29 08:58:34 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-12-29 08:58:34 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.3.1.Final
+2025-12-29 08:58:34 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-12-29 08:58:34 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-12-29 08:58:34 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-12-29 08:58:34 [main] WARN  org.hibernate.orm.deprecation - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2025-12-29 08:58:35 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-12-29 08:58:35 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-12-29 08:58:35 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-12-29 08:58:35 [main] INFO  o.s.c.o.FeignClientFactoryBean - For 'AI' URL not provided. Will try picking an instance via load-balancing.
+2025-12-29 08:58:36 [main] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
+
+Using generated security password: cb5ca14a-8d07-40e9-b52a-847290f8613c
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2025-12-29 08:58:36 [main] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@581da9e6, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@1c11a496, org.springframework.security.web.context.SecurityContextHolderFilter@50c20b15, org.springframework.security.web.header.HeaderWriterFilter@7be2f512, org.springframework.web.filter.CorsFilter@6296c184, org.springframework.security.web.authentication.logout.LogoutFilter@2975715, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@1c0f32ad, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@5a4833ab, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@3ea95f79, org.springframework.security.web.session.SessionManagementFilter@db610c3, org.springframework.security.web.access.ExceptionTranslationFilter@53a3ccc, org.springframework.security.web.access.intercept.AuthorizationFilter@71c1e70f]
+2025-12-29 08:58:38 [main] WARN  o.s.c.l.c.LoadBalancerCacheAutoConfiguration$LoadBalancerCaffeineWarnLogger - Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
+2025-12-29 08:58:38 [main] INFO  c.e.search.SearchApplicationTests - Started SearchApplicationTests in 8.749 seconds (process running for 11.654)
+2025-12-29 08:58:38 [main] INFO  c.a.n.client.config.impl.CacheData - config listener notify warn timeout millis use default 60000 millis 
+2025-12-29 08:58:38 [main] INFO  c.a.n.client.config.impl.CacheData - nacos.cache.data.init.snapshot = true 
+2025-12-29 08:58:38 [main] INFO  c.a.n.c.config.impl.ClientWorker - [fixed-127.0.0.1_8848] [subscribe] search.properties+DEFAULT_GROUP
+2025-12-29 08:58:38 [main] INFO  c.a.n.client.config.impl.CacheData - [fixed-127.0.0.1_8848] [add-listener] ok, tenant=, dataId=search.properties, group=DEFAULT_GROUP, cnt=1
+2025-12-29 08:58:38 [main] INFO  c.a.c.n.r.NacosContextRefresher - [Nacos Config] Listening config: dataId=search.properties, group=DEFAULT_GROUP
+2025-12-29 08:58:38 [main] INFO  c.a.n.c.config.impl.ClientWorker - [fixed-127.0.0.1_8848] [subscribe] search+DEFAULT_GROUP
+2025-12-29 08:58:38 [main] INFO  c.a.n.client.config.impl.CacheData - [fixed-127.0.0.1_8848] [add-listener] ok, tenant=, dataId=search, group=DEFAULT_GROUP, cnt=1
+2025-12-29 08:58:38 [main] INFO  c.a.c.n.r.NacosContextRefresher - [Nacos Config] Listening config: dataId=search, group=DEFAULT_GROUP
+2025-12-29 08:58:39 [main] INFO  o.s.c.o.FeignClientFactoryBean - For 'enterprise' URL not provided. Will try picking an instance via load-balancing.
+2025-12-29 08:58:39 [main] INFO  o.s.c.o.FeignClientFactoryBean - For 'search' URL not provided. Will try picking an instance via load-balancing.
+2025-12-29 08:58:39 [main] INFO  o.s.c.o.FeignClientFactoryBean - For 'tag' URL not provided. Will try picking an instance via load-balancing.
+2025-12-29 08:58:39 [main] INFO  o.s.c.o.FeignClientFactoryBean - For 'users' URL not provided. Will try picking an instance via load-balancing.
+2025-12-29 08:58:39 [main] INFO  c.e.s.s.impl.SearchEngineServiceImpl - 博查API返回状态码：200
+2025-12-29 08:58:39 [main] INFO  c.e.s.s.impl.SearchEngineServiceImpl - 博查API返回网页结果数量：10
+2025-12-29 08:58:39 [main] INFO  c.e.s.s.impl.SearchEngineServiceImpl - 
+网站顺序：0
+2025-12-29 08:58:39 [main] INFO  c.e.s.s.impl.SearchEngineServiceImpl - 网站名称：深蓝汽车
+2025-12-29 08:58:39 [main] INFO  c.e.s.s.impl.SearchEngineServiceImpl - 网站简介：太平洋汽车网为您提供专业权威的长安专题报道,了解长安汽车最新动态,更多精彩资讯内容,尽在太平洋汽车网。
+2025-12-29 08:58:39 [main] INFO  c.e.s.s.impl.SearchEngineServiceImpl - 网站地址：https://ivy.pcauto.com.cn/click?adid=1818432&id=auto.gnxc.shouye.tl1.
+2025-12-29 08:58:39 [main] INFO  c.e.s.s.impl.SearchEngineServiceImpl - 
+网站顺序：1
+2025-12-29 08:58:39 [main] INFO  c.e.s.s.impl.SearchEngineServiceImpl - 网站名称：深蓝汽车app官方下载-深蓝汽车最新版v1.6.21 安卓版 - 皮皮鲲下载站
+2025-12-29 08:58:39 [main] INFO  c.e.s.s.impl.SearchEngineServiceImpl - 网站简介：类型: 生活实用 下载: 34次 大小: 243.2MB 语言: 中文 系统: Android 授权: 免费软件 版本: v1.6.21 安卓版 时间: 2024-12-09 17:16:16 评分:
+2025-12-29 08:58:39 [main] INFO  c.e.s.s.impl.SearchEngineServiceImpl - 网站地址：http://www.pipikun.com/android/soft/30213.html
+2025-12-29 08:58:39 [main] INFO  c.e.s.s.impl.SearchEngineServiceImpl - 
+网站顺序：2
+2025-12-29 08:58:39 [main] INFO  c.e.s.s.impl.SearchEngineServiceImpl - 网站名称：深蓝汽车
+2025-12-29 08:58:39 [main] INFO  c.e.s.s.impl.SearchEngineServiceImpl - 网站简介：深蓝 汽车 是一款专为汽车爱好者、购车者及车主 设计 的 综合 性 汽车服务 软件。它集成了 汽车资讯 、车型 查询 、购车指导、 车主服务 等多种功能于一体,旨在为用户提供 便捷 、全面的汽车相关信
+2025-12-29 08:58:39 [main] INFO  c.e.s.s.impl.SearchEngineServiceImpl - 网站地址：http://m.dianwannan.com/app/1000000811388/
+2025-12-29 08:58:39 [main] INFO  c.e.s.s.impl.SearchEngineServiceImpl - 
+网站顺序：3
+2025-12-29 08:58:39 [main] INFO  c.e.s.s.impl.SearchEngineServiceImpl - 网站名称：深蓝汽车最新版下载安装-深蓝汽车最新版下载 v1.5.3安卓版(暂未上线)_预约 - 心愿游戏
+2025-12-29 08:58:39 [main] INFO  c.e.s.s.impl.SearchEngineServiceImpl - 网站简介：深蓝汽车是一款由深蓝汽车科技有限公司打造的线上服务平台,它不仅可以为你呈现丰富的资讯内容,还能通过有趣的线上和线下活动将车友们紧密相连,一键操控,实时掌握爱车情况,在线保养、查询门店等等,让你的出行更
+2025-12-29 08:58:39 [main] INFO  c.e.s.s.impl.SearchEngineServiceImpl - 网站地址：https://www.wishdown.com/soft/1832875.html
+2025-12-29 08:58:39 [main] INFO  c.e.s.s.impl.SearchEngineServiceImpl - 
+网站顺序：4
+2025-12-29 08:58:39 [main] INFO  c.e.s.s.impl.SearchEngineServiceImpl - 网站名称：深蓝汽车 - 网站百科
+2025-12-29 08:58:39 [main] INFO  c.e.s.s.impl.SearchEngineServiceImpl - 网站简介：深蓝汽车,长安旗下新能源汽车品牌,由长安深蓝更名而来。2022年4月13日,长安汽车新能源品牌长安深蓝正式发布。2023年3月消息,长安深蓝更名深蓝汽车。中文名称 深蓝汽车 网站备案 渝ICP备202
+2025-12-29 08:58:39 [main] INFO  c.e.s.s.impl.SearchEngineServiceImpl - 网站地址：https://www.80wzbk.com/siteinfo/5285.html
+2025-12-29 08:58:39 [main] INFO  c.e.s.s.impl.SearchEngineServiceImpl - 
+网站顺序：5
+2025-12-29 08:58:39 [main] INFO  c.e.s.s.impl.SearchEngineServiceImpl - 网站名称：深蓝是什么车?_易车百科
+2025-12-29 08:58:39 [main] INFO  c.e.s.s.impl.SearchEngineServiceImpl - 网站简介：深蓝是一款新能源汽车品牌,成立于2022年4月13日,拥有整车、研发、生产、加工、销售等全产业链业务。作为长安汽车香格里拉计划和北斗天枢计划的坚定探索者,深蓝致力于推动新能源汽车行业的发展。 打开易车
+2025-12-29 08:58:39 [main] INFO  c.e.s.s.impl.SearchEngineServiceImpl - 网站地址：https://www.yiche.com/baike/28385721.htm
+2025-12-29 08:58:39 [main] INFO  c.e.s.s.impl.SearchEngineServiceImpl - 
+网站顺序：6
+2025-12-29 08:58:39 [main] INFO  c.e.s.s.impl.SearchEngineServiceImpl - 网站名称：深蓝汽车最新版
+2025-12-29 08:58:39 [main] INFO  c.e.s.s.impl.SearchEngineServiceImpl - 网站简介：大小: 221.2M 更新时间: 2025-01-23 06:43 平台: Android 版本: v1.6.26 安卓版 类型: 生活服务 语言: 简体中文 厂商: 深蓝汽车科技有限公司 官网: h
+2025-12-29 08:58:39 [main] INFO  c.e.s.s.impl.SearchEngineServiceImpl - 网站地址：http://m.9663.com/downinfo/63469.html
+2025-12-29 08:58:39 [main] INFO  c.e.s.s.impl.SearchEngineServiceImpl - 
+网站顺序：7
+2025-12-29 08:58:39 [main] INFO  c.e.s.s.impl.SearchEngineServiceImpl - 网站名称：深蓝汽车客户端下载-深蓝汽车app下载 v1.6.29安卓版-六蓝安卓网
+2025-12-29 08:58:39 [main] INFO  c.e.s.s.impl.SearchEngineServiceImpl - 网站简介：大小:221.53MB 语言:简体中文 系统:Android Tags: 深蓝汽车 是一款汽车智能控制管理软件,包含资讯获取、车辆管理、购车服务、社区互动等。随时掌握汽车行业动态,享受远程操控车辆的便
+2025-12-29 08:58:39 [main] INFO  c.e.s.s.impl.SearchEngineServiceImpl - 网站地址：http://m.liulan.net/az/54215.html
+2025-12-29 08:58:39 [main] INFO  c.e.s.s.impl.SearchEngineServiceImpl - 
+网站顺序：8
+2025-12-29 08:58:39 [main] INFO  c.e.s.s.impl.SearchEngineServiceImpl - 网站名称：深蓝汽车下载2025安卓手机版_手机app免费下载
+2025-12-29 08:58:39 [main] INFO  c.e.s.s.impl.SearchEngineServiceImpl - 网站简介：类型: 生活 开发商: 深蓝汽车科技有限公司 渝ICP备2022004492号-4A 门店:新增评分与设施标签,信息更明晰 家充桩:新增蓝牙绑定教程 消息:消息页面UI焕新 如发现版本老旧,欢迎邮件反
+2025-12-29 08:58:39 [main] INFO  c.e.s.s.impl.SearchEngineServiceImpl - 网站地址：https://os-android.liqucn.com/rj/9769969549632.shtml
+2025-12-29 08:58:39 [main] INFO  c.e.s.s.impl.SearchEngineServiceImpl - 
+网站顺序：9
+2025-12-29 08:58:39 [main] INFO  c.e.s.s.impl.SearchEngineServiceImpl - 网站名称：深蓝汽车app下载-深蓝汽车官方版下载v1.6.25 安卓版-极限软件园
+2025-12-29 08:58:39 [main] INFO  c.e.s.s.impl.SearchEngineServiceImpl - 网站简介：软件大小: 221.5M 软件类型: 国产 / 生活实用 软件语言: 简体中文 软件授权: 免费 软件评级: 应用平台: Android 软件官网: 暂无 软件厂商: 深蓝汽车科技有限公司  0(5
+2025-12-29 08:58:39 [main] INFO  c.e.s.s.impl.SearchEngineServiceImpl - 网站地址：http://www.jxdown.com/soft/77629.html
+2025-12-29 08:58:39 [main] INFO  com.alibaba.nacos.client.naming - initializer namespace from ans.namespace attribute : null
+2025-12-29 08:58:39 [main] INFO  com.alibaba.nacos.client.naming - initializer namespace from ALIBABA_ALIWARE_NAMESPACE attribute :null
+2025-12-29 08:58:39 [main] INFO  com.alibaba.nacos.client.naming - initializer namespace from namespace attribute :null
+2025-12-29 08:58:39 [main] INFO  com.alibaba.nacos.client.naming - FailoverDataSource type is class com.alibaba.nacos.client.naming.backups.datasource.DiskFailoverDataSource
+2025-12-29 08:58:39 [main] INFO  c.a.n.p.a.s.c.ClientAuthPluginManager - [ClientAuthPluginManager] Load ClientAuthService com.alibaba.nacos.client.auth.impl.NacosClientAuthServiceImpl success.
+2025-12-29 08:58:39 [main] INFO  c.a.n.p.a.s.c.ClientAuthPluginManager - [ClientAuthPluginManager] Load ClientAuthService com.alibaba.nacos.client.auth.ram.RamClientAuthServiceImpl success.
+2025-12-29 08:58:39 [main] INFO  c.alibaba.nacos.common.remote.client - [RpcClientFactory] create a new rpc client of b5286407-5032-4119-92e3-04c580b775ad
+2025-12-29 08:58:39 [main] INFO  com.alibaba.nacos.client.naming - Create naming rpc client for uuid->b5286407-5032-4119-92e3-04c580b775ad
+2025-12-29 08:58:39 [main] INFO  c.alibaba.nacos.common.remote.client - [b5286407-5032-4119-92e3-04c580b775ad] RpcClient init, ServerListFactory = com.alibaba.nacos.client.naming.core.ServerListManager
+2025-12-29 08:58:39 [main] INFO  c.alibaba.nacos.common.remote.client - [b5286407-5032-4119-92e3-04c580b775ad] Registry connection listener to current client:com.alibaba.nacos.client.naming.remote.gprc.redo.NamingGrpcRedoService
+2025-12-29 08:58:39 [main] INFO  c.alibaba.nacos.common.remote.client - [b5286407-5032-4119-92e3-04c580b775ad] Register server push request handler:com.alibaba.nacos.client.naming.remote.gprc.NamingPushRequestHandler
+2025-12-29 08:58:39 [main] INFO  c.alibaba.nacos.common.remote.client - [b5286407-5032-4119-92e3-04c580b775ad] Try to connect to server on start up, server: {serverIp = '127.0.0.1', server main port = 8848}
+2025-12-29 08:58:39 [main] INFO  c.a.n.c.r.client.grpc.GrpcClient - grpc client connection server:127.0.0.1 ip,serverPort:9848,grpcTslConfig:{"sslProvider":"","enableTls":false,"mutualAuthEnable":false,"trustAll":false}
+2025-12-29 08:58:39 [main] INFO  c.alibaba.nacos.common.remote.client - [b5286407-5032-4119-92e3-04c580b775ad] Success to connect to server [127.0.0.1:8848] on start up, connectionId = 1766969919859_127.0.0.1_62045
+2025-12-29 08:58:39 [com.alibaba.nacos.client.remote.worker.0] INFO  c.alibaba.nacos.common.remote.client - [b5286407-5032-4119-92e3-04c580b775ad] Notify connected event to listeners.
+2025-12-29 08:58:39 [main] INFO  c.alibaba.nacos.common.remote.client - [b5286407-5032-4119-92e3-04c580b775ad] Register server push request handler:com.alibaba.nacos.common.remote.client.RpcClient$ConnectResetRequestHandler
+2025-12-29 08:58:39 [com.alibaba.nacos.client.remote.worker.0] INFO  com.alibaba.nacos.client.naming - Grpc connection connect
+2025-12-29 08:58:39 [main] INFO  c.alibaba.nacos.common.remote.client - [b5286407-5032-4119-92e3-04c580b775ad] Register server push request handler:com.alibaba.nacos.common.remote.client.RpcClient$$Lambda$1041/0x00000008011cf450
+2025-12-29 08:58:39 [main] INFO  com.alibaba.nacos.client.naming - [SUBSCRIBE-SERVICE] service:AI, group:DEFAULT_GROUP, clusters: 
+2025-12-29 08:58:39 [main] INFO  com.alibaba.nacos.client.naming - [GRPC-SUBSCRIBE] service:AI, group:DEFAULT_GROUP, cluster: 
+2025-12-29 08:58:39 [main] INFO  com.alibaba.nacos.client.naming - init new ips(1) service: DEFAULT_GROUP@@AI -> [{"instanceId":"192.168.183.1#58610#DEFAULT#DEFAULT_GROUP@@AI","ip":"192.168.183.1","port":58610,"weight":1.0,"healthy":true,"enabled":true,"ephemeral":true,"clusterName":"DEFAULT","serviceName":"DEFAULT_GROUP@@AI","metadata":{"preserved.register.source":"SPRING_CLOUD","IPv6":"[2001:da8:d002:b001:0:3d:6c1f:33db]"},"instanceHeartBeatInterval":5000,"instanceHeartBeatTimeOut":15000,"ipDeleteTimeout":30000}]
+2025-12-29 08:58:39 [main] INFO  com.alibaba.nacos.client.naming - current ips:(1) service: DEFAULT_GROUP@@AI -> [{"instanceId":"192.168.183.1#58610#DEFAULT#DEFAULT_GROUP@@AI","ip":"192.168.183.1","port":58610,"weight":1.0,"healthy":true,"enabled":true,"ephemeral":true,"clusterName":"DEFAULT","serviceName":"DEFAULT_GROUP@@AI","metadata":{"preserved.register.source":"SPRING_CLOUD","IPv6":"[2001:da8:d002:b001:0:3d:6c1f:33db]"},"instanceHeartBeatInterval":5000,"instanceHeartBeatTimeOut":15000,"ipDeleteTimeout":30000}]
+2025-12-29 08:58:40 [nacos-grpc-client-executor-127.0.0.1-7] INFO  c.alibaba.nacos.common.remote.client - [b5286407-5032-4119-92e3-04c580b775ad] Receive server push request, request = NotifySubscriberRequest, requestId = 14
+2025-12-29 08:58:40 [nacos-grpc-client-executor-127.0.0.1-7] INFO  c.alibaba.nacos.common.remote.client - [b5286407-5032-4119-92e3-04c580b775ad] Ack server push request, request = NotifySubscriberRequest, requestId = 14
+2025-12-29 08:58:41 [main] INFO  c.e.s.s.impl.SearchEngineServiceImpl - 开始从官网提取职位信息，企业名称：深蓝汽车，官网URL：https://ivy.pcauto.com.cn/click?adid=1818432&id=auto.gnxc.shouye.tl1.，企业ID：null
+2025-12-29 08:58:41 [main] INFO  c.e.s.s.impl.SearchEngineServiceImpl - 正在连接企业官网：https://ivy.pcauto.com.cn/click?adid=1818432&id=auto.gnxc.shouye.tl1.
+2025-12-29 08:58:41 [main] INFO  c.e.s.s.impl.SearchEngineServiceImpl - 成功连接企业官网：https://ivy.pcauto.com.cn/click?adid=1818432&id=auto.gnxc.shouye.tl1.
+2025-12-29 08:58:41 [main] INFO  c.e.s.s.impl.SearchEngineServiceImpl - 开始查找招聘页面链接
+2025-12-29 08:58:41 [main] INFO  c.e.s.s.impl.SearchEngineServiceImpl - 找到的招聘页面链接：null
+2025-12-29 08:58:41 [main] WARN  c.e.s.s.impl.SearchEngineServiceImpl - 未从企业官网提取到任何职位信息，企业名称：深蓝汽车，官网地址：https://ivy.pcauto.com.cn/click?adid=1818432&id=auto.gnxc.shouye.tl1.
+2025-12-29 08:58:42 [main] INFO  o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.example.search.service.impl.SearchEngineServiceImplTest]: SearchEngineServiceImplTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2025-12-29 08:58:42 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.example.search.SearchApplication for test class com.example.search.service.impl.SearchEngineServiceImplTest
+2025-12-29 08:58:42 [main] INFO  c.e.s.s.impl.SearchEngineServiceImpl - 开始从官网提取职位信息，企业名称：柯迪富乐精密科技，官网URL：http://foehl-china.net/，企业ID：null
+2025-12-29 08:58:42 [main] INFO  c.e.s.s.impl.SearchEngineServiceImpl - 正在连接企业官网：http://foehl-china.net/
+2025-12-29 08:58:42 [main] INFO  c.e.s.s.impl.SearchEngineServiceImpl - 成功连接企业官网：http://foehl-china.net/
+2025-12-29 08:58:42 [main] INFO  c.e.s.s.impl.SearchEngineServiceImpl - 开始查找招聘页面链接
+2025-12-29 08:58:42 [main] INFO  c.e.s.s.impl.SearchEngineServiceImpl - 找到的招聘页面链接：null
+2025-12-29 08:58:42 [Thread-6] WARN  c.a.nacos.common.notify.NotifyCenter - [NotifyCenter] Start destroying Publisher
+2025-12-29 08:58:42 [Thread-6] WARN  c.a.nacos.common.notify.NotifyCenter - [NotifyCenter] Destruction of the end
+2025-12-29 08:58:42 [Thread-3] WARN  c.a.n.c.http.HttpClientBeanHolder - [HttpClientBeanHolder] Start destroying common HttpClient
+2025-12-29 08:58:42 [Thread-3] WARN  c.a.n.c.http.HttpClientBeanHolder - [HttpClientBeanHolder] Destruction of the end
+2025-12-29 08:58:42 [SpringApplicationShutdownHook] INFO  com.alibaba.nacos.client.naming - com.alibaba.nacos.client.naming.cache.ServiceInfoHolder do shutdown begin
+2025-12-29 08:58:42 [SpringApplicationShutdownHook] INFO  com.alibaba.nacos.client.naming - com.alibaba.nacos.client.naming.backups.FailoverReactor do shutdown begin
+2025-12-29 08:58:42 [SpringApplicationShutdownHook] INFO  com.alibaba.nacos.client.naming - com.alibaba.nacos.client.naming.backups.FailoverReactor do shutdown stop
+2025-12-29 08:58:42 [SpringApplicationShutdownHook] INFO  com.alibaba.nacos.client.naming - com.alibaba.nacos.client.naming.cache.ServiceInfoHolder do shutdown stop
+2025-12-29 08:58:42 [SpringApplicationShutdownHook] INFO  com.alibaba.nacos.client.naming - com.alibaba.nacos.client.naming.remote.NamingClientProxyDelegate do shutdown begin
+2025-12-29 08:58:42 [SpringApplicationShutdownHook] INFO  com.alibaba.nacos.client.naming - com.alibaba.nacos.client.naming.core.ServiceInfoUpdateService do shutdown begin
+2025-12-29 08:58:42 [SpringApplicationShutdownHook] INFO  com.alibaba.nacos.client.naming - com.alibaba.nacos.client.naming.core.ServiceInfoUpdateService do shutdown stop
+2025-12-29 08:58:42 [SpringApplicationShutdownHook] INFO  com.alibaba.nacos.client.naming - com.alibaba.nacos.client.naming.core.ServerListManager do shutdown begin
+2025-12-29 08:58:42 [SpringApplicationShutdownHook] WARN  com.alibaba.nacos.client.naming - [NamingHttpClientManager] Start destroying NacosRestTemplate
+2025-12-29 08:58:42 [SpringApplicationShutdownHook] WARN  com.alibaba.nacos.client.naming - [NamingHttpClientManager] Destruction of the end
+2025-12-29 08:58:42 [SpringApplicationShutdownHook] INFO  com.alibaba.nacos.client.naming - com.alibaba.nacos.client.naming.core.ServerListManager do shutdown stop
+2025-12-29 08:58:42 [SpringApplicationShutdownHook] INFO  com.alibaba.nacos.client.naming - com.alibaba.nacos.client.naming.remote.http.NamingHttpClientProxy do shutdown begin
+2025-12-29 08:58:42 [SpringApplicationShutdownHook] WARN  com.alibaba.nacos.client.naming - [NamingHttpClientManager] Start destroying NacosRestTemplate
+2025-12-29 08:58:42 [SpringApplicationShutdownHook] WARN  com.alibaba.nacos.client.naming - [NamingHttpClientManager] Destruction of the end
+2025-12-29 08:58:42 [SpringApplicationShutdownHook] INFO  com.alibaba.nacos.client.naming - com.alibaba.nacos.client.naming.remote.http.NamingHttpClientProxy do shutdown stop
+2025-12-29 08:58:42 [SpringApplicationShutdownHook] INFO  com.alibaba.nacos.client.naming - Shutdown naming grpc client proxy for  uuid->b5286407-5032-4119-92e3-04c580b775ad
+2025-12-29 08:58:42 [SpringApplicationShutdownHook] INFO  com.alibaba.nacos.client.naming - Shutdown grpc redo service executor java.util.concurrent.ScheduledThreadPoolExecutor@57bb7d6e[Running, pool size = 1, active threads = 0, queued tasks = 1, completed tasks = 0]
+2025-12-29 08:58:42 [SpringApplicationShutdownHook] INFO  c.alibaba.nacos.common.remote.client - Shutdown rpc client, set status to shutdown
+2025-12-29 08:58:42 [SpringApplicationShutdownHook] INFO  c.alibaba.nacos.common.remote.client - Shutdown client event executor java.util.concurrent.ScheduledThreadPoolExecutor@68e3f037[Running, pool size = 2, active threads = 2, queued tasks = 0, completed tasks = 0]
+2025-12-29 08:58:42 [SpringApplicationShutdownHook] INFO  c.alibaba.nacos.common.remote.client - Close current connection 1766969919859_127.0.0.1_62045
+2025-12-29 08:58:42 [SpringApplicationShutdownHook] INFO  c.a.n.c.r.client.grpc.GrpcClient - Shutdown grpc executor java.util.concurrent.ThreadPoolExecutor@7b160b87[Running, pool size = 9, active threads = 1, queued tasks = 0, completed tasks = 8]
+2025-12-29 08:58:42 [SpringApplicationShutdownHook] INFO  com.alibaba.nacos.client.naming - shutdown and remove naming rpc client  for uuid ->b5286407-5032-4119-92e3-04c580b775ad
+2025-12-29 08:58:42 [SpringApplicationShutdownHook] INFO  c.a.n.c.a.r.i.CredentialWatcher - [null] CredentialWatcher is stopped
+2025-12-29 08:58:42 [SpringApplicationShutdownHook] INFO  c.a.n.c.a.r.i.CredentialService - [null] CredentialService is freed
+2025-12-29 08:58:42 [SpringApplicationShutdownHook] INFO  com.alibaba.nacos.client.naming - com.alibaba.nacos.client.naming.remote.NamingClientProxyDelegate do shutdown stop
+2025-12-29 08:58:42 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-12-29 08:58:42 [nacos-grpc-client-executor-127.0.0.1-8] INFO  c.a.n.c.r.client.grpc.GrpcClient - [1766969919859_127.0.0.1_62045]Ignore complete event,isRunning:false,isAbandon=false
+2025-12-29 08:58:42 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-12-29 08:58:42 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.

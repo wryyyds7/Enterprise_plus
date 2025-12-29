@@ -149,7 +149,7 @@ const getSectionList = async () => {
     const params = {
       ...filterForm.value,
       page: currentPage.value,
-      pageSize: pageSize.value
+      size: pageSize.value
     };
     const response = await forumApi.forumSection.getSectionList(params);
     sections.value = response.data.records || response.data || [];

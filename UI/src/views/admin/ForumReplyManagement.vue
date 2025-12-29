@@ -171,7 +171,7 @@ const getReplyList = async () => {
     const params = {
       ...filterForm.value,
       page: currentPage.value,
-      pageSize: pageSize.value
+      size: pageSize.value
     };
     const response = await forumApi.forumReply.getReplyList(params);
     replies.value = response.data.records || response.data || [];

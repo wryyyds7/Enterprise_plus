@@ -21,6 +21,11 @@ spring:
     web-application-type: servlet
     allow-bean-definition-overriding: true
 
+# MyBatis配置
+mybatis:
+  mapper-locations: classpath:mapper/**/*.xml
+  type-aliases-package: com.example.event.domain.entity
+
   cloud:
     nacos:
       server-addr: 127.0.0.1:8848

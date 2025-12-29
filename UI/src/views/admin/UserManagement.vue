@@ -183,7 +183,7 @@ const getUsers = async () => {
     const params = {
       ...filterForm.value,
       page: currentPage.value,
-      pageSize: pageSize.value
+      size: pageSize.value
     }
     const response = await userApi.getUserList(params)
     users.value = response.data.records || response.data || []

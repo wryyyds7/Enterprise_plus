@@ -54,13 +54,10 @@
                     </annotationProcessorPaths>
                 </configuration>
             </plugin>
-            <!-- 禁用Spring Boot插件，生成标准JAR -->
+            <!-- Spring Boot插件，生成可执行JAR -->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <configuration>
-                    <skip>true</skip>
-                </configuration>
             </plugin>
         </plugins>
     </build>

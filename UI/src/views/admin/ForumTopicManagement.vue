@@ -180,7 +180,7 @@ const getTopicList = async () => {
     const params = {
       ...filterForm.value,
       page: currentPage.value,
-      pageSize: pageSize.value
+      size: pageSize.value
     };
     const response = await forumApi.forumTopic.getTopicList(params);
     topics.value = response.data.records || response.data || [];

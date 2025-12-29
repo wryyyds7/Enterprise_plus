@@ -194,7 +194,7 @@ const getPositionList = async () => {
     const params = {
       ...filterForm.value,
       page: currentPage.value,
-      pageSize: pageSize.value
+      size: pageSize.value
     }
     const response = await enterpriseApi.getPositionList(params)
     positions.value = response.data.records || response.data || []

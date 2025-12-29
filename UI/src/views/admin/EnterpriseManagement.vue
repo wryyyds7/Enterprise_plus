@@ -202,7 +202,7 @@ const getEnterpriseList = async () => {
     const params = {
       ...filterForm.value,
       page: currentPage.value,
-      pageSize: pageSize.value
+      size: pageSize.value
     }
     const response = await enterpriseApi.getEnterpriseList(params)
     enterprises.value = response.data.records || response.data || []
