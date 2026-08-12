@@ -108,7 +108,8 @@ public class EnterpriseController extends BaseController
             System.out.println("开始搜索:"+enterpriseName);
             Result result = searchEnterprise(enterpriseName);
             if(result.isSuccess()){
-                list = (List<Enterprise>) result.getData();
+                // 搜索并插入数据库后，重新查询数据库以获取带有 enterpriseId 的完整记录
+                list = enterpriseService.selectEnterpriseList(enterprise);
             }
         }
         System.out.println("List:"+list);

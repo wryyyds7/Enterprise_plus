@@ -65,21 +65,18 @@ public class EnterpriseGlobalFilter implements GlobalFilter, Ordered {
                 return response.writeWith(Mono.empty());
             }
             String finalUserIdObj = userIdObj.toString();
-            ServerHttpRequest modifiedRequest = exchange.getRequest().mutate()
-                    .header("Authorization", "Bearer " + token)
-                    .build();
-            // 备用
-            ServerWebExchange swe = exchange.mutate()
+            // 合并 Authorization 头和 userId 头到同一个请求中
+            ServerWebExchange modifiedExchange = exchange.mutate()
                     .request(builder -> {
+                        builder.header("Authorization", "Bearer " + token);
                         builder.header("userId", finalUserIdObj);
                     })
                     .build();
 
-            exchange = exchange.mutate().request(modifiedRequest).build();
             CurrentHolder.remove();
 
-            System.out.println("完成解析：swe为"+ swe);
-            return chain.filter(exchange);
+            System.out.println("完成解析，userId已传递到下游");
+            return chain.filter(modifiedExchange);
         } catch (Exception e) {
             // 5. 解析失败
             e.printStackTrace();
@@ -98,16 +95,9 @@ public class EnterpriseGlobalFilter implements GlobalFilter, Ordered {
     }
 
     private boolean isExcludePath(String path) {
-        System.out.println("enter");
         for (String excludePath : authProperties.getExcludePaths()) {
-            System.out.println("进入过滤器，当前路径为:"+excludePath);
-            if(excludePath.startsWith("/system") ){
-                continue;
-            }
             if (antPathMatcher.match(excludePath, path)) {
-                System.out.println(excludePath);
-                System.out.println("请求成功");
-                return true; // 匹配成功，需要排除
+                return true;
             }
         }
         return false;

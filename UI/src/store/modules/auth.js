@@ -16,12 +16,14 @@ export const useAuthStore = defineStore('auth', {
   getters: {
     // 检查token是否过期
     isTokenExpired: (state) => {
-      if (!state.expireTime) return false // 如果没有过期时间，认为token有效
-      return new Date().getTime() > new Date(state.expireTime).getTime()
+      if (!state.expireTime) return false
+      // expireTime 可能是字符串或数字
+      const expireTime = typeof state.expireTime === 'string' ? new Date(state.expireTime).getTime() : Number(state.expireTime)
+      return new Date().getTime() > expireTime
     },
     // 检查用户是否有某个角色
     hasRole: (state) => (role) => {
-      return state.userRoles.includes(role)
+      return state.userRoles.some(r => r.toLowerCase() === role.toLowerCase())
     }
   },
   
@@ -135,6 +137,7 @@ export const useAuthStore = defineStore('auth', {
       localStorage.removeItem('token')
       localStorage.removeItem('expireTime')
       localStorage.removeItem('userRoles')
+      localStorage.removeItem('userInfo')
       
       // 跳转到登录页
       router.push('/login')
@@ -144,20 +147,25 @@ export const useAuthStore = defineStore('auth', {
     async refreshToken() {
       try {
         const res = await authApi.refreshToken(this.token)
-        if (res.success) {
-          this.token = res.data.token
-          this.expireTime = res.data.expireTime
+        const isSuccess = res.code === 200 || res.success
+        if (isSuccess) {
+          const newToken = res.data?.token || res.token
+          const newExpireTime = res.data?.expireTime || res.expireTime
+          this.token = newToken
+          this.expireTime = newExpireTime
           
           // 更新localStorage
-          localStorage.setItem('token', res.data.token)
-          if (res.data.expireTime) {
-            localStorage.setItem('expireTime', res.data.expireTime)
+          if (newToken) {
+            localStorage.setItem('token', newToken)
           }
+          if (newExpireTime) {
+            localStorage.setItem('expireTime', newExpireTime)
+          }
+          return { success: true }
         }
-        return res
+        return { success: false, msg: res.message || res.msg || '刷新token失败' }
       } catch (error) {
         console.error('刷新token失败:', error)
-        // 不清除认证信息，仅返回失败结果
         return { success: false, msg: '刷新token失败' }
       }
     },

@@ -14,7 +14,8 @@ const registerForm = reactive({
   password: '',
   confirmPassword: '',
   email: '',
-  nickName: ''
+  nickName: '',
+  userType: '01'
 })
 
 // 表单验证规则

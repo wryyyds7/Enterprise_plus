@@ -283,7 +283,7 @@ import { ElMessage } from 'element-plus'
 import {
   Monitor, User, OfficeBuilding, Briefcase, Calendar, StarFilled, UserFilled,
   ArrowRight, ArrowUp, ArrowDown, CircleCheckFilled, CircleCloseFilled,
-  Check, Warning, InfoFilled, Bell
+  Check, Warning, InfoFilled, Bell, Plus, Document
 } from '@element-plus/icons-vue'
 import { useRouter } from 'vue-router'
 import adminApi from '@/api/modules/admin'
@@ -348,12 +348,12 @@ const recentEvents = ref([
 
 // 快捷操作
 const quickActions = ref([
-  { name: '添加企业', icon: 'Plus', path: '/admin/enterprise-management' },
-  { name: '发布活动', icon: 'Calendar', path: '/admin/content-management' },
-  { name: '审核用户', icon: 'User', path: '/admin/user-management' },
-  { name: '查看报表', icon: 'Document', path: '/admin/statistics' },
-  { name: '新增管理员', icon: 'UserFilled', path: '/admin/register' },
-  { name: '事件管理', icon: 'Bell', path: '/admin/event-management' }
+  { name: '添加企业', icon: Plus, path: '/admin/enterprises' },
+  { name: '发布活动', icon: Calendar, path: '/admin/content-management' },
+  { name: '审核用户', icon: User, path: '/admin/users' },
+  { name: '查看报表', icon: Document, path: '/admin/statistics' },
+  { name: '新增管理员', icon: UserFilled, path: '/admin/register' },
+  { name: '事件管理', icon: Bell, path: '/admin/event-management' }
 ])
 
 // 跳转到统计页面

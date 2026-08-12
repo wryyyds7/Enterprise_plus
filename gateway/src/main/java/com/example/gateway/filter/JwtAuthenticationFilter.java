@@ -92,9 +92,12 @@ public class JwtAuthenticationFilter implements WebFilter {
     }
 
     private boolean isExcludedPath(String path) {
-        // 免认证路径
+        // 免认证路径（与 EnterpriseGlobalFilter 的 excludePaths 保持一致）
         String[] excludePaths = {
             "/in/**",
+            "/users/**",
+            "/search/**",
+            "/system/**",
             "/actuator/**",
             "/swagger-ui/**",
             "/v3/api-docs/**"

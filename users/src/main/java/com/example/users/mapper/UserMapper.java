@@ -5,6 +5,7 @@ import com.example.users.domain.dto.UserDTO;
 import com.example.common.domain.entity.User;
 import com.github.pagehelper.Page;
 import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.type.EnumOrdinalTypeHandler;
 
 
@@ -57,11 +58,11 @@ public interface UserMapper {
     @Options(useGeneratedKeys = true, keyProperty = "userId")
     User updateUserStatus(User user);
 
-    @Update("update sys_user set user_name = #{userName}, phonenumber = #{phonenumber}, email = #{email} where user_id = #{userId}")
+    @Update("update sys_user set user_name = #{userName}, phonenumber = #{phonenumber}, email = #{email}, login_ip = #{loginIp}, login_date = #{loginDate}, login_location = #{loginLocation} where user_id = #{userId}")
     @Options(useGeneratedKeys = true, keyProperty = "userId")
     Long updateUser(User user);
 
-    @Insert("insert into sys_user(user_name, password, nick_name, phonenumber, email, user_type) values(#{userName}, #{password}, #{nickName}, #{phonenumber}, #{email}, #{userType})")
+    @Insert("insert into sys_user(user_name, password, nick_name, phonenumber, email, user_type, create_time) values(#{userName}, #{password}, #{nickName}, #{phonenumber}, #{email}, #{userType}, #{createTime})")
     @Options(useGeneratedKeys = true, keyProperty = "userId")
     @Results({
             @Result(property = "userId", column = "user_id"),
@@ -74,14 +75,21 @@ public interface UserMapper {
     Long insertUserRole(@Param("userId") Long userId, @Param("roleId") Long roleId);
 
     //批量插入
-    @Insert("insert into sys_user(user_name, password, nick_name, phonenumber, email) values(#{userName}, #{password}, #{nickName}, #{phonenumber}, #{email})")
-    @Options(useGeneratedKeys = true, keyProperty = "id")
+    @Insert({
+        "<script>",
+        "insert into sys_user(user_name, password, nick_name, phonenumber, email) values",
+        "<foreach collection='user' item='u' separator=','>",
+        "(#{u.userName}, #{u.password}, #{u.nickName}, #{u.phonenumber}, #{u.email})",
+        "</foreach>",
+        "</script>"
+    })
+    @Options(useGeneratedKeys = true, keyProperty = "userId")
     @Results({
             @Result(property = "userId", column = "user_id"),
             @Result(property = "status", column = "user_status", typeHandler = EnumOrdinalTypeHandler.class),
             @Result(property = "loginLocation", column = "login_location")
     })
-    Integer addUser(User[] user);
+    Integer addUser(@Param("user") User[] user);
 
 }
 

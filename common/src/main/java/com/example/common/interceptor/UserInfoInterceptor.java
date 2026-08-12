@@ -85,15 +85,15 @@ public class UserInfoInterceptor implements HandlerInterceptor{
         try {
             // 解析JWT token
             Claims claims = JwtUtils.parseToken(authHeader);
-            Integer userIdInt = (Integer) claims.get("userId");
-            if (userIdInt == null) {
+            Object userIdRaw = claims.get("userId");
+            if (userIdRaw == null) {
                 response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
                 response.getWriter().write("Invalid token: missing userId");
                 System.out.println("token中没有userId，拦截");
                 return false;
             }
 
-            Long userId = Long.valueOf(userIdInt);
+            Long userId = ((Number) userIdRaw).longValue();
             List<String> roles = (List<String>) claims.get("roles");
 
             // 将用户信息存入ThreadLocal

@@ -55,12 +55,11 @@ router.beforeEach(async (to, from, next) => {
     
     // 检查token是否过期
     if (authStore.isTokenExpired) {
-      try {
-        await authStore.refreshToken()
-      } catch (error) {
-        // 刷新token失败，暂时不清除认证信息，允许继续访问
-        // 后续请求可能会因为token过期而失败，但登录流程可以正常完成
-        console.error('刷新token失败:', error)
+      const refreshResult = await authStore.refreshToken()
+      if (!refreshResult.success) {
+        // 刷新失败，清除认证信息并跳转登录页
+        authStore.clearAuthInfo()
+        return
       }
     }
     
