@@ -161,13 +161,7 @@ public class LoginController extends BaseController {
             // 2. 解析原始token获取claims信息
             Claims claims = JwtUtils.parseToken(token);
 
-            // 3. 检查token是否即将过期（可选）
-            Date expiration = claims.getExpiration();
-            if (expiration.before(new Date())) {
-                return Result.error("Token已过期");
-            }
-
-            // 4. 提取关键信息重新生成新token
+            // 3. 提取关键信息重新生成新token（parseToken 已校验签名和过期，无需再检查）
             Map<String, Object> newClaims = new HashMap<>();
             newClaims.put("userId", claims.get("userId"));
             newClaims.put("username", claims.get("username"));

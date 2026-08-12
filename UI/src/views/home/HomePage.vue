@@ -175,6 +175,9 @@ const careerCategories = ref([
 // 推荐企业数据
 const recommendedEnterprises = ref([])
 
+// 收藏状态
+const favoriteStatus = ref({})
+
 // 即将举行的活动
 const upcomingEvents = ref([])
 
@@ -190,7 +193,7 @@ const handleBannerClick = (event) => {
   } else if (event.type === 'industry') {
     router.push({ path: '/search/result', query: { keyword: event.industry || '互联网' } })
   } else if (event.type === 'enterprise') {
-    router.push('/home/enterprise/list')
+    router.push('/home/enterprise-recommendation')
   }
 }
 
@@ -220,21 +223,31 @@ const viewEventDetail = (eventId) => {
 }
 
 // 收藏/取消收藏企业
-const toggleFavorite = (enterpriseId) => {
-  // 这里应该调用收藏API
-  console.log('Toggle favorite for enterprise:', enterpriseId)
+const toggleFavorite = async (enterpriseId) => {
+  const isFav = favoriteStatus.value[enterpriseId]
+  try {
+    if (isFav) {
+      await homeApi.unfavoriteEnterprise(enterpriseId)
+      favoriteStatus.value[enterpriseId] = false
+      ElMessage.success('取消收藏成功')
+    } else {
+      await homeApi.favoriteEnterprise({ enterpriseId })
+      favoriteStatus.value[enterpriseId] = true
+      ElMessage.success('收藏成功')
+    }
+  } catch (error) {
+    ElMessage.error(isFav ? '取消收藏失败' : '收藏失败')
+  }
 }
 
 // 检查企业是否已收藏
 const isFavorite = (enterpriseId) => {
-  // 这里应该检查企业是否已收藏
-  return false
+  return favoriteStatus.value[enterpriseId] || false
 }
 
 // 报名活动
 const registerEvent = (eventId) => {
-  // 这里应该调用活动报名API
-  console.log('Register for event:', eventId)
+  router.push({ path: '/home/campusRecruitmentEvent', query: { eventId } })
 }
 
 // 搜索
@@ -261,13 +274,23 @@ const loadData = async () => {
     
     // 加载推荐企业
     const enterpriseResult = await homeApi.getEnterpriseRecommendations()
-    if (enterpriseResult.code === 200 && enterpriseResult.data) {
-      recommendedEnterprises.value = enterpriseResult.data
+    const isSuccess = enterpriseResult.code === 200 || enterpriseResult.success
+    if (isSuccess && enterpriseResult.data) {
+      const data = enterpriseResult.data
+      if (Array.isArray(data)) {
+        recommendedEnterprises.value = data.slice(0, 4)
+      } else if (data.records) {
+        recommendedEnterprises.value = data.records.slice(0, 4)
+      } else if (data.data && Array.isArray(data.data)) {
+        recommendedEnterprises.value = data.data.slice(0, 4)
+      } else {
+        recommendedEnterprises.value = []
+      }
     } else {
-      // 如果推荐企业为空，加载企业列表
+      // 推荐为空时，加载企业列表作为冷启动 fallback
       const listResult = await enterpriseApi.getEnterpriseList({ pageNum: 1, pageSize: 4 })
       if (listResult.code === 200 && listResult.data) {
-        recommendedEnterprises.value = listResult.data.records || []
+        recommendedEnterprises.value = (listResult.data.records || listResult.data || []).slice(0, 4)
       }
     }
     

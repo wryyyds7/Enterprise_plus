@@ -61,9 +61,9 @@ public class JwtUtils {
 	 */
 	public static boolean isTokenBlacklisted(String token) {
 		if (BLACKLIST.containsKey(token)) {
-			// 检查是否已过期
+			// 检查黑名单条目是否仍在有效期内
 			Date expiration = BLACKLIST.get(token);
-			return expiration.before(new Date());
+			return expiration.after(new Date());
 		}
 		return false;
 	}

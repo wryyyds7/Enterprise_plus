@@ -12,12 +12,15 @@ config = get_config()
 
 class RecommendationEngine:
     """推荐引擎类"""
-    
+
     def __init__(self):
         """
         初始化推荐引擎
         """
         self.graph_builder = graph_builder
+        # 企业热度缓存（用于冷启动和热门推荐）
+        self._popularity_cache = None
+        self._popularity_cache_time = 0
     
     def recommend_by_tag_similarity(self, user_tags, top_n=10):
         """
@@ -183,8 +186,74 @@ class RecommendationEngine:
             print(f"混合推荐算法失败: {str(e)}")
             # 如果混合推荐失败，回退到标签相似度推荐
             return self.recommend_by_tag_similarity(user_tags, top_n)
-    
-    def _get_all_enterprise_tags(self):
+
+    def recommend_popular(self, top_n=10):
+        """
+        热门推荐（冷启动策略）：按企业职位数量和标签数量排序
+        :param top_n: 返回数量
+        :return: 推荐企业列表
+        """
+        print("使用热门推荐策略（冷启动）...")
+
+        try:
+            enterprises = self._get_all_enterprise_tags()
+
+            for ent in enterprises:
+                eid = ent.get('enterpriseId')
+                # 职位数作为热度指标
+                positions = self._get_enterprise_positions(eid)
+                ent['popularity_score'] = len(ent.get('tags', [])) * 0.3 + len(positions) * 0.7
+
+            enterprises.sort(key=lambda x: x.get('popularity_score', 0), reverse=True)
+
+            recommendations = []
+            for ent in enterprises[:top_n]:
+                recommendations.append({
+                    'enterpriseId': ent['enterpriseId'],
+                    'enterpriseName': ent['enterpriseName'],
+                    'relevanceScore': min(ent['popularity_score'] / 10.0, 1.0),
+                    'matchedTags': ent.get('tags', [])[:5],
+                    'positions': []
+                })
+            return recommendations
+
+        except Exception as e:
+            print(f"热门推荐失败: {str(e)}")
+            return []
+
+    def recommend_with_context(self, user_tags=None, preferred_industry=None, preferred_city=None, top_n=10, strategy='hybrid'):
+        """
+        带上下文的多维度推荐
+        :param user_tags: 用户标签
+        :param preferred_industry: 期望行业
+        :param preferred_city: 期望城市
+        :param top_n: 返回数量
+        :param strategy: 推荐策略
+        :return: 推荐企业列表
+        """
+        # 冷启动：无标签时使用热门推荐
+        if not user_tags or len(user_tags) == 0:
+            print("用户无标签，使用冷启动策略")
+            return self.recommend_popular(top_n)
+
+        # 选择推荐策略
+        if strategy == 'tag_based':
+            recs = self.recommend_by_tag_similarity(user_tags, top_n * 2)
+        elif strategy == 'graph':
+            recs = self.recommend_by_graph_traversal(user_tags, top_n * 2)
+        elif strategy == 'popular':
+            return self.recommend_popular(top_n)
+        else:
+            recs = self.hybrid_recommend(user_tags, top_n * 2)
+
+        # 二次过滤：根据行业和城市偏好
+        if preferred_industry:
+            recs = [r for r in recs if r.get('industry', '') == preferred_industry or
+                    preferred_industry in r.get('matchedTags', [])]
+        if preferred_city:
+            recs = [r for r in recs if r.get('city', '') == preferred_city]
+
+        return recs[:top_n] if recs else self.recommend_popular(top_n)
         """
         获取所有企业及其标签
         :return: 企业列表，每个企业包含标签信息

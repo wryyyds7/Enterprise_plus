@@ -17,7 +17,8 @@ export const useAiStore = defineStore('ai', {
       this.loading = true
       try {
         const res = await aiApi.aiChat({ message })
-        if (res.success) {
+        const isSuccess = res.code === 200 || res.success
+        if (isSuccess) {
           this.chatHistory.push({
             id: Date.now(),
             type: 'user',
@@ -26,7 +27,7 @@ export const useAiStore = defineStore('ai', {
           this.chatHistory.push({
             id: Date.now() + 1,
             type: 'ai',
-            content: res.data.response
+            content: res.data?.response || res.data?.content || res.data || 'AI回复为空'
           })
         }
         return res

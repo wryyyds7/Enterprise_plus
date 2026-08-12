@@ -40,6 +40,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         </where>
     </select>
     
+    <select id="selectEnterpriseByEnterpriseName" parameterType="String" resultMap="EnterpriseResult">
+        <include refid="selectEnterpriseVo"/>
+        where enterprise_name = #{enterpriseName}
+    </select>
+
     <select id="selectEnterpriseByEnterpriseId" parameterType="Long" resultMap="EnterpriseResult">
         <include refid="selectEnterpriseVo"/>
         where enterprise_id = #{enterpriseId}

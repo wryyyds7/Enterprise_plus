@@ -152,9 +152,10 @@ const fetchSectionList = async () => {
 }
 
 // 获取主题列表
-const fetchTopicList = async () => {
+const fetchTopicList = async (sectionId) => {
   try {
-    const response = await forumApi.forumTopic.getTopicList()
+    const params = sectionId ? { sectionId } : {}
+    const response = await forumApi.forumTopic.getTopicList(params)
     topicList.value = response.data || []
   } catch (error) {
     ElMessage.error('获取主题列表失败：' + error.message)
@@ -210,8 +211,8 @@ const formatDate = (dateString) => {
 // 板块选择
 const handleSectionSelect = (sectionId) => {
   activeSection.value = sectionId
-  // 这里可以根据板块ID获取对应的主题列表
-  fetchTopicList()
+  // 根据板块ID获取对应的主题列表
+  fetchTopicList(sectionId)
 }
 
 // 新增板块

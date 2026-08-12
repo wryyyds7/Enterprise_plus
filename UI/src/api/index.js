@@ -50,9 +50,12 @@ request.interceptors.response.use(
       switch (status) {
         case 401:
           errorMsg = '未授权，请重新登录'
-          // 可以在这里处理登录过期逻辑，如跳转到登录页
-          // localStorage.removeItem('token')
-          // window.location.href = '/login'
+          // 清除过期 token 并跳转登录页
+          localStorage.removeItem('token')
+          localStorage.removeItem('expireTime')
+          localStorage.removeItem('userRoles')
+          localStorage.removeItem('userInfo')
+          window.location.href = '/login'
           break
         case 403:
           errorMsg = '拒绝访问'

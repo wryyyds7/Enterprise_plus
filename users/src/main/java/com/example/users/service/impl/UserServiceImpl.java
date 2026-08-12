@@ -75,10 +75,10 @@ public class UserServiceImpl implements UserService {
     public LoginInfo login(User user, String ip){
         // 1. TODO: 换成用ID或者账号寻找
         User dbUser = userMapper.selectByUsername(user.getUserName());
-        String password = dbUser.getPassword();
-        if (dbUser == null || !passwordEncoder.matches(user.getPassword(), password)) {
+        if (dbUser == null || !passwordEncoder.matches(user.getPassword(), dbUser.getPassword())) {
             return null;
         }
+        String password = dbUser.getPassword();
         
         // 调用百度地图API获取地理位置信息
             String loginLocation = ip;
@@ -243,15 +243,16 @@ public class UserServiceImpl implements UserService {
     public User updateUserStatus(UserDTO UserDTO) {
         User user = new User();
         user.setUserId(Long.valueOf(UserDTO.getUserId()));
-        // 获取当前用户的状态并转换为枚举
         user = userMapper.searchUserById(user.getUserId());
-        UserStatus currentUserStatus = user.getStatus(); // 假设status字段能映射到枚举
+        UserStatus currentUserStatus = user.getStatus();
 
         if (currentUserStatus == UserStatus.DISABLE) {
-            user.setStatus(UserStatus.ENABLE); // 或者 UserStatus.NORMAL.name()
+            user.setStatus(UserStatus.ENABLE);
         } else {
-            user.setStatus(UserStatus.DISABLE); // 或者 UserStatus.DISABLE.name()
+            user.setStatus(UserStatus.DISABLE);
         }
+        // 调用 mapper 将状态持久化到数据库
+        userMapper.updateUserStatus(user);
         return user;
     }
 
@@ -288,7 +289,15 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User updateUserPassword(User user) {
-        return null;
+        User dbUser = userMapper.searchUserById(user.getUserId());
+        if (dbUser == null) {
+            return null;
+        }
+        String encodedPassword = passwordEncoder.encode(user.getPassword());
+        dbUser.setPassword(encodedPassword);
+        userMapper.updateUser(dbUser);
+        dbUser.setPassword(null);
+        return dbUser;
     }
 
     @Override

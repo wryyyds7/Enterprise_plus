@@ -7,7 +7,7 @@ export default [
     meta: {
       title: '用户列表',
       requiresAuth: true,
-      roles: ['admin']
+      roles: ['ADMIN']
     }
   },
   {
@@ -26,7 +26,7 @@ export default [
     meta: {
       title: '创建用户',
       requiresAuth: true,
-      roles: ['admin']
+      roles: ['ADMIN']
     }
   },
   {
@@ -36,7 +36,7 @@ export default [
     meta: {
       title: '编辑用户',
       requiresAuth: true,
-      roles: ['admin']
+      roles: ['ADMIN']
     }
   },
   {

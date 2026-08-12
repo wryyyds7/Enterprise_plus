@@ -113,59 +113,56 @@ def update_graph():
 def recommend_enterprise():
     """
     企业推荐接口
-    输入: {"userId": "123", "tags": ["软件工程师", "Java", "Spring Boot"]}
+    输入: {"userId": "123", "tags": ["软件工程师", "Java"], "preferredIndustry": "互联网", "preferredCity": "北京", "strategy": "hybrid"}
     输出: 推荐企业列表
     """
     try:
-        # 解析请求参数
         data = request.get_json()
-        
-        # 验证参数
+
         if not data:
             return error_response(400, "请求参数不能为空")
-        
+
         user_id = data.get('userId')
         user_tags = data.get('tags', [])
-        
-        if not isinstance(user_tags, list) or len(user_tags) == 0:
-            return error_response(400, "用户标签必须是非空列表")
-        
-        # 可选参数
+        preferred_industry = data.get('preferredIndustry')
+        preferred_city = data.get('preferredCity')
+        strategy = data.get('strategy', 'hybrid')
         top_n = data.get('topN', 10)
-        recommend_type = data.get('type', 'hybrid')  # hybrid, tag, graph
-        
-        logger.info(f"为用户 {user_id} 推荐企业，标签: {user_tags}，类型: {recommend_type}")
-        
-        # 根据推荐类型调用不同的推荐算法
-        if recommend_type == 'tag':
-            recommendations = recommendation_engine.recommend_by_tag_similarity(user_tags, top_n)
-        elif recommend_type == 'graph':
-            recommendations = recommendation_engine.recommend_by_graph_traversal(user_tags, top_n)
-        else:  # hybrid
-            recommendations = recommendation_engine.hybrid_recommend(user_tags, top_n)
-        
-        # 格式化返回结果
+
+        logger.info(f"为用户 {user_id} 推荐企业，标签: {user_tags}，行业偏好: {preferred_industry}，城市偏好: {preferred_city}，策略: {strategy}")
+
+        # 使用带上下文的多维度推荐
+        recommendations = recommendation_engine.recommend_with_context(
+            user_tags=user_tags,
+            preferred_industry=preferred_industry,
+            preferred_city=preferred_city,
+            top_n=top_n,
+            strategy=strategy
+        )
+
         formatted_results = []
         for rec in recommendations:
             formatted_results.append({
-                "enterpriseId": rec["enterpriseId"],
-                "enterpriseName": rec["enterpriseName"],
-                "relevanceScore": rec["relevanceScore"],
-                "matchedTags": rec["matchedTags"],
+                "enterpriseId": rec.get("enterpriseId"),
+                "enterpriseName": rec.get("enterpriseName"),
+                "relevanceScore": rec.get("relevanceScore", 0),
+                "matchedTags": rec.get("matchedTags", []),
                 "positions": rec.get("positions", [])
             })
-        
+
         return success_response({
             "recommendations": formatted_results,
             "total": len(formatted_results),
             "request": {
                 "userId": user_id,
                 "tags": user_tags,
-                "topN": top_n,
-                "type": recommend_type
+                "preferredIndustry": preferred_industry,
+                "preferredCity": preferred_city,
+                "strategy": strategy,
+                "topN": top_n
             }
         })
-        
+
     except Exception as e:
         logger.error(f"推荐企业出错: {str(e)}")
         return error_response(500, f"推荐企业出错: {str(e)}")

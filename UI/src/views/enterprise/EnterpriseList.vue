@@ -81,7 +81,7 @@
           v-model:page-size="pagination.pageSize"
           :page-sizes="[10, 20, 50, 100]"
           layout="total, sizes, prev, pager, next, jumper"
-          :total="enterpriseList.length"
+          :total="pagination.total"
           @size-change="handleSizeChange"
           @current-change="handleCurrentChange"
         />
@@ -108,7 +108,8 @@ const searchForm = reactive({
 // 分页
 const pagination = reactive({
   currentPage: 1,
-  pageSize: 10
+  pageSize: 10,
+  total: 0
 })
 
 // 模拟企业列表数据
@@ -195,6 +196,7 @@ const handleSearch = async () => {
     
     if (response.success) {
       enterpriseList.value = response.data || []
+      pagination.total = response.total || enterpriseList.value.length
       ElMessage.success('搜索成功')
     } else {
       ElMessage.warning('搜索结果为空')
@@ -223,11 +225,14 @@ const handleReset = () => {
 // 分页大小变化
 const handleSizeChange = (size) => {
   pagination.pageSize = size
+  pagination.currentPage = 1
+  handleSearch()
 }
 
 // 当前页码变化
 const handleCurrentChange = (current) => {
   pagination.currentPage = current
+  handleSearch()
 }
 
 // 新增企业
